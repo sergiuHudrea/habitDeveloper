@@ -15,3 +15,6 @@
 
 ## Kanban
 https://trello.com/invite/b/o1DtQG61/ATTI86bb78a470105fd3b3f74625341f8bee80B33C04/kanban-template
+
+## React Native
+[Installation guide](https://reactnative.dev/docs/environment-setup)
