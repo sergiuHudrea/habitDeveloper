@@ -1,6 +1,6 @@
 # habitDeveloper
 
-## Mongo DD
+## Mongo DB
 
 [Mac install guide](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
 
