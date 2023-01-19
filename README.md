@@ -6,6 +6,10 @@
 
 [Github cheatsheet](https://gist.github.com/bradtraversy/f407d642bdc3b31681bc7e56d95485b6)
 
+## NativeBase
+
+[install & docs](https://docs.nativebase.io/getting-started)
+
 ## TypeScript
 [Getting started guide](https://code.visualstudio.com/docs/typescript/typescript-compiling)
 
