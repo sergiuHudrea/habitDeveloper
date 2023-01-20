@@ -4,8 +4,7 @@
 "password": "iLoveCake123",
 "likes": 9999999,
 "challenges": { 
-                "Sl_1_NoPhoneBeforeBed": {active: true
-                                          timesDone: 0},
+                "Sl_1_NoPhoneBeforeBed": 0,
                 "Sl_2_DimLights2hBeforeBed": 0,
                 "Sl_3_regularSleep": 0,
                 "Sl_4_NoCoffe8hBeforeBed": 0,
@@ -18,7 +17,7 @@
   }],
 "uniqueUserLink": "sergiuHabit@323rdas",
 "medals": {
-   "Sl_1_bronze": true,
+   "Sl_1": 0,
    "Sl_1_silver": false,
    "Sl_1_gold": false,
    "Sl_2_bronze": true,
