@@ -4,15 +4,31 @@
 "password": "iLoveCake123",
 "likes": 9999999,
 "challenges": { 
-                "SlNoPhoneBeforeBed": 0,
-                "SlDimLights2hBeforeBed": 0,
-                "SlregularSleep": 0,
-                "SlNoCoffe8hBeforeBed": 0
+                "Sl_1_NoPhoneBeforeBed": {active: true
+                                          timesDone: 0},
+                "Sl_2_DimLights2hBeforeBed": 0,
+                "Sl_3_regularSleep": 0,
+                "Sl_4_NoCoffe8hBeforeBed": 0,
+                "We_1_Take10minWalk: 0,
                 },
 "dailyJournal": [{
   "challengeName": "SlNoPhoneBeforeBed",
   "body": "I feelt quite good",
   "date": Date()
   }],
-"uniqueUserLink": "sergiuHabit@323rdas"
+"uniqueUserLink": "sergiuHabit@323rdas",
+"medals": {
+   "Sl_1_bronze": true,
+   "Sl_1_silver": false,
+   "Sl_1_gold": false,
+   "Sl_2_bronze": true,
+   "Sl_2_silver": false,
+   "Sl_2_gold": false,
+   "Sl_3_bronze": true,
+   "Sl_3_silver": false,
+   "Sl_3_gold": false,
+   "Sl_4_bronze": true,
+   "Sl_4_silver": false,
+   "Sl_4_gold": false,
+   }
 }
