@@ -20,4 +20,4 @@ https://trello.com/invite/b/o1DtQG61/ATTI86bb78a470105fd3b3f74625341f8bee80B33C0
 [Installation guide](https://reactnative.dev/docs/environment-setup)
 
 ## Excalidraw
-[Excalidraw] (https://excalidraw.com/#room=acb028d27f801791ad31,RxD_87v4uPf43S6IHCTH-g)
+[Excalidraw](https://excalidraw.com/#room=acb028d27f801791ad31,RxD_87v4uPf43S6IHCTH-g)
