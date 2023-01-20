@@ -4,10 +4,10 @@
 "password": "iLoveCake123",
 "likes": 9999999,
 "challenges": { 
-                "Sl_1_NoPhoneBeforeBed": 0,
+                "Sl_1_NoPhoneBeforeBed": null,
                 "Sl_2_DimLights2hBeforeBed": 0,
-                "Sl_3_regularSleep": 0,
-                "Sl_4_NoCoffe8hBeforeBed": 0,
+                "Sl_3_regularSleep": 1,
+                "Sl_4_NoCoffe8hBeforeBed": 4,
                 "We_1_Take10minWalk: 0,
                 },
 "dailyJournal": [{
@@ -18,16 +18,8 @@
 "uniqueUserLink": "sergiuHabit@323rdas",
 "medals": {
    "Sl_1": 0,
-   "Sl_1_silver": false,
-   "Sl_1_gold": false,
-   "Sl_2_bronze": true,
-   "Sl_2_silver": false,
-   "Sl_2_gold": false,
-   "Sl_3_bronze": true,
-   "Sl_3_silver": false,
-   "Sl_3_gold": false,
-   "Sl_4_bronze": true,
-   "Sl_4_silver": false,
-   "Sl_4_gold": false,
+   "Sl_2": 5,
+   "Sl_3": 2,
+   "Sl_4": 474,
    }
 }
