@@ -1,18 +1,19 @@
-{
-username: "Sergiu",
-email: shudrea@gmail.com,
-password: iLoveCake123,
-like: 9999999,
-challenges: { Sleep: { noPhoneBeforeBed: 0,
-                     dimLights2hBeforeBed: 0,
-                     regularSleep: 0,
-                     noCoffe8hBeforeBed: 0}
-            }
-dailyJournal: [{
-  challengeName: noPhoneBeforeBed,
-  body: "I feelt quite good",
-  date: Date()
-  },
-  {},{}],
-uniqueUserLink: sergiuHabit@323rdas
+{"_id":{"$oid":"63ca5fb92aecc47bd9f1f735"},
+"username": "Sergiu",
+"email": "shudrea@gmail.com",
+"password": "iLoveCake123",
+"likes": 9999999,
+"challenges": [{ 
+                "challengeTitle": "sleep",
+                "noPhoneBeforeBed": 0,
+                "dimLights2hBeforeBed": 0,
+                "regularSleep": 0,
+                "noCoffe8hBeforeBed": 0}
+            ],
+"dailyJournal": [{
+  "challengeName": "noPhoneBeforeBed",
+  "body": "I feelt quite good",
+  "date": Date()
+  }],
+"uniqueUserLink": "sergiuHabit@323rdas"
 }
