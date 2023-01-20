@@ -3,15 +3,14 @@
 "email": "shudrea@gmail.com",
 "password": "iLoveCake123",
 "likes": 9999999,
-"challenges": [{ 
-                "challengeTitle": "sleep",
-                "noPhoneBeforeBed": 0,
-                "dimLights2hBeforeBed": 0,
-                "regularSleep": 0,
-                "noCoffe8hBeforeBed": 0}
-            ],
+"challenges": { 
+                "SlNoPhoneBeforeBed": 0,
+                "SlDimLights2hBeforeBed": 0,
+                "SlregularSleep": 0,
+                "SlNoCoffe8hBeforeBed": 0
+                },
 "dailyJournal": [{
-  "challengeName": "noPhoneBeforeBed",
+  "challengeName": "SlNoPhoneBeforeBed",
   "body": "I feelt quite good",
   "date": Date()
   }],
