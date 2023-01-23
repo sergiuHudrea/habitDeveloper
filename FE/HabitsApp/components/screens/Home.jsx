@@ -1,13 +1,42 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useState } from "react"
+import { MyCalendar } from './Secondary_Components/MyCalendar'
 
-const Home = () => {
-  return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
-  )
-}
+const Home = ()=>{
+    const [selectedDay, setSelectedDay] = useState({"dateString": "", "day": undefined, "month": undefined, "timestamp": undefined, "year": undefined})
+    //from api require all challenges
+    const challenges = {
+      take10minWalk: 1
+    }
+
+
+    return (
+      <View>
+          <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+          <View>
+          <Text>Today's challenges:</Text>
+          <ScrollView horizontal={true}>
+          <Text>Challenge 1</Text>
+          <Text>Challenge 2</Text>
+          <Text>Challenge 3</Text>
+          <Text>Challenge 4</Text>
+          <Text>Challenge 1</Text>
+          <Text>Challenge 2</Text>
+          <Text>Challenge 3</Text>
+          <Text>Challenge 4</Text>
+          <Text>Challenge 1</Text>
+          <Text>Challenge 2</Text>
+          <Text>Challenge 3</Text>
+          <Text>Challenge 4</Text>
+          <Text>Challenge 1</Text>
+          <Text>Challenge 2</Text>
+          <Text>Challenge 3</Text>
+          <Text>Challenge 4</Text>
+          </ScrollView></View>
+      </View>
+    )
+} 
 
 export default Home
 
