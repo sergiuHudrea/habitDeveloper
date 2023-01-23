@@ -1,5 +1,6 @@
 import { View, Text,StyleSheet } from "react-native"
 import { Calendar } from "react-native-calendars"
+import { getUser } from "../../../apis";
 
 export const MyCalendar =({selectedDay, setSelectedDay})=>{
     const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
@@ -11,6 +12,7 @@ export const MyCalendar =({selectedDay, setSelectedDay})=>{
         markingType='multi-dot'
         enableSwipeMonths={true}
             onDayPress={(day)=>{
+                getUser()
                 setSelectedDay(day)
                 console.log(day)
             }}

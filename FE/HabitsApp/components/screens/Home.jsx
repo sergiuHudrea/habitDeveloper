@@ -7,9 +7,8 @@ const Home = ()=>{
     const [selectedDay, setSelectedDay] = useState({"dateString": "", "day": undefined, "month": undefined, "timestamp": undefined, "year": undefined})
     //from api require all challenges
     const challenges = {
-      take10minWalk: 1
+      take10minWalk: {times: 1, days:['','']}
     }
-
 
     return (
       <View>
