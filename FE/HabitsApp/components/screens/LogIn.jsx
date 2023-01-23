@@ -18,13 +18,17 @@ const handleLogIn=()=>{
     >
     <Image source={require('../logo/logo.png')}
     style={{width:200, height:190,marginTop:-40,marginBottom:30}}/>
-        <View style={styles.inputContainer}>
+        <View style={styles.inputContainer }>
             <TextInput
             placeholder='Email'
+            keyboardType='email-address'
+            autoCorrect={false}
             value={email}
             onChangeText={text=> setEmail(text)}
             style={styles.input}
            />
+           <Text style={{color:'red', fontSize:14}}>
+           </Text>
             <TextInput
             placeholder='Password'
             value={password}
