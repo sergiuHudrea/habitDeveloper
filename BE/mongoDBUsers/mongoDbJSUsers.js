@@ -28,16 +28,16 @@ app.get('/user/:email/:password', getUser)
 app.patch('/user/:userId/:challengeName')
 
 app.patch('/journal/:username', addJournalEntry)
-app.use(handleCustomErrors);
 app.patch('/challenges/:username', patchChallenge)
+app.use(handleCustomErrors);
 
-
-app.use((err, req,  res, next) => {
-     if (err.msg !== undefined) {
-         res.status(err.status).send( {msg: err.msg} );
-     } else {
-         next(err);
-     }
- });
+//This is now handles by karl's handleCustomErrors Function
+// app.use((err, req,  res, next) => {
+//      if (err.msg !== undefined) {
+//          res.status(err.status).send( {msg: err.msg} );
+//      } else {
+//          next(err);
+//      }
+//  });
 
 module.exports = app;

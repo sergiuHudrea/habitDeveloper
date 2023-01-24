@@ -38,6 +38,7 @@ exports.inputJournalEntry = (username, journalEntry) =>{
     .then((result)=>{
         return result;
     })
+}
 
 
 exports.updateChallenge = (username, updates) => {
