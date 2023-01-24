@@ -4,7 +4,7 @@ const express = require("express");
 
 const app = express();	
 app.use(express.json());
-
+mongoose.set("strictQuery", false);
 
 const uri = "mongodb+srv://theFantastic5:theFantastic54321@habitdeveloper.m1vjjrl.mongodb.net/habitDev?retryWrites=true&w=majority";
 mongoose.connect(uri)
@@ -96,15 +96,11 @@ const seedTest = [ {
        }]
     }]
 
-// const seeDB = async () => {
-//     await User.deleteMany({});
-//     await User.insertMany(seedTest);
-// }
+const seeDB = async () => {
+    await User.deleteMany({});
+    await User.insertMany(seedTest);
+}
 
-// seeDB().then(() => {
-//     console.log("Finishing")
-//     mongoose.connection.close();
-// })
-
-User.deleteMany({});
-User.insertMany(seedTest);
+seeDB().then(() => {
+  mongoose.connection.close()
+})

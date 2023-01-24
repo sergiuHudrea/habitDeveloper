@@ -1,7 +1,7 @@
 const request = require('supertest');
 //const User = require("./models/UserSetUpModel");
 const app = require("../mongoDbJSUsers");
-// jest.setTimeout(50000)
+jest.setTimeout(50000)
 
 describe('1. GET /user/:username/:password', () =>{
 
@@ -51,6 +51,17 @@ describe('PATCH /challenges/:username', () => {
         .expect(404)
         .then(({body}) => {
             expect(body.msg).toBe("Not Found")
+        })
+    })
+
+    test("status:400, bad request when the value passed is not null or a number", () => {
+        const challenge_updates = {"challenges.Sl_6_NoAlcoholBB": "SDAFSDFASDFA"}
+        return request(app)
+        .patch('/challenges/Sergiu')
+        .send(challenge_updates)
+        .expect(400)
+        .then(({body}) => {
+            expect(body.msg).toBe("Bad request")
         })
     })
 })
