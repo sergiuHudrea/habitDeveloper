@@ -15,8 +15,9 @@ export default function App() {
             options={{ headerShown:false}}
               name="Log In"
               component={LogIn}
-            />
-            <Stack.Screen
+            /> 
+             <Stack.Screen
+             options={{ headerShown:false}}
               name="Register"
               component={Register}
             />

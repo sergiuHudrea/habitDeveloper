@@ -12,7 +12,7 @@ const Inputs = ({iconName,error,password,onFocus=()=>{},...props}) => {
 
 
   return (
-    <View style={{marginBottom:5}}>
+    <View style={{marginBottom:10}}>
       <View style={[style.inputContainer,{borderColor: error 
       ? 'red'
       : isFocused 
@@ -58,7 +58,7 @@ const style = StyleSheet.create({
         paddingHorizontal:15,
         borderWidth:2,
         alignItems:'center',
-        width:300,
+        width:350,
         borderRadius:10,
 
     },
