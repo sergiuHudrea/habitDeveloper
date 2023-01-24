@@ -4,6 +4,7 @@ import { useState } from "react"
 import { MyCalendar } from './Secondary_Components/MyCalendar'
 import { getUserData } from '../../apis'
 import { ChallengeCard } from './Secondary_Components/ChallengeCard'
+import { MyHomeStats } from './Secondary_Components/MyHomeStats'
 
 
 const Home = ({navigation})=>{
@@ -29,7 +30,7 @@ const Home = ({navigation})=>{
               })
           }
           </ScrollView></View>
-          
+          <MyHomeStats></MyHomeStats>
       </View>
        
     )
