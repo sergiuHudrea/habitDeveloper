@@ -24,7 +24,7 @@ exports.getJournalEntriesInfo = (userId,challenge,order="desc") => {
      }
      console.log(challenge,order)
      
-     return User.aggregate([{$match:{_id:ObjectID(userId)}},{$unwind:'$dailyJournal'},{$sort:{'dailyJournal.date':order}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName','Sl_4_NoCoffe8hBeforeBed']}}}}}])
+     return User.aggregate([{$match:{_id:ObjectID(userId)}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName','Sl_4_NoCoffe8hBeforeBed']},{$sort:{'dailyJournal.date':order}}}}}}])
      .then((result) => {
           return result.map((entry) => {return entry.dailyJournal})
      })
