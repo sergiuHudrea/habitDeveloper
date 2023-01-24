@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const userApi = axios.create({baseURL: "http://localhost:3005"})
+const userApi = axios.create({baseURL: "http://localhost:3000"})
 
 export const getUserData =()=>{
     const email = "shudrea@gmail.com"
