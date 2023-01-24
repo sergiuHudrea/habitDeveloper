@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const User = require("./models/UserSetUpModel");
 const { req, res } = require('express');
-const { addUser, getUser } = require('./controllers/UserDataControllers');
+const { addUser, getUser, patchChallenge} = require('./controllers/UserDataControllers');
 var ObjectID = require('mongodb').ObjectID;
 
 const app = express();	
@@ -22,5 +22,18 @@ mongoose.connect(uri)
 // app.get('/add-user', addUser(req,res))
 
 app.get('/user/:email/:password', getUser)
-app.patch('/user/:userId/:challengeName')
+
+app.patch('/challenges/:username', patchChallenge)
+
+
+app.use((err, req,  res, next) => {
+     if (err.msg !== undefined) {
+         res.status(err.status).send( {msg: err.msg} );
+     } else {
+         next(err);
+     }
+ });
+
+
+
 module.exports = app;

@@ -14,7 +14,7 @@ db.Users.aggregate( [
   db.Users.find()
   
   // Change chalenge status or increment it --- needs to be changed to accept id and update well
-  db.Users.update({username: "Sergiu"}, { $set: { "challenges.Sl_5_NoLargeMealsBB": 24}})
+  db.Users.update({username: "Sergiu"}, { $set: { "challenges.Sl_5_NoLargeMealsBB": 35}})
   
   
   // Inc likes
@@ -25,7 +25,7 @@ db.Users.aggregate( [
   
   // Insert data
   
-  db.users.insert({
+  db.Test.insert({
   username: "Sergiu",
   email: "shudrea@gmail.com",
   password: "iLoveCake",
@@ -144,13 +144,13 @@ db.Users.aggregate( [
   })
   
   // Push element to array (JournalEntry)
-  db.Users.update({username: "Sergiu"}, { $push: {dailyJournal: 
+  db.Users.update({_id: "63ce737398713ef9f956c3d3"}, { $push: {dailyJournal: 
     {
       challengeName: "Sl_6_NoAlcoholBB",
       challengeEntryNumber: 1,
-      journalEntry: "u",
+      journalEntry: "1231232321",
       date: 5654
-        },
+        }
   }})
   
   // Add to Object but overrides everything
@@ -172,7 +172,10 @@ db.Users.aggregate( [
   
   
   
-  
+  db.Users.aggregate(
+    { $match: {username: "Sergiu"}}, {$unwind: '$dailyJournal'}, 
+    { $sort: {'dailyJournal.challengeName': 1 }}
+    )
   
   
   

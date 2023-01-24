@@ -13,3 +13,16 @@ exports.findUser = (password, email) =>{
          return result;
     })
 }
+
+
+exports.updateChallenge = (username, updates) => {
+     return User.findOneAndUpdate({username: username}, { $set: updates }, {
+          new: true
+        })
+          .then((result) => {
+               if (result === null) {
+                    return Promise.reject({status: 404, msg: 'Not Found'})
+               }
+               return result;
+          })
+}
