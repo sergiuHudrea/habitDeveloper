@@ -1,13 +1,46 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image} from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Keyboard} from 'react-native'
 import React, { useEffect, useState } from 'react'
-
-const LogIn = () => {
-    const [email,setEmail]=useState('')
-    const [password, setPassword]=useState('')
+import Inputs from '../inputs';
 
 
+
+
+const LogIn = ({navigation}) => {
+const [inputs,setInputs]=useState({email:'', password:''})
+const [isError,setIsError]=useState({})
+
+const validate=()=>{
+Keyboard.dismiss();
+let valid=true;
+if(!inputs.email){
+handleError('Please input email','email');
+valid=false;
+}else if(!inputs.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)){
+    handleError('Please input a valid email','email');
+}
+
+if(!inputs.password){
+    handleError('Please input password','password');
+}else if(inputs.password.length<8){
+    
+    handleError('Minimum password length of 8 characters ','password');
+    
+}
+if(valid){
+       handleLogIn(); 
+    }
+}
+
+
+    
+const handleOnChange =(text,input)=>{
+setInputs(prevState=>({...prevState,[input]:text}));
+}
+const handleError =(errorMsg,input)=>{
+setIsError((prevState)=>({...prevState,[input]:errorMsg}));
+}
 const handleLogIn=()=>{
-   
+   navigation.navigate('MainContainer')
 }
 
 
@@ -16,45 +49,44 @@ const handleLogIn=()=>{
     style={styles.container}
     behavior="padding"
     >
-    <Image source={require('../logo/logo.png')}
-    style={{width:200, height:190,marginTop:-40,marginBottom:30}}/>
-        <View style={styles.inputContainer }>
-            <TextInput
-            placeholder='Email'
-            keyboardType='email-address'
-            autoCorrect={false}
-            value={email}
-            onChangeText={text=> setEmail(text)}
-            style={styles.input}
-           />
-           <Text style={{color:'red', fontSize:14}}>
-           </Text>
-            <TextInput
-            placeholder='Password'
-            value={password}
-            onChangeText={text=> setPassword(text)}
-            style={styles.input}
-            secureTextEntry
-           />
+        <View>
+            <Inputs 
+            onChangeText={text=>handleOnChange(text,'email')}
+            placeholder='Enter your email address' 
+            error={isError.email}
+            onFocus={()=>{
+                handleError(null, 'email');
+            }}
+            iconName={'mail-open-outline'}/>
+            <Inputs 
+            onChangeText={text=>handleOnChange(text,'password')}
+            placeholder='Enter your password'
+            error={isError.password}
+            onFocus={()=>{
+                handleError(null, 'password');
+            }}
+            iconName={'lock-closed-outline'}
+            password/>
         </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-        onPress={handleLogIn}
+        activeOpacity={0.7}
+        onPress={validate}
         style={styles.button}
         >
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
         <TouchableOpacity
-        onPress={()=>{}}
-        style={[styles.button, styles.buttonOutline]}
+        
+         onPress={()=>navigation.navigate('Register')}
         >
-            <Text style={styles.buttonOutlineText}>Register</Text>
+            <Text style={styles.buttonOutlineText}>Don't have an account? Register</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   )
-}
-
+ 
+};
 export default LogIn
 
 const styles = StyleSheet.create({
@@ -62,13 +94,10 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent: 'center',
         alignItems:'center',
-
-    },
-    inputContainer:{
-        width:'80%',
-
+        backgroundColor:'#345772',
     },
     input:{
+        height:45,
         backgroundColor:'white',
         paddingHorizontal:15,
         paddingVertical:10,
@@ -76,7 +105,7 @@ const styles = StyleSheet.create({
         marginTop:5,
     },
     button:{
-        backgroundColor:'#006633',
+        backgroundColor:'#55BEDF',
         width:'100%',
         padding:15,
         alignItems:'center',
@@ -91,19 +120,22 @@ const styles = StyleSheet.create({
     buttonOutline:{
         backgroundColor:'white',
         marginTop:5,
-        borderColor:'#006633',
+        borderColor:'#55BEDF',
         borderWidth:2,
 },
     buttonText:{
-        color:'white',
-        fontWeight:'500',
+        color:'#F7F6F8',
+        fontWeight:'bold',
         fontSize: 16,
 
     },
     buttonOutlineText:{
-        color:'#4DA768',
+        color:'#F7F6F8',
         fontWeight:'500',
-        fontSize: 16,
+        fontSize: 13,
+        marginTop: 10,
+        textDecorationLine: 'underline',
     },
+    
     
 })

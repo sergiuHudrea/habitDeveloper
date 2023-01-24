@@ -1,28 +1,19 @@
 import { View, Text,StyleSheet } from "react-native"
-import { Calendar } from "react-native-calendars"
-import { getUser } from "../../../apis";
+// import { Calendar } from "react-native-calendars"
+import CalendarStrip from 'react-native-calendar-strip'
 
 export const MyCalendar =({selectedDay, setSelectedDay})=>{
-    const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
-    const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
-    const workout = {key: 'workout', color: 'orange'};
     return (
         <View>
-        <Calendar
-        markingType='multi-dot'
-        enableSwipeMonths={true}
-            onDayPress={(day)=>{
-                getUser()
-                setSelectedDay(day)
-                console.log(day)
+            <CalendarStrip 
+            style={{height:110, paddingTop: 20, paddingBottom: 10
             }}
-            markedDates={{
-                '2023-01-25': {dots: [vacation, massage, workout]},
-                '2023-01-26': {dots: [vacation, massage, workout]},
-                '2023-01-27': {dots: [vacation, massage, workout]},
-                [selectedDay.dateString]: {selected: true, selectedColor: 'lightblue'},
-            }}
-        />
+            calendarColor={"#8eb4d28d"}
+            scrollable={true}
+            scrollerPaging={true}
+            calendarAnimation={{type: 'sequence', duration: 10}}
+            daySelectionAnimation={{type: 'background', duration: 200, borderWidth: 2, borderHighlightColor:"#78ACB1", highlightColor:"#78ACB1"}}
+            />
         </View>
     )
 }
