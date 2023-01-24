@@ -35,7 +35,7 @@ const userSchema = schema({
     },
     dailyJournal:[{
         challengeName:{
-            type:Array,
+            type:String,
             required:false,
         },
         challengeEntryNumber:{
@@ -55,6 +55,6 @@ const userSchema = schema({
 },    
 { minimize: false }
 )
-const User = mongoose.model('User', userSchema, "Users");
+const User = mongoose.model('User', userSchema, "Test");
 
 module.exports = User;

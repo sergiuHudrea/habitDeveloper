@@ -1,4 +1,6 @@
-const { findUser, saveNewUser } = require("../models/UserDataModels")
+const { ADDRGETNETWORKPARAMS } = require("dns")
+const { findUser, saveNewUser, inputJournalEntry } = require("../models/UserDataModels")
+const User = require("../models/UserSetUpModel");
 
 exports.addUser = (req,res) =>{
     const user = new User({
@@ -29,6 +31,19 @@ exports.getUser = (req, res) =>{
     })
     .catch((err)=>{
         console.log(err);
+    })
+}
+
+exports.addJournalEntry = (req, res, next) =>{
+    const {username} = req.params;
+    const journalEntry = req.body;
+    inputJournalEntry(username, journalEntry)
+    .then((result)=>{
+        res.status(201).send(result);
+    })
+    .catch((err)=>{
+        console.log(err);
+        next(err);
     })
 }
 
