@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { stringify } = require('querystring');
 const schema = mongoose.Schema;
 
+mongoose.set("strictQuery", false);
+
 //could also add timestamp property 16:49 on video
 const userSchema = schema({
     username:{
