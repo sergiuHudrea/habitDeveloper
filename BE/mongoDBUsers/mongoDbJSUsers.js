@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const User = require("./models/UserSetUpModel");
 const { req, res } = require('express');
-const { addUser, getUser } = require('./controllers/UserDataControllers');
+const { addUser, getUser, getJournalEntries, trial } = require('./controllers/UserDataControllers');
 var ObjectID = require('mongodb').ObjectID;
 
 const app = express();	
@@ -13,14 +13,18 @@ const uri = "mongodb+srv://theFantastic5:theFantastic54321@habitdeveloper.m1vjjr
 mongoose.connect(uri)
 .then((result)=>{
      console.log("connected to db")
-     app.listen(3005);
+     app.listen(3007);
 })
 .catch((err)=>{
      console.log(err);
 })
 
-// app.get('/add-user', addUser(req,res))
+app.get('/add-user', addUser)
 
 app.get('/user/:email/:password', getUser)
 app.patch('/user/:userId/:challengeName')
+
+//get journal entries, filter by challenge, sort by date
+app.get('/journal/:userId', getJournalEntries)
+
 module.exports = app;

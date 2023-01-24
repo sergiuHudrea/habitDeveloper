@@ -1,4 +1,5 @@
-const { findUser, saveNewUser } = require("../models/UserDataModels")
+const { findUser, saveNewUser, getJournalEntriesInfo } = require("../models/UserDataModels")
+const User = require("../models/UserSetUpModel");
 
 exports.addUser = (req,res) =>{
     const user = new User({
@@ -32,3 +33,13 @@ exports.getUser = (req, res) =>{
     })
 }
 
+//get journal entries, filter by challenge, sort by date
+exports.getJournalEntries = (req,res) => {
+    const {userId} = req.params;
+    const {challenge, order} = req.query;
+
+    getJournalEntriesInfo(userId,challenge,order)
+    .then((journalEntries) =>{
+        res.status(200).send(journalEntries)
+    })
+}
