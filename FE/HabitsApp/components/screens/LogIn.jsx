@@ -18,10 +18,13 @@ valid=false;
 }else if(!inputs.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)){
     handleError('Please input a valid email','email');
 }
+valid=false;
 if(!inputs.password){
     handleError('Please input password','password');
 }else if(inputs.password.length<8){
+    
     handleError('Minimum password length of 8 characters ','password');
+    
 }
 if(valid){
        handleLogIn(); 
