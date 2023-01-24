@@ -5,7 +5,8 @@ import { MyCalendar } from './Secondary_Components/MyCalendar'
 import { getUserData } from '../../apis'
 import { ChallengeCard } from './Secondary_Components/ChallengeCard'
 
-const Home = ()=>{
+
+const Home = ({navigation})=>{
     const [selectedDay, setSelectedDay] = useState({"dateString": "", "day": undefined, "month": undefined, "timestamp": undefined, "year": undefined})
     const [challenges, setChallenges] = useState([])
 
@@ -16,6 +17,7 @@ const Home = ()=>{
     },[selectedDay])
 
     return (
+       
       <View>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
@@ -28,6 +30,7 @@ const Home = ()=>{
           }
           </ScrollView></View>
       </View>
+       
     )
 } 
 
