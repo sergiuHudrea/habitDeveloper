@@ -3,7 +3,8 @@ import React from 'react'
 import { useState } from "react"
 import { MyCalendar } from './Secondary_Components/MyCalendar'
 
-const Home = ()=>{
+
+const Home = ({navigation})=>{
     const [selectedDay, setSelectedDay] = useState({"dateString": "", "day": undefined, "month": undefined, "timestamp": undefined, "year": undefined})
     //from api require all challenges
     const challenges = {
@@ -11,6 +12,7 @@ const Home = ()=>{
     }
 
     return (
+       
       <View>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
@@ -34,6 +36,7 @@ const Home = ()=>{
           <Text>Challenge 4</Text>
           </ScrollView></View>
       </View>
+       
     )
 } 
 
