@@ -20,6 +20,7 @@ export default function App() {
               component={LogIn}
             /> 
              <Stack.Screen
+             options={{ headerShown:false}}
               name="Register"
               component={Register}
             />

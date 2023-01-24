@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, Vi
 import React, { useEffect, useState } from 'react'
 import Inputs from '../inputs';
 import { getUserData } from '../../apis';
+import Loader from '../Loader';
 
 
 
@@ -20,6 +21,7 @@ useEffect(()=>{
             if(inputs.email===userData.email && inputs.password===userData.password){
                setUserInfo(userData)
                console.log(userData.email,"<<<<userdata")
+               setIsLoading(false)
                handleLogIn()
             }
         })
@@ -57,7 +59,7 @@ if(!inputs.password){
 // }
 if(valid){
    setIsValid(true) 
-
+setIsLoading(true)
 }
  
 }
@@ -85,6 +87,7 @@ const handleLogIn=()=>{
     style={styles.container}
     behavior="padding"
     >
+        <Loader visible={isLoading}/>
         <View>
             <Inputs 
             onChangeText={text=>handleOnChange(text,'email')}

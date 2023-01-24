@@ -1,7 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { getUserData } from '../../apis'
 
-const Journal = ({navigation}) => {
+const Journal = ({navigation, }) => {
+  
+  useEffect(()=>{
+    getUserData()
+  })
+  
+  
+  
+  
+  
+  
   return (
     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
       <Text style={{fontSize:26}}>Journal</Text>
