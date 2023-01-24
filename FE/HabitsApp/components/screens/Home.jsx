@@ -1,39 +1,33 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { useEffect } from 'react'
 import { useState } from "react"
 import { MyCalendar } from './Secondary_Components/MyCalendar'
+import { getUserData } from '../../apis'
+import { ChallengeCard } from './Secondary_Components/ChallengeCard'
 
 
 const Home = ({navigation})=>{
     const [selectedDay, setSelectedDay] = useState({"dateString": "", "day": undefined, "month": undefined, "timestamp": undefined, "year": undefined})
-    //from api require all challenges
-    const challenges = {
-      take10minWalk: {times: 1, days:['','']}
-    }
+    const [challenges, setChallenges] = useState([])
+
+    useEffect(()=>{
+      getUserData().then((userData)=>{
+        setChallenges(Object.keys(userData.challenges))
+      })
+    },[selectedDay])
 
     return (
        
       <View>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
-          <Text>Today's challenges:</Text>
-          <ScrollView horizontal={true}>
-          <Text>Challenge 1</Text>
-          <Text>Challenge 2</Text>
-          <Text>Challenge 3</Text>
-          <Text>Challenge 4</Text>
-          <Text>Challenge 1</Text>
-          <Text>Challenge 2</Text>
-          <Text>Challenge 3</Text>
-          <Text>Challenge 4</Text>
-          <Text>Challenge 1</Text>
-          <Text>Challenge 2</Text>
-          <Text>Challenge 3</Text>
-          <Text>Challenge 4</Text>
-          <Text>Challenge 1</Text>
-          <Text>Challenge 2</Text>
-          <Text>Challenge 3</Text>
-          <Text>Challenge 4</Text>
+          <Text style={styles.todaysChal}>Today's challenges:</Text>
+          <ScrollView style={styles.cards} horizontal={true}>
+          { (challenges.length !== 0) &&
+              challenges.map((chal)=>{
+                  return <ChallengeCard key={chal} chal={chal}/>
+              })
+          }
           </ScrollView></View>
       </View>
        
@@ -42,4 +36,7 @@ const Home = ({navigation})=>{
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  cards: {},
+  todaysChal: {margin: 10, fontSize: 18}
+})
