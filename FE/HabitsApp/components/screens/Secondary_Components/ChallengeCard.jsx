@@ -7,10 +7,6 @@ export const ChallengeCard =({chal})=>{
             <Text style={styles.text}>{chal}</Text>
             
             <Text style={styles.text}>Description..</Text>
-            {/* <CircularProgress
-                value={76}
-                valueSuffix={"days"}
-            /> */}
             <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} fillColor={"#55BEDF"} onPress={(isChecked)=>{console.log(isChecked)}}/>
             <TouchableOpacity
                 activeOpacity={0.7}

@@ -29,6 +29,7 @@ const Home = ({navigation})=>{
               })
           }
           </ScrollView></View>
+          
       </View>
        
     )
