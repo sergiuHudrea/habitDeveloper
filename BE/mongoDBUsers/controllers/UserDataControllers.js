@@ -1,4 +1,7 @@
-const { findUser, saveNewUser, updateChallenge } = require("../models/UserDataModels")
+const { ADDRGETNETWORKPARAMS } = require("dns")
+const { findUser, saveNewUser,  } = require("../models/UserDataModels")
+const User = require("../models/UserSetUpModel");
+const { findUser, saveNewUser, updateChallenge, inputJournalEntry } = require("../models/UserDataModels")
 
 exports.addUser = (req,res) =>{
     const user = new User({
@@ -31,6 +34,20 @@ exports.getUser = (req, res) =>{
         console.log(err);
     })
 }
+
+exports.addJournalEntry = (req, res, next) =>{
+    const {username} = req.params;
+    const journalEntry = req.body;
+    inputJournalEntry(username, journalEntry)
+    .then((result)=>{
+        res.status(201).send(result);
+    })
+    .catch((err)=>{
+        console.log(err);
+        next(err);
+    })
+}
+
 
 exports.patchChallenge = (req, res, next) => {
     const { username } = req.params;

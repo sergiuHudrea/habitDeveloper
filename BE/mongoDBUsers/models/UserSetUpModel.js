@@ -37,7 +37,7 @@ const userSchema = schema({
     },
     dailyJournal:[{
         challengeName:{
-            type:Array,
+            type:String,
             required:false,
         },
         challengeEntryNumber:{
