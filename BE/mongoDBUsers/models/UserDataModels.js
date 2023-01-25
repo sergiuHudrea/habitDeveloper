@@ -100,7 +100,6 @@ exports.saveNewUser = (username, email, password) =>{
             }
         })
         .then(()=>{
-            console.log(nUser);
             return nUser.save()
         })
         .then((result)=>{
