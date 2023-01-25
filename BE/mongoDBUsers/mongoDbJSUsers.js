@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const User = require("./models/UserSetUpModel");
 const { req, res } = require('express');
-const { addUser, getUser, getJournalEntries, trial } = require('./controllers/UserDataControllers');
+const { addUser, getUser, getJournalEntries, getFilterJournal } = require('./controllers/UserDataControllers');
 var ObjectID = require('mongodb').ObjectID;
 
 const app = express();	
@@ -24,7 +24,9 @@ app.get('/add-user', addUser)
 app.get('/user/:email/:password', getUser)
 app.patch('/user/:userId/:challengeName')
 
-//get journal entries, filter by challenge, sort by date
+//get journal entries, sort by date
 app.get('/journal/:userId', getJournalEntries)
+//get journal entries, filter by challenge, sort by date
+app.get('/journal/filter/:userId', getFilterJournal)
 
 module.exports = app;

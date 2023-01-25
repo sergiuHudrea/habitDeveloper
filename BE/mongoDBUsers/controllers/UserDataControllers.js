@@ -1,4 +1,4 @@
-const { findUser, saveNewUser, getJournalEntriesInfo } = require("../models/UserDataModels")
+const { findUser, saveNewUser, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
 const User = require("../models/UserSetUpModel");
 
 exports.addUser = (req,res) =>{
@@ -33,12 +33,23 @@ exports.getUser = (req, res) =>{
     })
 }
 
-//get journal entries, filter by challenge, sort by date
+//get journal entries, sort by date
 exports.getJournalEntries = (req,res) => {
+    const {userId} = req.params;
+    const {order} = req.query;
+
+    getJournalEntriesInfo(userId,order)
+    .then((journalEntries) =>{
+        res.status(200).send(journalEntries)
+    })
+}
+
+//get journal entries, filter by challenge, sort by date
+exports.getFilterJournal  = (req,res) => {
     const {userId} = req.params;
     const {challenge, order} = req.query;
 
-    getJournalEntriesInfo(userId,challenge,order)
+    getFilterJournalInfo(userId,challenge,order)
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
     })
