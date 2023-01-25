@@ -172,7 +172,7 @@
     ]
 ```
 
-### PATCH /challenges/:username -- takes an object(challenge), array of strings(dates) or numbers(streak and times) and patches the respective challenge.
+### PATCH /challenges/:username -- takes an object (challenge), array of strings (dates) or numbers (streak and times) and patches the respective challenge.
 ```
 queries: username
 exampleInput: { "challenges.Sl_3_RegularSleep": {
