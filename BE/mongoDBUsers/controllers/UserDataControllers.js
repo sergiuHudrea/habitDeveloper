@@ -1,6 +1,11 @@
+
+const { findUser, saveNewUser, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
+const User = require("../models/UserSetUpModel");
+
 const { ADDRGETNETWORKPARAMS } = require("dns");
 const User = require("../models/UserSetUpModel");
 const { findUser, saveNewUser, updateChallenge, inputJournalEntry } = require("../models/UserDataModels")
+
 
 exports.addUser = (req,res) =>{
     const user = new User({
@@ -34,6 +39,7 @@ exports.getUser = (req, res) =>{
     })
 }
 
+
 exports.addJournalEntry = (req, res, next) =>{
     const {username} = req.params;
     const journalEntry = req.body;
@@ -57,4 +63,26 @@ exports.patchChallenge = (req, res, next) => {
         .catch( (err) => {
             next(err);
         })
+}
+
+//get journal entries, sort by date
+exports.getJournalEntries = (req,res) => {
+    const {userId} = req.params;
+    const {order} = req.query;
+
+    getJournalEntriesInfo(userId,order)
+    .then((journalEntries) =>{
+        res.status(200).send(journalEntries)
+    })
+}
+
+//get journal entries, filter by challenge, sort by date
+exports.getFilterJournal  = (req,res) => {
+    const {userId} = req.params;
+    const {challenge, order} = req.query;
+
+    getFilterJournalInfo(userId,challenge,order)
+    .then((journalEntries) =>{
+        res.status(200).send(journalEntries)
+    })
 }

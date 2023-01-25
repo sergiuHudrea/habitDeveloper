@@ -3,9 +3,13 @@ const mongoose = require("mongoose");
 const express = require("express");
 const User = require("./models/UserSetUpModel");
 const { req, res } = require('express');
+
+const { addUser, getUser, getJournalEntries, getFilterJournal } = require('./controllers/UserDataControllers');
+
 const {handleCustomErrors} = require('./controllers/errorController')
 
 const { addUser, getUser, patchChallenge, addJournalEntry} = require('./controllers/UserDataControllers');
+
 var ObjectID = require('mongodb').ObjectID;
 
 const app = express();	
@@ -15,7 +19,8 @@ const uri = "mongodb+srv://theFantastic5:theFantastic54321@habitdeveloper.m1vjjr
 mongoose.connect(uri)
 .then((result)=>{
      console.log("connected to db")
-     app.listen(3006);
+     app.listen(3007);
+
 })
 .catch((err)=>{
      console.log(err);
@@ -24,6 +29,14 @@ mongoose.connect(uri)
 app.get('/add-user', addUser)
 
 app.get('/user/:email/:password', getUser)
+
+app.patch('/user/:userId/:challengeName')
+
+//get journal entries, sort by date
+app.get('/journal/:userId', getJournalEntries)
+//get journal entries, filter by challenge, sort by date
+app.get('/journal/filter/:userId', getFilterJournal)
+
 
 app.patch('/journal/:username', addJournalEntry)
 app.patch('/challenges/:username', patchChallenge)
@@ -37,5 +50,6 @@ app.use(handleCustomErrors);
 //          next(err);
 //      }
 //  });
+
 
 module.exports = app;
