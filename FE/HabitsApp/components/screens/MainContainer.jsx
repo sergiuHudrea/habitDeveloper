@@ -5,6 +5,7 @@ import MoreHabits from './MoreHabits';
 import Journal from './Journal';
 import Badges from './Badges';
 import Home from './Home';
+import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
 

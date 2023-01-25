@@ -1,25 +1,103 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import {StyleSheet, Text, FlatList, Image} from 'react-native'
+import SimpleDateTime  from 'react-simple-timestamp-to-date';
+import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-const Journal = ({navigation, }) => {
-  
+
+
+
+
+const Journal = ({navigation,route }) => {
+const [userJournal, setUserJournal]=useState()
+const userInfo = route.params
+
+
+
   useEffect(()=>{
-    // getUserData({email: ..., password: ...})
-  })
+    getUserData(userInfo).then((data)=>{
+      setUserJournal(data.dailyJournal) 
+    })
+  },[])
   
-  
-  
-  
-  
-  
-  return (
-    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-      <Text style={{fontSize:26}}>Journal</Text>
-    </View>
+
+
+  const data = userJournal
+  const JournalCard = ({challengeName,journalEntry,date}) => (
+  <SafeAreaView style={styles.item}>
+      <Image style={{ marginTop:-20, width: 100, height: 100, alignSelf:'center' }} source={{uri:'https://cdn-icons-png.flaticon.com/512/4312/4312464.png'}}/>
+      <Text style={styles.challengeName}>{challengeName}</Text>
+      <Text style={styles.journalEntry}>"{journalEntry}"</Text>
+      <Text style={styles.date}><SimpleDateTime dateSeparator="-"  showTime='0' meridians="1" format="DMY">{date}</SimpleDateTime></Text>
+      <Ionicons style={{alignSelf:'center', fontSize:16, marginBottom:-30,marginTop:10}} name='trash-outline' onPress={()=>{}}/>
+</SafeAreaView>  
+  );
+
+
+      
+return (
+  <FlatList numColumns={2} style={styles.container}     data={data}
+  renderItem={({item}) => <JournalCard challengeName={item.challengeName} journalEntry={item.journalEntry} date={item.date} key={item.id}/>
+}/>
   )
-}
+};
 
 export default Journal
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor:"#F7F6F8"
+  },
+  item: {
+    backgroundColor: '#F7F6F8',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    marginVertical: 5,
+    borderWidth:1,
+    width:'48%',
+    margin:'1%',
+    marginHorizontal:10,
+    marginVertical:10,
+    borderRadius:30,
+    padding:7,
+    borderColor:'#BBD18C'
+  },
+journalEntry:{
+  textAlign:'center',
+  fontStyle:'italic',
+  margin:20,
+  color:'black',
+},
+challengeName:{
+  textAlign:'center',
+  margin:8,
+  fontWeight:'bold',
+  color:'black',
+},
+date:{
+  textAlign:'center',
+  margin:8,
+  color:'black',
+}
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

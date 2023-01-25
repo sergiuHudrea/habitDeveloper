@@ -76,7 +76,7 @@ const Register = ({navigation}) => {
       <View >
          <Inputs
             onChangeText={text => handleOnChange(text, 'username')}
-            onFocus={() => handleError(null, 'phone')}
+            onFocus={() => handleError(null, 'username')}
             iconName="person-circle-outline"
             label="Username"
             placeholder="Choose a username"
