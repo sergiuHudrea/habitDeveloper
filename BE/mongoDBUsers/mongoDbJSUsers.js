@@ -4,11 +4,9 @@ const express = require("express");
 const User = require("./models/UserSetUpModel");
 const { req, res } = require('express');
 
-const { addUser, getUser, getJournalEntries, getFilterJournal } = require('./controllers/UserDataControllers');
-
 const {handleCustomErrors} = require('./controllers/errorController')
 
-const { addUser, getUser, patchChallenge, addJournalEntry} = require('./controllers/UserDataControllers');
+const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal} = require('./controllers/UserDataControllers');
 
 var ObjectID = require('mongodb').ObjectID;
 

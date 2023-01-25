@@ -1,10 +1,6 @@
-
-const { findUser, saveNewUser, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
-const User = require("../models/UserSetUpModel");
-
 const { ADDRGETNETWORKPARAMS } = require("dns");
 const User = require("../models/UserSetUpModel");
-const { findUser, saveNewUser, updateChallenge, inputJournalEntry } = require("../models/UserDataModels")
+const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
 
 
 exports.addUser = (req,res) =>{
