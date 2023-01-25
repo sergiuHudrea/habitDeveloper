@@ -1,6 +1,9 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Keyboard} from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Keyboard, Alert} from 'react-native'
+
 import React, { useEffect, useState } from 'react'
 import Inputs from '../inputs';
+import { getUserData } from '../../apis';
+import Loader from '../Loader';
 
 
 
@@ -8,8 +11,27 @@ import Inputs from '../inputs';
 const LogIn = ({navigation}) => {
 const [inputs,setInputs]=useState({email:'', password:''})
 const [isError,setIsError]=useState({})
+const [invalidErr,setInvalidErr]=useState({})
+const [isLoading,setIsLoading]=useState(false)
+const [isValid,setIsValid]=useState(false)
+const [userInfo,setUserInfo]=useState()
+
+useEffect(()=>{
+        getUserData(inputs.email,inputs.password).then((userData)=>{
+            if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
+               setUserInfo(userData)
+               console.log(userData.email,"<<<<userdata")
+               setIsLoading(false)
+               handleLogIn()
+            }
+        })
+    },[isValid])
+
+
+
 
 const validate=()=>{
+
 Keyboard.dismiss();
 let valid=true;
 if(!inputs.email){
@@ -17,19 +39,30 @@ handleError('Please input email','email');
 valid=false;
 }else if(!inputs.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)){
     handleError('Please input a valid email','email');
+    valid=false;
 }
-
 if(!inputs.password){
     handleError('Please input password','password');
+    valid=false;
 }else if(inputs.password.length<8){
     
     handleError('Minimum password length of 8 characters ','password');
-    
+    valid=false;
+
 }
+ 
+ 
 if(valid){
-       handleLogIn(); 
-    }
+   setIsValid(true) 
+// setIsLoading(true)
+
 }
+ 
+}
+
+    
+    
+
 
 
     
@@ -44,11 +77,13 @@ const handleLogIn=()=>{
 }
 
 
+
   return (
     <KeyboardAvoidingView
     style={styles.container}
     behavior="padding"
     >
+        <Loader visible={isLoading}/>
         <View>
             <Inputs 
             onChangeText={text=>handleOnChange(text,'email')}
@@ -63,7 +98,7 @@ const handleLogIn=()=>{
             placeholder='Enter your password'
             error={isError.password}
             onFocus={()=>{
-                handleError(null, 'password');
+                handleError(null, 'password')
             }}
             iconName={'lock-closed-outline'}
             password/>

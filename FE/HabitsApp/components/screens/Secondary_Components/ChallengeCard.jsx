@@ -1,6 +1,5 @@
-import { View, Text, StyleSheet} from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-// import CircularProgress from 'react-native-circular-progress-indicator'
 
 export const ChallengeCard =({chal})=>{
     return (
@@ -8,11 +7,13 @@ export const ChallengeCard =({chal})=>{
             <Text style={styles.text}>{chal}</Text>
             
             <Text style={styles.text}>Description..</Text>
-            {/* <CircularProgress
-                value={76}
-                valueSuffix={"days"}
-            /> */}
-            <BouncyCheckbox text={"Completed!"} fillColor={"#18BB9C"} onPress={(isChecked)=>{console.log(isChecked)}}/>
+            <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} fillColor={"#55BEDF"} onPress={(isChecked)=>{console.log(isChecked)}}/>
+            <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => (console.log('goes to where the journal entry is.. tbd'))}
+                style={styles.button}
+                ><Text style={styles.buttonText}>Write to journal</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -20,6 +21,7 @@ export const ChallengeCard =({chal})=>{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        alignItems: 'center',
         justifyContent: "center",
         marginRight: 15,
         borderRadius: 20,
@@ -33,6 +35,18 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'black',
-        fontSize: 18, 
+        fontSize: 18,
+        marginBottom: 10,
+    },
+    button: {
+        marginTop: 10,
+        backgroundColor:'#78ACB1',
+        width:'100%',
+        padding:5,
+        alignItems:'center',
+        borderRadius:10,
+    },
+    buttonText: {
+        color: 'white'
     }
 })

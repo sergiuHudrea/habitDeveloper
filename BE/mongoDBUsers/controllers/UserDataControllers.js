@@ -1,5 +1,11 @@
+
 const { findUser, saveNewUser, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
 const User = require("../models/UserSetUpModel");
+
+const { ADDRGETNETWORKPARAMS } = require("dns");
+const User = require("../models/UserSetUpModel");
+const { findUser, saveNewUser, updateChallenge, inputJournalEntry } = require("../models/UserDataModels")
+
 
 exports.addUser = (req,res) =>{
     const user = new User({
@@ -31,6 +37,32 @@ exports.getUser = (req, res) =>{
     .catch((err)=>{
         console.log(err);
     })
+}
+
+
+exports.addJournalEntry = (req, res, next) =>{
+    const {username} = req.params;
+    const journalEntry = req.body;
+    inputJournalEntry(username, journalEntry)
+    .then((result)=>{
+        res.status(201).send(result);
+    })
+    .catch((err)=>{
+        console.log(err);
+        next(err);
+    })
+}
+
+
+exports.patchChallenge = (req, res, next) => {
+    const { username } = req.params;
+    updateChallenge(username, req.body)
+        .then( (user) => {
+            res.status(200).send( user);
+        })
+        .catch( (err) => {
+            next(err);
+        })
 }
 
 //get journal entries, sort by date

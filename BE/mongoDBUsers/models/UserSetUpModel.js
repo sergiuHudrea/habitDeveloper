@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { stringify } = require('querystring');
 const schema = mongoose.Schema;
 
+mongoose.set("strictQuery", false);
+
 //could also add timestamp property 16:49 on video
 const userSchema = schema({
     username:{
@@ -35,7 +37,7 @@ const userSchema = schema({
     },
     dailyJournal:[{
         challengeName:{
-            type:Array,
+            type:String,
             required:false,
         },
         challengeEntryNumber:{
@@ -55,6 +57,6 @@ const userSchema = schema({
 },    
 { minimize: false }
 )
-const User = mongoose.model('User', userSchema, "Users");
+const User = mongoose.model('User', userSchema, "Test");
 
 module.exports = User;
