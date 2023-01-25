@@ -13,7 +13,6 @@ beforeAll(done => {
 
   afterAll(done => {
     // Closing the DB connection allows Jest to exit successfully.
-    console.log("done");
     mongoose.connection.close()
     done()
   })
@@ -157,6 +156,7 @@ describe('PATCH /challenges/:username', () => {
 })
 
 
+
     test("status:400, bad request when the dates value is not an array of strings", () => {
         const challenge_updates = {"challenges.2_DimLights3hBeforeBed.dates": [1,2, 3]}
         return request(app)
@@ -223,8 +223,8 @@ describe("POST /user", () =>{
 
     test("status 400, username already exists", ()=>{
         const newUser = {
-            username: "James",
-            email:"shudrea@gmail.com",
+            username: "Sergiu",
+            email:"shua@gmail.com",
             password:"password",
        }
         
@@ -253,46 +253,7 @@ describe("POST /user", () =>{
             })
         })
 
-//get journal entries, sort by date
-describe('GET /journal/:username sort', () =>{
-    test('status code 200 returns an array of journal entries in  desc order unless specified', () => {
-        return request(app)
-        .get('/journal/Sergiu')
-        .expect(200)
-        .then((response) => {
-            const journalEntries = response.body;
-            expect(journalEntries).toBeInstanceOf(Array);
-            const sortJournalEntries = [...journalEntries].sort((a,b) => b.date-a.date)
-            expect(journalEntries).toEqual(sortJournalEntries)
-        })
-    })
-    test('status code 200 returns an array of journal entries in  asc order', () => {
-        return request(app)
-        .get('/journal/Sergiu?order=asc')
-        .expect(200)
-        .then((response) => {
-            const journalEntries = response.body;
-            expect(journalEntries).toBeInstanceOf(Array);
-            const sortJournalEntries =[...journalEntries].sort((a,b) => a.date-b.date)
-            expect(journalEntries).toEqual(sortJournalEntries)
-          })
-    })
-    test('status code 400 when order is invlaid', () => {
-        return request(app)
-        .get('/journal/Sergiu?order=varshs')
-        .expect(400)
-        .then((response) => {
-            expect(response.body.msg).toBe("Bad request")
-        })
-    })
-    test('status code 400 when username is invlaid', () => {
-        return request(app)
-        .get('/journal/SergiuKPMG?order=desc')
-        .expect(400)
-        .then((response) => {
-            expect(response.body.msg).toBe("User does not exist")
-        })
-    })
+
 })
 
 //get journal entries, filter by challenge, sort by date
@@ -345,5 +306,44 @@ describe('GET /journal/filter/:username  filter+sort', () =>{
     })
 })
 
+//get journal entries, sort by date
+describe('GET /journal/:username sort', () =>{
+    test('status code 200 returns an array of journal entries in  desc order unless specified', () => {
+        return request(app)
+        .get('/journal/Sergiu')
+        .expect(200)
+        .then((response) => {
+            const journalEntries = response.body;
+            expect(journalEntries).toBeInstanceOf(Array);
+            const sortJournalEntries = [...journalEntries].sort((a,b) => b.date-a.date)
+            expect(journalEntries).toEqual(sortJournalEntries)
+        })
+    })
+    test('status code 200 returns an array of journal entries in  asc order', () => {
+        return request(app)
+        .get('/journal/Sergiu?order=asc')
+        .expect(200)
+        .then((response) => {
+            const journalEntries = response.body;
+            expect(journalEntries).toBeInstanceOf(Array);
+            const sortJournalEntries =[...journalEntries].sort((a,b) => a.date-b.date)
+            expect(journalEntries).toEqual(sortJournalEntries)
+          })
+    })
+    test('status code 400 when order is invlaid', () => {
+        return request(app)
+        .get('/journal/Sergiu?order=varshs')
+        .expect(400)
+        .then((response) => {
+            expect(response.body.msg).toBe("Bad request")
+        })
+    })
+    test('status code 400 when username is invlaid', () => {
+        return request(app)
+        .get('/journal/SergiuKPMG?order=desc')
+        .expect(400)
+        .then((response) => {
+            expect(response.body.msg).toBe("User does not exist")
+        })
+    })
 
-})

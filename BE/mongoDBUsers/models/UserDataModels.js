@@ -40,7 +40,6 @@ exports.saveNewUser = (username, email, password) =>{
 exports.findUser = (password, email) =>{
     return User.find({email:email, password:password})
     .then((result)=>{
-     console.log(result)
          return result;
     })
 }
