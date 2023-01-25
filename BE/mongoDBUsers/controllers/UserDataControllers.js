@@ -62,7 +62,7 @@ exports.patchChallenge = (req, res, next) => {
 }
 
 //get journal entries, sort by date
-exports.getJournalEntries = (req,res) => {
+exports.getJournalEntries = (req,res,next) => {
     const {username} = req.params;
     const {order} = req.query;
 
@@ -70,15 +70,21 @@ exports.getJournalEntries = (req,res) => {
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
     })
+    .catch ((err) => {
+        next(err)
+    })
 }
 
 //get journal entries, filter by challenge, sort by date
-exports.getFilterJournal  = (req,res) => {
+exports.getFilterJournal  = (req,res,next) => {
     const {username} = req.params;
     const {challenge, order} = req.query;
 
     getFilterJournalInfo(username,challenge,order)
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
+    })
+    .catch((err) => {
+        next(err)
     })
 }
