@@ -2,7 +2,7 @@ import axios from "axios"
 
 const userApi = axios.create({baseURL: "http://localhost:3007"})
 
-export const getUserData =(email='shudrea@gmail.com',password='iLoveCake')=>{
+export const getUserData =({email ,password})=>{
     // const email = "shudrea@gmail.com"
     // const password = "iLoveCake"
     // console.log(email,"<<<<email")

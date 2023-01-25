@@ -14,7 +14,7 @@ const Home = ({navigation, route})=>{
 
 
     useEffect(()=>{
-      getUserData().then((userData)=>{
+      getUserData(userInfo).then((userData)=>{
         setChallenges(Object.keys(userData.challenges))
       })
     },[selectedDay])

@@ -17,7 +17,7 @@ const [isValid,setIsValid]=useState(false)
 const [userInfo,setUserInfo]=useState({})
 
 useEffect(()=>{
-    getUserData(inputs.email,inputs.password).then((userData)=>{
+    getUserData({email:inputs.email, password: inputs.password}).then((userData)=>{
         if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
             console.log(userData.email,"<<<<userdata")
             setUserInfo(userData)
@@ -33,7 +33,7 @@ useEffect(()=>{
 
 
 const validate=()=>{
-
+console.log('FE is running!')
 Keyboard.dismiss();
 let valid=true;
 if(!inputs.email){
