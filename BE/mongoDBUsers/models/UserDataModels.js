@@ -1,10 +1,39 @@
 const User = require("./UserSetUpModel");
 
-exports.saveNewUser = (user) =>{
-   return user.save()
+exports.saveNewUser = (username, email, password) =>{
+    if(username === undefined || email === undefined || password === undefined){
+        return Promise.reject({msg: "Missing info", status:400});
+    }
+    const nUser = new User({
+        username: username,
+        email:email,
+        password:password,
+        likes:0,
+        challenges:{},
+        uniqueUserLink:"",
+        medals:{},
+        dailyJournal:[]
+   })
+        return User.find({username:nUser.username})
+        .then((result)=>{
+            if(result.length!==0){
+                return Promise.reject({msg: "Username already exists", status:400});
+            }
+        })
+        .then(()=>{
+            return User.find({email:nUser.email})
+        })
+        .then((result)=>{
+            if(result.length!==0){
+                return Promise.reject({msg: "Email already exists", status:400});
+            }
+        })
+        .then(()=>{
+            return nUser.save()
+        })
         .then((result=>{
-             return result;
-        }))
+            return result;
+       }))
 }
 
 exports.findUser = (password, email) =>{
@@ -42,7 +71,7 @@ exports.inputJournalEntry = (username, journalEntry) =>{
 
 
 exports.updateChallenge = (username, updates) => {
-    //  if (typeof Object.values(updates)[0] !== "number" && Object.values(updates)[0] !== null) {return Promise.reject({status: 400, msg: 'Bad request'})}
+    if (typeof Object.values(updates)[0] !== "number" && Object.values(updates)[0] !== null) {return Promise.reject({status: 400, msg: 'Bad request'})}
      return User.findOneAndUpdate({username: username}, { $set: updates }, {
           new: true
         })

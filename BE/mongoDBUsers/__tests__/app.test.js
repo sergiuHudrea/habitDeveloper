@@ -2,10 +2,21 @@
 const request = require('supertest');
 // const { describe } = require('test');
 const app = require("../mongoDbJSUsers");
+const mongoose = require("mongoose");
+const User = require("../models/UserSetUpModel");
 jest.setTimeout(5000);
 
+beforeAll(done => {
+    done()
+  })
 
-describe('1. GET /user/:username/:password', () =>{
+  afterAll(done => {
+    // Closing the DB connection allows Jest to exit successfully.
+    console.log("done");
+    mongoose.connection.close()
+    done()
+  })
+describe('GET /user/:username/:password', () =>{
 
     test("status:200, returns a user object with their app details", ()=>{
         return request(app)
@@ -19,7 +30,7 @@ describe('1. GET /user/:username/:password', () =>{
     })
   })
 
-describe("Patching the journal entry", () =>{
+describe("PATCH /journal/:username", () =>{
 
     test("status 201, returns 201 confirming patch of new journal entry", ()=>{
         const journalEntry = {
@@ -29,7 +40,7 @@ describe("Patching the journal entry", () =>{
             date: new Date()
         }
         return request(app)
-        .patch("/journal/Karl")
+        .patch("/journal/Sergiu")
         .send(journalEntry)
         .expect(201)
     })
@@ -115,3 +126,66 @@ describe('PATCH /challenges/:username', () => {
     })
 })
 
+
+describe.only("POST /user", () =>{
+
+    test("status 201, returns 201 confirming new user and user object", ()=>{
+            const newUser = {
+        username: "Karl",
+        email:"karl.rivett@yahoo.au",
+        password:"password",
+   }
+
+        return request(app)
+        .post("/user")
+        .send(newUser)
+        .expect(201)
+    })
+
+    test.only("status 400, not fully filled in form", ()=>{
+        const newUser = {
+    email:"karl.rivett@yahoo.au",
+    password:"password",
+}
+
+    return request(app)
+    .post("/user")
+    .send(newUser)
+    .expect(400)
+    .then((response)=>{
+        expect(response._body.msg).toBe("Missing info");
+    })
+})
+
+    test("status 400, username already exists", ()=>{
+        const newUser = {
+            username: "James",
+            email:"shudrea@gmail.com",
+            password:"password",
+       }
+        
+            return request(app)
+            .post("/user")
+            .send(newUser)
+            .expect(400)
+            .then((response)=>{
+                expect(response._body.msg).toBe("Username already exists");
+            })
+    })
+
+    test("status 400, email already exists", ()=>{
+        const newUser = {
+            username: "James",
+            email:"shudrea@gmail.com",
+            password:"password",
+       }
+        
+            return request(app)
+            .post("/user")
+            .send(newUser)
+            .expect(400)
+            .then((response)=>{
+                expect(response._body.msg).toBe("Email already exists");
+            })
+    })
+})
