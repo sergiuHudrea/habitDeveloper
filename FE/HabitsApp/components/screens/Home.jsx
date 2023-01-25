@@ -7,9 +7,11 @@ import { ChallengeCard } from './Secondary_Components/ChallengeCard'
 import { MyHomeStats } from './Secondary_Components/MyHomeStats'
 
 
-const Home = ({navigation})=>{
+const Home = ({navigation, route})=>{
     const [selectedDay, setSelectedDay] = useState({"dateString": "", "day": undefined, "month": undefined, "timestamp": undefined, "year": undefined})
     const [challenges, setChallenges] = useState([])
+    const userInfo = route.params
+
 
     useEffect(()=>{
       getUserData().then((userData)=>{

@@ -14,15 +14,17 @@ const [isError,setIsError]=useState({})
 const [invalidErr,setInvalidErr]=useState({})
 const [isLoading,setIsLoading]=useState(false)
 const [isValid,setIsValid]=useState(false)
-const [userInfo,setUserInfo]=useState()
+const [userInfo,setUserInfo]=useState({})
 
 useEffect(()=>{
-        getUserData(inputs.email,inputs.password).then((userData)=>{
-            if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
-               setUserInfo(userData)
-               console.log(userData.email,"<<<<userdata")
+    getUserData(inputs.email,inputs.password).then((userData)=>{
+        if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
+            console.log(userData.email,"<<<<userdata")
+            setUserInfo(userData)
                setIsLoading(false)
                handleLogIn()
+            } else {
+                setIsValid(false)
             }
         })
     },[isValid])
@@ -55,7 +57,6 @@ if(!inputs.password){
 if(valid){
    setIsValid(true) 
 // setIsLoading(true)
-
 }
  
 }
@@ -73,7 +74,7 @@ const handleError =(errorMsg,input)=>{
 setIsError((prevState)=>({...prevState,[input]:errorMsg}));
 }
 const handleLogIn=()=>{
-   navigation.navigate('MainContainer')
+   navigation.navigate('MainContainer', {email: inputs.email, password: inputs.password})
 }
 
 
