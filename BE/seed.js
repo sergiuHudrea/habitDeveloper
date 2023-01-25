@@ -22,16 +22,16 @@ const seedTest = [ {
     password: "iLoveCake",
     likes: 100,
     challenges: { 
-                  Sl_1_NoPhoneBeforeBed: null,
-                  Sl_2_DimLights3hBeforeBed: 0,
-                  Sl_3_RegularSleep: 2,
-                  Sl_4_NoCoffe8hBeforeBed: 8,
-                  Sl_5_NoLargeMealsBB: 24,
-                  Sl_6_NoAlcoholBB: 1,
-                  Sl_7_NoNapAfter3pm: null,
-                  Sl_8_NaturalLight30Mins: null,
-                  Sl_9_OptimisedBedroomEnv: null,
-                  Sl_10_UnwindBB: 44
+                  Sl_1_NoPhoneBeforeBed: {times: -1, dates:[], streak: 0},
+                  Sl_2_DimLights3hBeforeBed: {times: 0, dates:[], streak: 0},
+                  Sl_3_RegularSleep: {times: 2, dates:[], streak: 0},
+                  Sl_4_NoCoffe8hBeforeBed: {times: 8, dates:[], streak: 0},
+                  Sl_5_NoLargeMealsBB: {times: 24, dates:[], streak: 0},
+                  Sl_6_NoAlcoholBB: {times: 1, dates:[], streak: 0},
+                  Sl_7_NoNapAfter3pm: {times: -1, dates:[], streak: 0},
+                  Sl_8_NaturalLight30Mins: {times: -1, dates:[], streak: 0},
+                  Sl_9_OptimisedBedroomEnv: {times: -1, dates:[], streak: 0},
+                  Sl_10_UnwindBB: {times: 44, dates:[], streak: 0}
                   },
     uniqueUserLink: "",
     medals: {
