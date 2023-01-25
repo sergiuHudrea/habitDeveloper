@@ -31,9 +31,9 @@ app.get('/user/:email/:password', getUser)
 app.patch('/user/:userId/:challengeName')
 
 //get journal entries, sort by date
-app.get('/journal/:userId', getJournalEntries)
+app.get('/journal/:username', getJournalEntries)
 //get journal entries, filter by challenge, sort by date
-app.get('/journal/filter/:userId', getFilterJournal)
+app.get('/journal/filter/:username', getFilterJournal)
 
 
 app.patch('/journal/:username', addJournalEntry)
