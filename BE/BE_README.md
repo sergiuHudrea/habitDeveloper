@@ -111,7 +111,7 @@ dailyJournal: [{
     ]
 ```
 
-### GET /journal/filter/:username  -- returns an array containing filtered journal entries as query (?challenge=<challengeName>) of the username defaulted to date desc order unless query (?order=asc) given. 
+### GET /journal/filter/:username  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the username defaulted to date desc order unless query (?order=asc) given. 
 
 ```
  [
