@@ -24,8 +24,146 @@ const userSchema = schema({
         required: true
     },
     challenges:{
-        type:Object,
-        default: {},
+        Sl_1_NoPhoneBeforeBed: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_2_DimLights3hBeforeBed: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_3_RegularSleep: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_4_NoCoffe8hBeforeBed: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_5_NoLargeMealsBB: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_6_NoAlcoholBB: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_7_NoNapAfter3pm: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_8_NaturalLight30Mins: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_9_OptimisedBedroomEnv: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            },
+        Sl_10_UnwindBB: {
+            times: {
+                type: Number,
+                required: true
+                }, 
+            dates:{
+                type: [String],
+                required: true
+                }, 
+            streak: {
+                type: Number,
+                required: true
+                }
+            }
     },
     uniqueUserLink:{
         type:String,

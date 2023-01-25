@@ -72,17 +72,22 @@ exports.inputJournalEntry = (username, journalEntry) =>{
 
 
 exports.updateChallenge = (username, updates) => {
-    if (typeof Object.values(updates)[0] !== "number" && Object.values(updates)[0] !== null) {return Promise.reject({status: 400, msg: 'Bad request'})}
-     return User.findOneAndUpdate({username: username}, { $set: updates }, {
-          new: true
-        })
-          .then((result) => {
-               if (result === null) {
-                    return Promise.reject({status: 404, msg: 'Not Found'})
-               }
-               return result;
-          })
+   return User.find({ [Object.keys(updates)[0]] : {$exists: true}})
+    .then((res) => {
+        
+        if (res.length === 0 ) {return Promise.reject({status: 400, msg: 'Bad request'}) }
+    })
+    .then(()=> {
+        return User.findOneAndUpdate({username: username}, { $set: updates }, {
+                new: true
+            }) })
+    .then((result) => {
+        if (result === null) { return Promise.reject({status: 404, msg: 'Not Found'}) }
+        return result;
+                })
+   
 }
+
 
 
 //get journal entries, sort by date
@@ -144,3 +149,4 @@ exports.getFilterJournalInfo = (username,challenge,order="desc") => {
 
     
 }
+
