@@ -115,7 +115,6 @@ describe('PATCH /challenges/:username', () => {
         .send(challenge_updates)
         .expect(200)
         .then((response) => {
-            console.log(response._body.challenges.Sl_6_NoAlcoholBB.times)
             expect(response._body.challenges.Sl_6_NoAlcoholBB.times).toBe(null)
         })
     })
@@ -346,4 +345,4 @@ describe('GET /journal/:username sort', () =>{
             expect(response.body.msg).toBe("User does not exist")
         })
     })
-
+})
