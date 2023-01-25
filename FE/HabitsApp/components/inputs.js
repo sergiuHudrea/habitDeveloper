@@ -21,7 +21,7 @@ const Inputs = ({iconName,error,password,onFocus=()=>{},...props}) => {
      },
     ]}>
         <Ionicons style={{fontSize:22, color:'#55BEDF', marginRight:10}}name={iconName}/>
-        <TextInput autoCorrect={false} autoCapitalize={false}
+        <TextInput autoCorrect={false} autoCapitalize={false} keyboardType={'email-address'}
         secureTextEntry={hidePassword} 
         onFocus={()=>{onFocus();
             setIsFocused(true);
@@ -58,7 +58,7 @@ const style = StyleSheet.create({
         paddingHorizontal:15,
         borderWidth:2,
         alignItems:'center',
-        width:350,
+        width:385,
         borderRadius:10,
 
     },

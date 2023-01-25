@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Keyboard, Alert} from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text,TouchableOpacity, View, Keyboard} from 'react-native'
 
 import React, { useEffect, useState } from 'react'
 import Inputs from '../inputs';
@@ -19,12 +19,12 @@ const [userInfo,setUserInfo]=useState({})
 useEffect(()=>{
     getUserData({email:inputs.email, password: inputs.password}).then((userData)=>{
         if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
-            console.log(userData.email,"<<<<userdata")
             setUserInfo(userData)
                setIsLoading(false)
                handleLogIn()
             } else {
                 setIsValid(false)
+                setIsLoading(false)
             }
         })
     },[isValid])
@@ -33,7 +33,6 @@ useEffect(()=>{
 
 
 const validate=()=>{
-console.log('FE is running!')
 Keyboard.dismiss();
 let valid=true;
 if(!inputs.email){
@@ -56,7 +55,7 @@ if(!inputs.password){
  
 if(valid){
    setIsValid(true) 
-// setIsLoading(true)
+   setIsLoading(true)
 }
  
 }
