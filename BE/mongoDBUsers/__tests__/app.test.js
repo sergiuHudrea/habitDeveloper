@@ -190,7 +190,7 @@ describe('PATCH /challenges/:username', () => {
     })
 
 
-describe("POST /user", () =>{
+describe.only("POST /user", () =>{
 
     test("status 201, returns 201 confirming new user and user object", ()=>{
             const newUser = {
