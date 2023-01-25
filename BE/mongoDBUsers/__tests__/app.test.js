@@ -1,11 +1,23 @@
 // const { default: test } = require('node:test');
 const request = require('supertest');
+// const User = require("./models/UserSetUpModel");
 // const { describe } = require('test');
 const app = require("../mongoDbJSUsers");
+const mongoose = require("mongoose");
+const User = require("../models/UserSetUpModel");
 jest.setTimeout(5000);
 
+beforeAll(done => {
+    done()
+  })
 
-describe('1. GET /user/:username/:password', () =>{
+  afterAll(done => {
+    // Closing the DB connection allows Jest to exit successfully.
+    console.log("done");
+    mongoose.connection.close()
+    done()
+  })
+describe('GET /user/:username/:password', () =>{
 
     test("status:200, returns a user object with their app details", ()=>{
         return request(app)
@@ -19,7 +31,7 @@ describe('1. GET /user/:username/:password', () =>{
     })
   })
 
-describe("Patching the journal entry", () =>{
+describe("PATCH /journal/:username", () =>{
 
     test("status 201, returns 201 confirming patch of new journal entry", ()=>{
         const journalEntry = {
@@ -29,7 +41,7 @@ describe("Patching the journal entry", () =>{
             date: new Date()
         }
         return request(app)
-        .patch("/journal/Karl")
+        .patch("/journal/Sergiu")
         .send(journalEntry)
         .expect(201)
     })
@@ -142,6 +154,7 @@ describe('PATCH /challenges/:username', () => {
         })
     })
 
+
     test("status:400, bad request when the dates value is not an array of strings", () => {
         const challenge_updates = {"challenges.2_DimLights3hBeforeBed.dates": [1,2, 3]}
         return request(app)
@@ -174,4 +187,161 @@ describe('PATCH /challenges/:username', () => {
             expect(body.msg).toBe("Bad request")
         })
     })
+
+
+describe.only("POST /user", () =>{
+
+    test("status 201, returns 201 confirming new user and user object", ()=>{
+            const newUser = {
+        username: "Karl",
+        email:"karl.rivett@yahoo.au",
+        password:"password",
+   }
+
+        return request(app)
+        .post("/user")
+        .send(newUser)
+        .expect(201)
+    })
+
+    test.only("status 400, not fully filled in form", ()=>{
+        const newUser = {
+    email:"karl.rivett@yahoo.au",
+    password:"password",
+}
+
+    return request(app)
+    .post("/user")
+    .send(newUser)
+    .expect(400)
+    .then((response)=>{
+        expect(response._body.msg).toBe("Missing info");
+    })
+})
+
+    test("status 400, username already exists", ()=>{
+        const newUser = {
+            username: "James",
+            email:"shudrea@gmail.com",
+            password:"password",
+       }
+        
+            return request(app)
+            .post("/user")
+            .send(newUser)
+            .expect(400)
+            .then((response)=>{
+                expect(response._body.msg).toBe("Username already exists");
+            })
+    })
+
+    test("status 400, email already exists", ()=>{
+        const newUser = {
+            username: "James",
+            email:"shudrea@gmail.com",
+            password:"password",
+       }
+        
+            return request(app)
+            .post("/user")
+            .send(newUser)
+            .expect(400)
+            .then((response)=>{
+                expect(response._body.msg).toBe("Email already exists");
+            })
+        })
+
+//get journal entries, sort by date
+describe('GET /journal/:username sort', () =>{
+    test('status code 200 returns an array of journal entries in  desc order unless specified', () => {
+        return request(app)
+        .get('/journal/Sergiu')
+        .expect(200)
+        .then((response) => {
+            const journalEntries = response.body;
+            expect(journalEntries).toBeInstanceOf(Array);
+            const sortJournalEntries = [...journalEntries].sort((a,b) => b.date-a.date)
+            expect(journalEntries).toEqual(sortJournalEntries)
+        })
+    })
+    test('status code 200 returns an array of journal entries in  asc order', () => {
+        return request(app)
+        .get('/journal/Sergiu?order=asc')
+        .expect(200)
+        .then((response) => {
+            const journalEntries = response.body;
+            expect(journalEntries).toBeInstanceOf(Array);
+            const sortJournalEntries =[...journalEntries].sort((a,b) => a.date-b.date)
+            expect(journalEntries).toEqual(sortJournalEntries)
+          })
+    })
+    test('status code 400 when order is invlaid', () => {
+        return request(app)
+        .get('/journal/Sergiu?order=varshs')
+        .expect(400)
+        .then((response) => {
+            expect(response.body.msg).toBe("Bad request")
+        })
+    })
+    test('status code 400 when username is invlaid', () => {
+        return request(app)
+        .get('/journal/SergiuKPMG?order=desc')
+        .expect(400)
+        .then((response) => {
+            expect(response.body.msg).toBe("User does not exist")
+        })
+    })
+})
+
+//get journal entries, filter by challenge, sort by date
+describe('GET /journal/filter/:username  filter+sort', () =>{
+    test('status code 200 returns an array of journal entries in  asc order', () => {
+        return request(app)
+        .get('/journal/filter/Sergiu?challenge=Sl_4_NoCoffe8hBeforeBed&order=asc')
+        .expect(200)
+        .then((response) => {
+            const journalEntries = response.body;
+            expect(journalEntries).toBeInstanceOf(Array);
+            const sortJournalEntries =[...journalEntries].sort((a,b) => a.date-b.date)
+            expect(journalEntries).toEqual(sortJournalEntries)
+        })
+    })
+    test('status code 200 returns an array of journal entries in  desc order', () => {
+        return request(app)
+        .get('/journal/filter/Sergiu?challenge=Sl_3_RegularSleep')
+        .expect(200)
+        .then((response) => {
+            const journalEntries = response.body;
+            expect(journalEntries).toBeInstanceOf(Array);
+            const sortJournalEntries =[...journalEntries].sort((a,b) => b.date-a.date)
+            expect(journalEntries).toEqual(sortJournalEntries)
+        })
+    })
+    test('status code 400 when order is invlaid', () => {
+        return request(app)
+        .get('/journal/filter/Sergiu?challenge=Sl_3_RegularSleep&order=varshs')
+        .expect(400)
+        .then((response) => {
+            expect(response.body.msg).toBe("Bad request")
+        })
+    })
+    test('status code 400 when challenge is invlaid', () => {
+        return request(app)
+        .get('/journal/filter/Sergiu?challenge=varsha&order=desc')
+        .expect(400)
+        .then((response) => {
+            expect(response.body.msg).toBe("Bad request")
+        })
+    })
+    test('status code 400 when username is invlaid', () => {
+        return request(app)
+        .get('/journal/filter/SergiuKPMG?challenge=Sl_3_RegularSleep&order=desc')
+        .expect(400)
+        .then((response) => {
+            expect(response.body.msg).toBe("User does not exist")
+        })
+    })
+})
+
+
 })

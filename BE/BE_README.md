@@ -56,3 +56,94 @@ dailyJournal: [{
      }]
 }
 ```
+### GET /journal/:username  -- returns an array containing all journal entries of the username defaulted to date desc order unless query (?order=asc) given
+
+```
+[
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 6,
+        journalEntry: 'x',
+        date: 56345
+      },
+      {
+        challengeName: 'Sl_6_NoAlcoholBB',
+        challengeEntryNumber: 1,
+        journalEntry: 'u',
+        date: 5654
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 4,
+        journalEntry: 'h',
+        date: 67
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 1,
+        journalEntry: 'bb',
+        date: 22
+      },
+      {
+        challengeName: 'Sl_3_RegularSleep',
+        challengeEntryNumber: 2,
+        journalEntry: 'bba',
+        date: 7
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 8,
+        journalEntry: 'mhg',
+        date: 7
+      },
+      {
+        challengeName: 'Sl_3_RegularSleep',
+        challengeEntryNumber: 1,
+        journalEntry: 'aaaaa',
+        date: 3
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 7,
+        journalEntry: 'sfdads',
+        date: 3
+      }
+    ]
+```
+
+### GET /journal/filter/:username  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the username defaulted to date desc order unless query (?order=asc) given. 
+
+```
+ [
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 7,
+        journalEntry: 'sfdads',
+        date: 3
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 8,
+        journalEntry: 'mhg',
+        date: 7
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 1,
+        journalEntry: 'bb',
+        date: 22
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 4,
+        journalEntry: 'h',
+        date: 67
+      },
+      {
+        challengeName: 'Sl_4_NoCoffe8hBeforeBed',
+        challengeEntryNumber: 6,
+        journalEntry: 'x',
+        date: 56345
+      }
+    ]
+```

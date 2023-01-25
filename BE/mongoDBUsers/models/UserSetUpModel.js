@@ -195,6 +195,6 @@ const userSchema = schema({
 },    
 { minimize: false }
 )
-const User = mongoose.model('User', userSchema, "Test");
+const User = mongoose.model('User', userSchema, "Users");
 
 module.exports = User;

@@ -5,7 +5,7 @@ import { getUserData } from '../../apis'
 const Journal = ({navigation, }) => {
   
   useEffect(()=>{
-    getUserData()
+    // getUserData({email: ..., password: ...})
   })
   
   
