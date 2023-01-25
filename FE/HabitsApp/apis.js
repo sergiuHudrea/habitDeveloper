@@ -8,6 +8,9 @@ export const getUserData =(email,password)=>{
     console.log(email,"<<<<email")
     console.log(password,"<<<<password")
     return userApi.get(`/user/${email}/${password}`).then((res)=>{
+        console.log(res.status)
             return res.data[0]
+        }).catch((err)=>{
+console.log(err,"<<<<<err")
         })
 }

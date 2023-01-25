@@ -18,7 +18,7 @@ const [userInfo,setUserInfo]=useState()
 
 useEffect(()=>{
         getUserData(inputs.email,inputs.password).then((userData)=>{
-            if(inputs.email===userData.email && inputs.password===userData.password){
+            if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
                setUserInfo(userData)
                console.log(userData.email,"<<<<userdata")
                setIsLoading(false)
@@ -49,17 +49,13 @@ if(!inputs.password){
     handleError('Minimum password length of 8 characters ','password');
     valid=false;
 
-}//else if(inputs.email !== userInfo.email){
-//     handleError('Incorrect email, try again!','email');
-    
-// }else if(inputs.password !== userInfo.password){
-    
-//     handleError('Incorrect password, try again!','password');
-   
-// }
+}
+ 
+ 
 if(valid){
    setIsValid(true) 
-setIsLoading(true)
+// setIsLoading(true)
+
 }
  
 }
