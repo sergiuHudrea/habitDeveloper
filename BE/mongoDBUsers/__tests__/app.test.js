@@ -82,7 +82,7 @@ describe("PATCH /journal/:username", () =>{
 
 describe('PATCH /challenges/:username', () => {
     test("status:200, responds with a patched challenge containing and array of dates, number of streak and number of times", () => {
-        const challenge_updates = {"challenges.Sl_3_RegularSleep": {times: null, dates:["32323", "4234", "54"], streak: 100}}
+        const challenge_updates = {"challenges.Sl_3_RegularSleep": {times: 2, dates: ["32323", "4234", "54"], streak: 100}}
         return request(app)
         .patch('/challenges/Sergiu')
         .send(challenge_updates)
@@ -109,7 +109,7 @@ describe('PATCH /challenges/:username', () => {
         })
     })
 
-    test.only("status:200, responds with patched challenge times to null", () => {
+    test("status:200, responds with patched challenge times to null", () => {
         const challenge_updates = {"challenges.Sl_6_NoAlcoholBB.times": null}
         return request(app)
         .patch('/challenges/Sergiu')
@@ -154,6 +154,8 @@ describe('PATCH /challenges/:username', () => {
         })
     })
 
+})
+
 
     test("status:400, bad request when the dates value is not an array of strings", () => {
         const challenge_updates = {"challenges.2_DimLights3hBeforeBed.dates": [1,2, 3]}
@@ -189,7 +191,7 @@ describe('PATCH /challenges/:username', () => {
     })
 
 
-describe.only("POST /user", () =>{
+describe("POST /user", () =>{
 
     test("status 201, returns 201 confirming new user and user object", ()=>{
             const newUser = {
@@ -204,7 +206,7 @@ describe.only("POST /user", () =>{
         .expect(201)
     })
 
-    test.only("status 400, not fully filled in form", ()=>{
+    test("status 400, not fully filled in form", ()=>{
         const newUser = {
     email:"karl.rivett@yahoo.au",
     password:"password",
