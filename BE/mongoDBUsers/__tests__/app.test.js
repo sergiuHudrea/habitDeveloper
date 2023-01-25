@@ -194,8 +194,8 @@ describe("POST /user", () =>{
 
     test("status 201, returns 201 confirming new user and user object", ()=>{
             const newUser = {
-        username: "Karl",
-        email:"karl.rivett@yahoo.au",
+        username: "Michael",
+        email:"Michael.rivett@yahoo.au",
         password:"password",
    }
 
