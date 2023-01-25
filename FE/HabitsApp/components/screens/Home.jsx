@@ -8,19 +8,20 @@ import { MyHomeStats } from './Secondary_Components/MyHomeStats'
 
 
 const Home = ({navigation, route})=>{
-    const [selectedDay, setSelectedDay] = useState({"dateString": "", "day": undefined, "month": undefined, "timestamp": undefined, "year": undefined})
+    const [selectedDay, setSelectedDay] = useState(new Date())
     const [challenges, setChallenges] = useState([])
     const userInfo = route.params
 
-
     useEffect(()=>{
       getUserData(userInfo).then((userData)=>{
-        setChallenges(Object.keys(userData.challenges))
+        // const challCodes = Object.keys(userData.challenges)
+        const challengeObj = userData.challenges
+        const challArray = Object.entries(challengeObj).map((e) => ({[e[0]]:e[1]})); //converts to arr of objs
+        setChallenges(challArray)
       })
-    },[selectedDay])
+    },[])
 
     return (
-       
       <View>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
@@ -28,7 +29,7 @@ const Home = ({navigation, route})=>{
           <ScrollView style={styles.cards} horizontal={true}>
           { (challenges.length !== 0) &&
               challenges.map((chal)=>{
-                  return <ChallengeCard key={chal} chal={chal}/>
+                  return <ChallengeCard key={Math.random()} chal={chal} selectedDay={selectedDay}/>
               })
           }
           </ScrollView></View>
