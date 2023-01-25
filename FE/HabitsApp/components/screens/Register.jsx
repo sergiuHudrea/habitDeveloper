@@ -115,7 +115,7 @@ const Register = ({navigation}) => {
         onPress={validate}
         style={styles.button}
         >
-            <Text style={styles.buttonText}>Log In</Text>
+            <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
           <Text
             onPress={() => navigation.navigate('Log In')}

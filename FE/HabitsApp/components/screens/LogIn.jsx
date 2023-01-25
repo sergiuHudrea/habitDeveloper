@@ -14,15 +14,17 @@ const [isError,setIsError]=useState({})
 const [invalidErr,setInvalidErr]=useState({})
 const [isLoading,setIsLoading]=useState(false)
 const [isValid,setIsValid]=useState(false)
-const [userInfo,setUserInfo]=useState()
+const [userInfo,setUserInfo]=useState({})
 
 useEffect(()=>{
-        getUserData(inputs.email,inputs.password).then((userData)=>{
-            if(inputs.email===userData.email && inputs.password===userData.password){
-               setUserInfo(userData)
-               console.log(userData.email,"<<<<userdata")
+    getUserData({email:inputs.email, password: inputs.password}).then((userData)=>{
+        if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
+            console.log(userData.email,"<<<<userdata")
+            setUserInfo(userData)
                setIsLoading(false)
                handleLogIn()
+            } else {
+                setIsValid(false)
             }
         })
     },[isValid])
@@ -31,7 +33,7 @@ useEffect(()=>{
 
 
 const validate=()=>{
-
+console.log('FE is running!')
 Keyboard.dismiss();
 let valid=true;
 if(!inputs.email){
@@ -49,17 +51,12 @@ if(!inputs.password){
     handleError('Minimum password length of 8 characters ','password');
     valid=false;
 
-}//else if(inputs.email !== userInfo.email){
-//     handleError('Incorrect email, try again!','email');
-    
-// }else if(inputs.password !== userInfo.password){
-    
-//     handleError('Incorrect password, try again!','password');
-   
-// }
+}
+ 
+ 
 if(valid){
    setIsValid(true) 
-setIsLoading(true)
+// setIsLoading(true)
 }
  
 }
@@ -77,7 +74,7 @@ const handleError =(errorMsg,input)=>{
 setIsError((prevState)=>({...prevState,[input]:errorMsg}));
 }
 const handleLogIn=()=>{
-   navigation.navigate('MainContainer')
+   navigation.navigate('MainContainer', {email: inputs.email, password: inputs.password})
 }
 
 

@@ -1,6 +1,7 @@
 const { ADDRGETNETWORKPARAMS } = require("dns");
 const User = require("../models/UserSetUpModel");
-const { findUser, saveNewUser, updateChallenge, inputJournalEntry } = require("../models/UserDataModels")
+const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
+
 
 exports.addUser = (req,res, next) =>{
     const {username, email, password} = req.body;
@@ -27,6 +28,7 @@ exports.getUser = (req, res) =>{
     })
 }
 
+
 exports.addJournalEntry = (req, res, next) =>{
     const {username} = req.params;
     const journalEntry = req.body;
@@ -50,4 +52,32 @@ exports.patchChallenge = (req, res, next) => {
         .catch( (err) => {
             next(err);
         })
+}
+
+//get journal entries, sort by date
+exports.getJournalEntries = (req,res,next) => {
+    const {username} = req.params;
+    const {order} = req.query;
+
+    getJournalEntriesInfo(username,order)
+    .then((journalEntries) =>{
+        res.status(200).send(journalEntries)
+    })
+    .catch ((err) => {
+        next(err)
+    })
+}
+
+//get journal entries, filter by challenge, sort by date
+exports.getFilterJournal  = (req,res,next) => {
+    const {username} = req.params;
+    const {challenge, order} = req.query;
+
+    getFilterJournalInfo(username,challenge,order)
+    .then((journalEntries) =>{
+        res.status(200).send(journalEntries)
+    })
+    .catch((err) => {
+        next(err)
+    })
 }
