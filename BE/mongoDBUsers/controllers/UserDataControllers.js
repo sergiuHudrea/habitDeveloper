@@ -5,8 +5,6 @@ const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEnt
 
 exports.addUser = (req,res, next) =>{
     const {username, email, password} = req.body;
-    console.log(username, email, password);
-    
 
    saveNewUser(username, email, password)
    .then((user)=>{
@@ -17,14 +15,14 @@ exports.addUser = (req,res, next) =>{
     })
 }
 
-exports.getUser = (req, res) =>{
+exports.getUser = (req, res, next) =>{
     const {password, email} = req.params;
     findUser(password, email)
     .then((user)=>{
         res.status(200).send(user);
     })
     .catch((err)=>{
-        console.log(err);
+        next(err);
     })
 }
 
@@ -37,7 +35,6 @@ exports.addJournalEntry = (req, res, next) =>{
         res.status(201).send(result);
     })
     .catch((err)=>{
-        console.log(err);
         next(err);
     })
 }

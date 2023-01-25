@@ -40,7 +40,6 @@ exports.saveNewUser = (username, email, password) =>{
 exports.findUser = (password, email) =>{
     return User.find({email:email, password:password})
     .then((result)=>{
-     console.log(result)
          return result;
     })
 }
@@ -58,7 +57,6 @@ exports.inputJournalEntry = (username, journalEntry) =>{
     return User.find({username:username})
     .then((result)=>{
         if(result.length===0){
-            console.log(result);
             return Promise.reject({msg: "User does not exist", status:400});
         }
     })
