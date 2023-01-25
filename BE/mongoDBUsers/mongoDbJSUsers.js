@@ -25,8 +25,6 @@ app.get('/add-user', addUser)
 
 app.get('/user/:email/:password', getUser)
 
-app.patch('/user/:userId/:challengeName')
-
 app.patch('/journal/:username', addJournalEntry)
 app.patch('/challenges/:username', patchChallenge)
 app.use(handleCustomErrors);
