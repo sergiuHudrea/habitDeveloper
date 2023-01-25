@@ -17,11 +17,13 @@ export const MyCalendar =({selectedDay, setSelectedDay})=>{
           dots: [{color: "red"},{color: "blue"},{color: 'yellow'},{color: 'orange'}]
         },
       ];
+    // console.log(selectedDay, "selectedday")
 
     return (
         <View>
             <CalendarStrip
-            onDateSelected={(date) => console.log(date)}
+            selectedDate={selectedDay}
+            onDateSelected={(date) => setSelectedDay(date)}
             markedDates={markedDatesArray}
             style={{height:110, paddingTop: 20, paddingBottom: 10
             }}

@@ -21,10 +21,11 @@ useEffect(()=>{
         if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
             console.log(userData.email,"<<<<userdata")
             setUserInfo(userData)
-               setIsLoading(false)
-               handleLogIn()
+            setIsLoading(false)
+            handleLogIn()
             } else {
                 setIsValid(false)
+                setIsLoading(false)
             }
         })
     },[isValid])
@@ -56,7 +57,7 @@ if(!inputs.password){
  
 if(valid){
    setIsValid(true) 
-// setIsLoading(true)
+   setIsLoading(true)
 }
  
 }
