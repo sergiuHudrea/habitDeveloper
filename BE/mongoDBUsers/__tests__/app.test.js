@@ -188,6 +188,7 @@ describe.only("POST /user", () =>{
             .then((response)=>{
                 expect(response._body.msg).toBe("Email already exists");
             })
+        })
 
 //get journal entries, sort by date
 describe('GET /journal/:username sort', () =>{
@@ -279,4 +280,6 @@ describe('GET /journal/filter/:username  filter+sort', () =>{
             expect(response.body.msg).toBe("User does not exist")
         })
     })
+})
+
 })
