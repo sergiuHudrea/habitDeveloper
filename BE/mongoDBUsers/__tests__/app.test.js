@@ -122,7 +122,7 @@ describe('PATCH /challenges/:username', () => {
 describe('GET /journal/:userId sort', () =>{
     test('status code 200 returns an array of journal entries in  desc order unless specified', () => {
         return request(app)
-        .get('/journal/63cfba643ef0b24f840b7a32')
+        .get('/journal/Sergiu')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
@@ -133,7 +133,7 @@ describe('GET /journal/:userId sort', () =>{
     })
     test('status code 200 returns an array of journal entries in  asc order', () => {
         return request(app)
-        .get('/journal/63cfba643ef0b24f840b7a32?order=asc')
+        .get('/journal/Sergiu?order=asc')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
@@ -148,7 +148,7 @@ describe('GET /journal/:userId sort', () =>{
 describe('GET /journal/filter/:userId  filter+sort', () =>{
     test('status code 200 returns an array of journal entries in  asc order', () => {
         return request(app)
-        .get('/journal/filter/63cfba643ef0b24f840b7a32?challenge=Sl_4_NoCoffe8hBeforeBed&order=asc')
+        .get('/journal/filter/Sergiu?challenge=Sl_4_NoCoffe8hBeforeBed&order=asc')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
@@ -159,7 +159,7 @@ describe('GET /journal/filter/:userId  filter+sort', () =>{
     })
     test('status code 200 returns an array of journal entries in  desc order', () => {
         return request(app)
-        .get('/journal/filter/63cfba643ef0b24f840b7a32?challenge=Sl_3_RegularSleep')
+        .get('/journal/filter/Sergiu?challenge=Sl_3_RegularSleep')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;

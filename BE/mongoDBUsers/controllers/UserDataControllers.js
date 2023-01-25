@@ -63,10 +63,10 @@ exports.patchChallenge = (req, res, next) => {
 
 //get journal entries, sort by date
 exports.getJournalEntries = (req,res) => {
-    const {userId} = req.params;
+    const {username} = req.params;
     const {order} = req.query;
 
-    getJournalEntriesInfo(userId,order)
+    getJournalEntriesInfo(username,order)
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
     })
@@ -74,10 +74,10 @@ exports.getJournalEntries = (req,res) => {
 
 //get journal entries, filter by challenge, sort by date
 exports.getFilterJournal  = (req,res) => {
-    const {userId} = req.params;
+    const {username} = req.params;
     const {challenge, order} = req.query;
 
-    getFilterJournalInfo(userId,challenge,order)
+    getFilterJournalInfo(username,challenge,order)
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
     })

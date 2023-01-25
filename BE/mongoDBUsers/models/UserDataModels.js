@@ -60,28 +60,28 @@ exports.updateChallenge = (username, updates) => {
 
 
 //get journal entries, sort by date
-exports.getJournalEntriesInfo = (userId,order="desc") => {
+exports.getJournalEntriesInfo = (username,order="desc") => {
      if (order === "asc") {
           order = 1
      } else if (order == "desc"){
           order = -1
      }
      
-     return User.aggregate([{$match:{_id:ObjectID(userId)}},{$unwind:"$dailyJournal"},{$sort:{'dailyJournal.date':order}}])
+     return User.aggregate([{$match:{username:username}},{$unwind:"$dailyJournal"},{$sort:{'dailyJournal.date':order}}])
      .then((result) => {
           return result.map((entry) => {return entry.dailyJournal})
      })
 }
 
 //get journal entries, filter by challenge, sort by date
-exports.getFilterJournalInfo = (userId,challenge,order="desc") => {
+exports.getFilterJournalInfo = (username,challenge,order="desc") => {
      if (order === "asc") {
           order = 1
      } else if (order == "desc"){
           order = -1
      }
      
-     return User.aggregate([{$match:{_id:ObjectID(userId)}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName',challenge]}}}}},{$unwind:"$dailyJournal"},{$sort: {'dailyJournal.date':order}}])
+     return User.aggregate([{$match:{username:username}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName',challenge]}}}}},{$unwind:"$dailyJournal"},{$sort: {'dailyJournal.date':order}}])
      .then((result) => {
           return result.map((entry) => {return entry.dailyJournal})
      })
