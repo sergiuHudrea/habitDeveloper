@@ -3,25 +3,18 @@ const User = require("../models/UserSetUpModel");
 const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
 
 
-exports.addUser = (req,res) =>{
-    const user = new User({
-        username: "Karl",
-        email:"karl.rivett@yahoo.au",
-        password:"password",
-        likes:0,
-        challenges:{},
-        uniqueUserLink:"",
-        medals:{},
-        dailyJournal:[]
-   })
+exports.addUser = (req,res, next) =>{
+    const {username, email, password} = req.body;
+    console.log(username, email, password);
+    
 
-   saveNewUser(user)
+   saveNewUser(username, email, password)
    .then((user)=>{
     res.status(201).send(user)
-    .catch((err)=>{
-        console.log(err)
-    })
    })
+    .catch((err)=>{
+        next(err)    
+    })
 }
 
 exports.getUser = (req, res) =>{
