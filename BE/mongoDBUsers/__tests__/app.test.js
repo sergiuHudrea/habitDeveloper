@@ -1,18 +1,13 @@
-// const { default: test } = require('node:test');
 const request = require('supertest');
-// const User = require("./models/UserSetUpModel");
-// const { describe } = require('test');
 const app = require("../mongoDbJSUsers");
 const mongoose = require("mongoose");
-const User = require("../models/UserSetUpModel");
-jest.setTimeout(50000);
+jest.setTimeout(5000);
 
 beforeAll(done => {
     done()
   })
 
   afterAll(done => {
-    // Closing the DB connection allows Jest to exit successfully.
     mongoose.connection.close()
     done()
   })
@@ -26,6 +21,17 @@ describe('GET /user/:email/:password', () =>{
             const user = response._body[0];
             expect(user).toBeInstanceOf(Object);
             expect(user.username).toBe("Sergiu");
+        })
+    })
+
+
+
+    test("status:404, email does not exist", ()=>{
+        return request(app)
+        .get('/asdfasdfas')
+        .expect(404)
+        .then((response)=>{
+            expect(response._body.msg).toBe("Route not found");
         })
     })
 
@@ -170,8 +176,6 @@ describe('PATCH /challenges/:email', () => {
         })
     })
 
-})
-
 
 
     test("status:400, bad request when the dates value is not an array of strings", () => {
@@ -206,6 +210,8 @@ describe('PATCH /challenges/:email', () => {
             expect(body.msg).toBe("Bad request")
         })
     })
+
+})
 
 
 describe("POST /user", () =>{

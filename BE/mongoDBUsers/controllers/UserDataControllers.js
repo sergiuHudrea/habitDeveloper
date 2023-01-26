@@ -1,5 +1,3 @@
-const { ADDRGETNETWORKPARAMS } = require("dns");
-const User = require("../models/UserSetUpModel");
 const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
 
 

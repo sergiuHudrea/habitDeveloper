@@ -1,14 +1,8 @@
-const {MongoClient} = require('mongodb');
 const mongoose = require("mongoose");
 const express = require("express");
-const User = require("./models/UserSetUpModel");
-const { req, res } = require('express');
 
-const {handleCustomErrors} = require('./controllers/errorController')
-
+const {handleCustomErrors, handle404s} = require('./controllers/errorController')
 const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal} = require('./controllers/UserDataControllers');
-
-var ObjectID = require('mongodb').ObjectID;
 
 const app = express();	
 app.use(express.json());
@@ -25,19 +19,15 @@ mongoose.connect(uri)
 })
 
 app.post('/user', addUser)
-
 app.get('/user/:email/:password', getUser)
 
-app.patch('/user/:userId/:challengeName')
-
-//get journal entries, sort by date
 app.get('/journal/:email', getJournalEntries)
-//get journal entries, filter by challenge, sort by date
 app.get('/journal/filter/:email', getFilterJournal)
-
 
 app.patch('/journal/:email', addJournalEntry)
 app.patch('/challenges/:email', patchChallenge)
+
+app.all('/*', handle404s);
 app.use(handleCustomErrors);
 
 module.exports = app;
