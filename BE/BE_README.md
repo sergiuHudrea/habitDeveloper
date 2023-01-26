@@ -289,7 +289,7 @@ const journalEntry = {
         }
 There are a number of custom errors if this API call is not invoked correctly.
 
-#### An incomplete journalEntry:
+An incomplete journalEntry:
 
 const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
@@ -298,7 +298,7 @@ const journalEntry = {
         }
  This will return a 400 code and "Missing part of journal entry" message.
  
- #### User does not exist
+ User does not exist
  
  .patch("/journal/:non-ExistentUser")
  
