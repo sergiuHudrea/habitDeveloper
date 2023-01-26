@@ -1,5 +1,5 @@
 import { Keyboard, ScrollView, StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Inputs from '../inputs';
 import Loader from '../Loader';
@@ -12,10 +12,6 @@ const Register = ({navigation}) => {
   const [isLoading,setIsLoading]=useState(false)
   
 
-
-
-
-
 const handleRegister =()=>{
 postNewUser(inputs.username,inputs.email,inputs.password).then((response)=>{
   if(response){
@@ -26,7 +22,7 @@ setIsLoading(false)
   
   }else{
     Alert.alert('Welcome'+ inputs.username, 'Account created successfully!!', [
-      {text: 'LogIn', onPress: () => navigation.navigate('Login')},
+      {text: 'LogIn', onPress: () => navigation.navigate('Log In')},
     ]);
     setIsLoading(false)
   }

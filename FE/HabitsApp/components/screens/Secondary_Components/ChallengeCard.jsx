@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { patchUserChallenges } from "../../../apis";
 
-export const ChallengeCard =({chal, selectedDay, navigation})=>{
+export const ChallengeCard =({chal, selectedDay, navigation, userInfo})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
     // console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
     const [fillColor, setFillColour] = useState("white")
-    console.log(fillColor)
+
     useEffect(()=>{
         if(chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {setFillColour("#cbd3d3af")}
 
@@ -24,10 +24,10 @@ export const ChallengeCard =({chal, selectedDay, navigation})=>{
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"
                         const chalCodeStrDates = 'challenges.'+ chalCode.toString() + ".dates"
-                        patchUserChallenges('Sergiu',chalCodeStrTimes, chal[chalCode].times+1)
+                        patchUserChallenges(userInfo.email,chalCodeStrTimes, chal[chalCode].times+1)
                         chal[chalCode].dates.push(selectedDay.toISOString().split('T')[0])
                         // console.log(chalCodeStrTimes, chal[chalCode].times)
-                        patchUserChallenges('Sergiu',chalCodeStrDates, chal[chalCode].dates)
+                        patchUserChallenges(userInfo.email,chalCodeStrDates, chal[chalCode].dates)
                     }
                 }}
                 />

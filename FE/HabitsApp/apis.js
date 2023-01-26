@@ -12,8 +12,8 @@ export const getUserData =({email,password})=>{
         })
 }
 
-export const patchUserChallenges =(username='Sergiu', chalCodeStr, bodyObj)=>{
-    return userApi.patch(`/challenges/${username}`, {[chalCodeStr]: bodyObj}).then((res)=>{
+export const patchUserChallenges =(email, chalCodeStr, bodyObj)=>{
+    return userApi.patch(`/challenges/${email}`, {[chalCodeStr]: bodyObj}).then((res)=>{
             return res.data[0]
         }).catch((err)=>{
             console.log(err,"<<<<<err")

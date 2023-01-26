@@ -1,33 +1,34 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { getUserData } from '../../apis'
 
 const Badges = ({navigation, route}) => {
-  // const chalNames = {Sl_1: "NoPhoneBeforeBed",
-  //   Sl_2: "Dim Lights 3h Before Bed",
-  //   Sl_3: "Regular Sleep",
-  //   Sl_4: "No Coffe 8h Before Bed",
-  //   Sl_5: "No Large Meals Before Bed",
-  //   Sl_6: "No Alcohol Before Bed",
-  //   Sl_7: "No Nap After 3pm",
-  //   Sl_8: "Natural Light 30 Mins",
-  //   Sl_9: "Optimised Bedroom Env",
-  //   Sl_10: "Unwind Before Bed"
-  // }
-  // const userInfo = route.params
+  const [challenges, setChallenges] = useState([])
+  const [badgesArr, setBadgesArr] = []
+  const userInfo = route.params
 
-  // useEffect(()=>{
-  //   getUserData(userInfo).then(({medals})=>{
-  //   console.log(medals,"<<medals")
-  //   })
-  // },[])
+  useEffect(()=>{
+    getUserData(userInfo).then((userData)=>{
+      const challengeObj = userData.challenges
+      const challArray = Object.entries(challengeObj).map((e) => ({[e[0]]:e[1]}))
+      setChallenges(userData)
+    })
+  },[])
+    
+
+  
+    // const sth = challenges.map((chal)=>{
+    //   })
 
   return (
     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-    <Text style={{fontSize:26}}>Badges</Text>
+    {/* <Text>{chal[Object.keys(chal)[0]].title}</Text> */}
+    <Image source={require("../../assets/badges/silverBadge.png")} style={{height:100, width:100}}/>
+    <Image source={require("../../assets/badges/bronzeBadge.png")} style={{height:100, width:100}}/>
+    <Image source={require("../../assets/badges/goldBadge2.png")} style={{height:100, width:100}}/>
     </View>
   )
 }
-
 export default Badges
 
 const styles = StyleSheet.create({})
