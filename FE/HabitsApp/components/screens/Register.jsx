@@ -7,7 +7,7 @@ import { postNewUser } from '../../apis';
 
 
 const Register = ({navigation}) => {
-  const [inputs, setInputs] = React.useState({username: '',email: '',password: '',conpassword: ''});
+  const [inputs, setInputs] = useState({username: '',email: '',password: '',conpassword: ''});
   const [isError,setIsError]=useState({})
   const [isLoading,setIsLoading]=useState(false)
   
@@ -25,8 +25,8 @@ postNewUser(inputs.username,inputs.email,inputs.password).then((response)=>{
 setIsLoading(false)
   
   }else{
-    Alert.alert('Welcome'+ inputs.username, 'Account created successfully!!', [
-      {text: 'LogIn', onPress: () => navigation.navigate('Login')},
+    Alert.alert('Welcome'+" "+ inputs.username+'!', 'Account created successfully!!', [
+      {text: 'Log In', onPress: () => navigation.navigate('Log In')},
     ]);
     setIsLoading(false)
   }
@@ -88,13 +88,13 @@ setIsLoading(false)
 
   return (
     <SafeAreaView style={{backgroundColor:'#F7F6F8', flex:1}}>
-      <KeyboardAvoidingView behavior='padding' style={{paddingTop: 50, paddingHorizontal: 20}}> 
+      <ScrollView behavior='padding' style={{paddingTop: 50, paddingHorizontal: 20}}> 
       <Loader visible={isLoading}/>
         <Text style={{color:'#345772', fontSize: 40, fontWeight: 'bold'}}>Register</Text>
       <Text style={{color: '#78ACB1', fontSize: 18, marginVertical: 10,marginBottom:40}}>
       Enter Your Details to Register
       </Text>
-      <View >
+      <View style={{alignItems:'center',}} >
          <Inputs
             onChangeText={text => handleOnChange(text, 'username')}
             onFocus={() => handleError(null, 'username')}
@@ -150,7 +150,7 @@ setIsLoading(false)
             Already have an account? Login
           </Text>
        
-     </KeyboardAvoidingView>
+     </ScrollView>
      
     </SafeAreaView>
     
