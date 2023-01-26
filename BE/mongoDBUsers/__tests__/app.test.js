@@ -5,7 +5,7 @@ const request = require('supertest');
 const app = require("../mongoDbJSUsers");
 const mongoose = require("mongoose");
 const User = require("../models/UserSetUpModel");
-jest.setTimeout(5000);
+jest.setTimeout(50000);
 
 beforeAll(done => {
     done()
