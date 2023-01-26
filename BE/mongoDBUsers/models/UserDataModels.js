@@ -41,9 +41,20 @@ exports.saveNewUser = (username, email, password) =>{
 }
 
 exports.findUser = (password, email) =>{
-    return User.find({email:email, password:password})
+    return User.find({email:email})
     .then((result)=>{
-         return result;
+        if(result.length===0){
+            return Promise.reject({msg: "Username does not exist", status:404});
+        }
+    })
+    .then(()=>{
+        return User.find({email:email, password:password})
+    })
+    .then((result)=>{
+        if(result.length===0){
+            return Promise.reject({msg: "Password is incorrect", status:404});
+        }
+        return result;
     })
 }
 

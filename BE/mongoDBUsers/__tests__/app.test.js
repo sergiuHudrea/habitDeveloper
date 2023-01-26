@@ -16,7 +16,7 @@ beforeAll(done => {
     mongoose.connection.close()
     done()
   })
-describe('GET /user/:username/:password', () =>{
+describe.only('GET /user/:username/:password', () =>{
 
     test("status:200, returns a user object with their app details", ()=>{
         return request(app)
@@ -26,6 +26,24 @@ describe('GET /user/:username/:password', () =>{
             const user = response._body[0];
             expect(user).toBeInstanceOf(Object);
             expect(user.username).toBe("Sergiu");
+        })
+    })
+
+    test("status:404, username does not exist", ()=>{
+        return request(app)
+        .get('/user/doesnotexist@gmail.com/iLoveCake')
+        .expect(404)
+        .then((response)=>{
+            expect(response._body.msg).toBe("Username does not exist");
+        })
+    })
+
+    test("status:404, password is incorrect", ()=>{
+        return request(app)
+        .get('/user/shudrea@gmail.com/incorrectPassword123')
+        .expect(404)
+        .then((response)=>{
+            expect(response._body.msg).toBe("Password is incorrect");
         })
     })
   })
