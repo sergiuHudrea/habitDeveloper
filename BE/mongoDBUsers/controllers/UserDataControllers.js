@@ -28,9 +28,9 @@ exports.getUser = (req, res, next) =>{
 
 
 exports.addJournalEntry = (req, res, next) =>{
-    const {username} = req.params;
+    const {email} = req.params;
     const journalEntry = req.body;
-    inputJournalEntry(username, journalEntry)
+    inputJournalEntry(email, journalEntry)
     .then((result)=>{
         res.status(201).send(result);
     })
@@ -41,8 +41,8 @@ exports.addJournalEntry = (req, res, next) =>{
 
 
 exports.patchChallenge = (req, res, next) => {
-    const { username } = req.params;
-    updateChallenge(username, req.body)
+    const { email } = req.params;
+    updateChallenge(email, req.body)
         .then( (user) => {
             res.status(200).send( user);
         })
@@ -53,10 +53,10 @@ exports.patchChallenge = (req, res, next) => {
 
 //get journal entries, sort by date
 exports.getJournalEntries = (req,res,next) => {
-    const {username} = req.params;
+    const {email} = req.params;
     const {order} = req.query;
 
-    getJournalEntriesInfo(username,order)
+    getJournalEntriesInfo(email,order)
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
     })
@@ -67,10 +67,10 @@ exports.getJournalEntries = (req,res,next) => {
 
 //get journal entries, filter by challenge, sort by date
 exports.getFilterJournal  = (req,res,next) => {
-    const {username} = req.params;
+    const {email} = req.params;
     const {challenge, order} = req.query;
 
-    getFilterJournalInfo(username,challenge,order)
+    getFilterJournalInfo(email,challenge,order)
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
     })

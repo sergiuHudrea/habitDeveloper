@@ -31,13 +31,13 @@ app.get('/user/:email/:password', getUser)
 app.patch('/user/:userId/:challengeName')
 
 //get journal entries, sort by date
-app.get('/journal/:username', getJournalEntries)
+app.get('/journal/:email', getJournalEntries)
 //get journal entries, filter by challenge, sort by date
-app.get('/journal/filter/:username', getFilterJournal)
+app.get('/journal/filter/:email', getFilterJournal)
 
 
-app.patch('/journal/:username', addJournalEntry)
-app.patch('/challenges/:username', patchChallenge)
+app.patch('/journal/:email', addJournalEntry)
+app.patch('/challenges/:email', patchChallenge)
 app.use(handleCustomErrors);
 
 module.exports = app;

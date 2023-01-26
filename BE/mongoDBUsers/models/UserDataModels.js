@@ -44,7 +44,7 @@ exports.findUser = (password, email) =>{
     return User.find({email:email})
     .then((result)=>{
         if(result.length===0){
-            return Promise.reject({msg: "Username does not exist", status:404});
+            return Promise.reject({msg: "Email does not exist", status:404});
         }
     })
     .then(()=>{
@@ -59,7 +59,7 @@ exports.findUser = (password, email) =>{
 }
 
 
-exports.inputJournalEntry = (username, journalEntry) =>{
+exports.inputJournalEntry = (email, journalEntry) =>{
     const journalProps = ['challengeName','challengeEntryNumber','journalEntry','date'];
 
     for(let i =0; i < journalProps.length;i++){
@@ -68,14 +68,14 @@ exports.inputJournalEntry = (username, journalEntry) =>{
         }
     }
 
-    return User.find({username:username})
+    return User.find({email:email})
     .then((result)=>{
         if(result.length===0){
-            return Promise.reject({msg: "User does not exist", status:400});
+            return Promise.reject({msg: "Email does not exist", status:400});
         }
     })
     .then(()=>{
-        return User.updateOne({username: username}, { $push: 
+        return User.updateOne({email: email}, { $push: 
             {dailyJournal:journalEntry}
         })
     })
@@ -85,14 +85,14 @@ exports.inputJournalEntry = (username, journalEntry) =>{
 }
 
 
-exports.updateChallenge = (username, updates) => {
+exports.updateChallenge = (email, updates) => {
    return User.find({ [Object.keys(updates)[0]] : {$exists: true}})
     .then((res) => {
         
         if (res.length === 0 ) {return Promise.reject({status: 400, msg: 'Bad request'}) }
     })
     .then(()=> {
-        return User.findOneAndUpdate({username: username}, { $set: updates }, {
+        return User.findOneAndUpdate({email: email}, { $set: updates }, {
                 new: true
             }) })
     .then((result) => {
@@ -105,7 +105,7 @@ exports.updateChallenge = (username, updates) => {
 
 
 //get journal entries, sort by date
-exports.getJournalEntriesInfo = (username,order="desc") => {
+exports.getJournalEntriesInfo = (email,order="desc") => {
      if (order === "asc") {
           order = 1
      } else if (order == "desc"){
@@ -114,14 +114,14 @@ exports.getJournalEntriesInfo = (username,order="desc") => {
           return Promise.reject({status: 400, msg: 'Bad request'})
      }
 
-     return User.find({username:username})
+     return User.find({email:email})
           .then((result)=>{
                if(result.length===0){
-                    return Promise.reject({msg: "User does not exist", status:400});
+                    return Promise.reject({msg: "Email does not exist", status:400});
                }
           })
           .then(() => {
-               return User.aggregate([{$match:{username:username}},{$unwind:"$dailyJournal"},{$sort:{'dailyJournal.date':order}}])
+               return User.aggregate([{$match:{email:email}},{$unwind:"$dailyJournal"},{$sort:{'dailyJournal.date':order}}])
                .then((result) => {
                     return result.map((entry) => {return entry.dailyJournal})
                })
@@ -131,7 +131,7 @@ exports.getJournalEntriesInfo = (username,order="desc") => {
 }
 
 //get journal entries, filter by challenge, sort by date
-exports.getFilterJournalInfo = (username,challenge,order="desc") => {
+exports.getFilterJournalInfo = (email,challenge,order="desc") => {
      if (order === "asc") {
           order = 1
      } else if (order == "desc"){
@@ -140,10 +140,10 @@ exports.getFilterJournalInfo = (username,challenge,order="desc") => {
           return Promise.reject({status: 400, msg: 'Bad request'})
      }
      
-     return User.find({username:username})
+     return User.find({email:email})
           .then((result)=>{
                if(result.length===0){
-                    return Promise.reject({msg: "User does not exist", status:400});
+                    return Promise.reject({msg: "Email does not exist", status:400});
                }
           })
           .then (() => {
@@ -155,7 +155,7 @@ exports.getFilterJournalInfo = (username,challenge,order="desc") => {
                })
           })
           .then(() => {
-               return User.aggregate([{$match:{username:username}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName',challenge]}}}}},{$unwind:"$dailyJournal"},{$sort: {'dailyJournal.date':order}}])
+               return User.aggregate([{$match:{email:email}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName',challenge]}}}}},{$unwind:"$dailyJournal"},{$sort: {'dailyJournal.date':order}}])
                .then((result) => {
                     return result.map((entry) => {return entry.dailyJournal})
                })
