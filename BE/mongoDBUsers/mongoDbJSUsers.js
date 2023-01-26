@@ -27,7 +27,7 @@ app.get('/journal/filter/:email', getFilterJournal)
 app.patch('/journal/:email', addJournalEntry)
 app.patch('/challenges/:email', patchChallenge)
 
-app.all('/*', handle404s);
+// app.all('/*', handle404s);
 app.use(handleCustomErrors);
 
 module.exports = app;

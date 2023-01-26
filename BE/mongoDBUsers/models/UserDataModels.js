@@ -52,7 +52,7 @@ exports.findUser = (password, email) =>{
     return User.find({email:email})
     .then((result)=>{
         if(result.length===0){
-            return Promise.reject({msg: "Email does not exist", status:404});
+            return Promise.reject({msg: "User does not exist", status:404});
         }
     })
     .then(()=>{

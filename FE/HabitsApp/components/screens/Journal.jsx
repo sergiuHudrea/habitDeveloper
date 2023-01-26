@@ -58,7 +58,7 @@ export default Journal
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#F7F6F8"
+    backgroundColor:'#F7F6F8'
   },
   item: {
     backgroundColor: '#F7F6F8',
@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     marginVertical: 5,
-    borderWidth:1,
+    borderWidth:7,
     width:'48%',
     margin:'1%',
     marginHorizontal:10,
     marginVertical:10,
     borderRadius:30,
     padding:7,
-    borderColor:'#BBD18C'
+    borderColor:'#345772'
   },
 journalEntry:{
   textAlign:'center',
