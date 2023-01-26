@@ -1,5 +1,4 @@
-import { Keyboard, ScrollView, StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import React, { useEffect } from 'react'
+import { Keyboard, ScrollView, StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native'
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Inputs from '../inputs';
@@ -11,25 +10,29 @@ const Register = ({navigation}) => {
   const [inputs, setInputs] = React.useState({username: '',email: '',password: '',conpassword: ''});
   const [isError,setIsError]=useState({})
   const [isLoading,setIsLoading]=useState(false)
-  const [isValid,setIsValid]=useState(false)
-
-
-console.log(inputs.username,'<<<username')
-console.log(inputs.email,'<<<email')
-console.log(inputs.password,'<<<password')
-
-
-useEffect(()=>{
   
-    postNewUser(inputs.username,inputs.email,inputs.password).then((response)=>{
-      console.log(response,'<<<res')
-    if(inputs.username !== '' && inputs.email !== '' && inputs.password !== ''){
-    setIsLoading(false)
-    handleRegister()
-}
-  })
 
-},[isValid])
+
+
+
+
+const handleRegister =()=>{
+postNewUser(inputs.username,inputs.email,inputs.password).then((response)=>{
+  if(response){
+    Alert.alert('Oops!', response, [
+      {text: 'Try Again', onPress: () => console.log('OK Pressed')},
+    ]);
+setIsLoading(false)
+  
+  }else{
+    Alert.alert('Welcome'+ inputs.username, 'Account created successfully!!', [
+      {text: 'LogIn', onPress: () => navigation.navigate('Login')},
+    ]);
+    setIsLoading(false)
+  }
+})
+}
+
 
 
 
@@ -40,7 +43,7 @@ useEffect(()=>{
     if(!inputs.username){
       handleError('Please input a username','username');
       valid=false;
-    }
+    } 
     if(!inputs.email){
     handleError('Please input email','email');
     valid=false;
@@ -63,16 +66,14 @@ useEffect(()=>{
     handleError('Your password does not match, try agin','conpassword');
     valid=false;
 }
-
-
-
-
     if(valid){
-      setIsValid(true) 
       setIsLoading(true)
+      handleRegister()
     }
      
     }
+
+
 
 
     const handleOnChange =(text,input)=>{
@@ -81,9 +82,7 @@ useEffect(()=>{
       const handleError =(errorMsg,input)=>{
       setIsError((prevState)=>({...prevState,[input]:errorMsg}));
       }
-      const handleRegister=()=>{
-        navigation.navigate('Log In')
-      }
+     
       
 
 
