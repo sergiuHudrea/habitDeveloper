@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require("../mongoDbJSUsers");
 const mongoose = require("mongoose");
-jest.setTimeout(5000);
+jest.setTimeout(10000);
 
 beforeAll(done => {
     done()
@@ -208,6 +208,28 @@ describe('PATCH /challenges/:email', () => {
         .expect(400)
         .then(({body}) => {
             expect(body.msg).toBe("Bad request")
+        })
+    })
+
+    test("status:400, bad request if you try to update the title.", () => {
+        const challenge_updates = {"challenges.2_DimLights3hBeforeBed.title": "NO TITLE"}
+        return request(app)
+        .patch('/challenges/shudrea@gmail.com')
+        .send(challenge_updates)
+        .expect(400)
+        .then(({body}) => {
+            expect(body.msg).toBe('Bad request. You cannot change the title or description.')
+        })
+    })
+
+    test("status:400, bad request if you try to update the description", () => {
+        const challenge_updates = {"challenges.2_DimLights3hBeforeBed.description": "SLEEP IS BADZ"}
+        return request(app)
+        .patch('/challenges/shudrea@gmail.com')
+        .send(challenge_updates)
+        .expect(400)
+        .then(({body}) => {
+            expect(body.msg).toBe('Bad request. You cannot change the title or description.')
         })
     })
 
