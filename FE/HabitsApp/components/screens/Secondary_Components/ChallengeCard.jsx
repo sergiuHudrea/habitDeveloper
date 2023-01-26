@@ -24,7 +24,7 @@ export const ChallengeCard =({chal, selectedDay})=>{
     return chalNames[codeStr]
     }
 
-    console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
+    // console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
 
     return (
         <View style={styles.container}>

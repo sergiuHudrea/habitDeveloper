@@ -1,16 +1,36 @@
 import { Keyboard, ScrollView, StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Inputs from '../inputs';
 import Loader from '../Loader';
-
+import { postNewUser } from '../../apis';
 
 
 const Register = ({navigation}) => {
   const [inputs, setInputs] = React.useState({username: '',email: '',password: '',conpassword: ''});
   const [isError,setIsError]=useState({})
   const [isLoading,setIsLoading]=useState(false)
+  const [isValid,setIsValid]=useState(false)
+
+
+console.log(inputs.username,'<<<username')
+console.log(inputs.email,'<<<email')
+console.log(inputs.password,'<<<password')
+
+
+useEffect(()=>{
+  
+    postNewUser(inputs.username,inputs.email,inputs.password).then((response)=>{
+      console.log(response,'<<<res')
+    if(inputs.username !== '' && inputs.email !== '' && inputs.password !== ''){
+    setIsLoading(false)
+    handleRegister()
+}
+  })
+
+},[isValid])
+
 
 
   const validate=()=>{
@@ -48,7 +68,8 @@ const Register = ({navigation}) => {
 
 
     if(valid){
-    
+      setIsValid(true) 
+      setIsLoading(true)
     }
      
     }
@@ -61,8 +82,9 @@ const Register = ({navigation}) => {
       setIsError((prevState)=>({...prevState,[input]:errorMsg}));
       }
       const handleRegister=()=>{
-        
+        navigation.navigate('Log In')
       }
+      
 
 
   return (

@@ -21,13 +21,20 @@ const userInfo = route.params
     })
   },[])
   
+  const getChalNameFromCode =(challCode)=>{
+    let newCodesArr = challCode.split("_")
+    newCodesArr = newCodesArr.slice(2,3)
+   
+    return newCodesArr
+    
+}
 
 
   const data = userJournal
   const JournalCard = ({challengeName,journalEntry,date}) => (
   <SafeAreaView style={styles.item}>
       <Image style={{ marginTop:-20, width: 100, height: 100, alignSelf:'center' }} source={{uri:'https://cdn-icons-png.flaticon.com/512/4312/4312464.png'}}/>
-      <Text style={styles.challengeName}>{challengeName}</Text>
+      <Text style={styles.challengeName}>{getChalNameFromCode(challengeName)}</Text>
       <Text style={styles.journalEntry}>"{journalEntry}"</Text>
       <Text style={styles.date}><SimpleDateTime dateSeparator="-"  showTime='0' meridians="1" format="DMY">{date}</SimpleDateTime></Text>
       <Ionicons style={{alignSelf:'center', fontSize:16, marginBottom:-30,marginTop:10}} name='trash-outline' onPress={()=>{}}/>
