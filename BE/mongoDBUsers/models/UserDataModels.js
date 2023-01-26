@@ -18,18 +18,18 @@ exports.saveNewUser = (username, email, password) =>{
         dailyJournal: []
         })
 
-        return User.find({username:nUser.username})
-        .then((result)=>{
-            if(result.length!==0){
-                return Promise.reject({msg: "Username already exists", status:400});
-            }
-        })
-        .then(()=>{
-            return User.find({email:nUser.email})
-        })
+        return User.find({email:nUser.email})
         .then((result)=>{
             if(result.length!==0){
                 return Promise.reject({msg: "Email already exists", status:400});
+            }
+        })
+        .then(()=>{
+            return User.find({username:nUser.username})
+        })
+        .then((result)=>{
+            if(result.length!==0){
+                return Promise.reject({msg: "Username already exists", status:400});
             }
         })
         .then(()=>{

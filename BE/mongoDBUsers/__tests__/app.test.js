@@ -16,7 +16,7 @@ beforeAll(done => {
     mongoose.connection.close()
     done()
   })
-describe.only('GET /user/:username/:password', () =>{
+describe('GET /user/:username/:password', () =>{
 
     test("status:200, returns a user object with their app details", ()=>{
         return request(app)
@@ -211,6 +211,7 @@ describe('PATCH /challenges/:username', () => {
 describe("POST /user", () =>{
 
     test("status 201, returns 201 confirming new user and user object", ()=>{
+        //if this fails it's likely because user is already in database, just reseed and re run
             const newUser = {
         username: "Michael",
         email:"Michael.rivett@yahoo.au",
