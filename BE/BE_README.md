@@ -277,9 +277,9 @@ exampleInput: {
     }
 ```
 
-### Patch /journal/:username -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
+### PATCH /journal/:username -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
 ```
-An example of journalEntry object can be seen below:
+An example of journalEntry object to send can be seen below:
 
 const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
@@ -298,9 +298,38 @@ const journalEntry = {
         }
  This will return a 400 code and "Missing part of journal entry" message.
  
- User does not exist
+ User does not exist:
  
  .patch("/journal/:non-ExistentUser")
  
  This will return a 400 code and "User does not exist" message.
+ ```
+ 
+ ### POST /user -- takes a new users details and creats a user entry in the database
+```
+An example of newUser object to send can be seen below:
+
+const newUser = {
+        username: "Michael",
+        email:"Michael.rivett@yahoo.au",
+        password:"password",
+        }
+There are a number of custom errors if this API call is not invoked correctly.
+
+An incomplete newUser:
+
+const newUser = {
+        email:"Michael.rivett@yahoo.au",
+        password:"password",
+        }
+ This will return a 400 code and "Missing info" message.
+ 
+ Email already exists:
+ 
+ This will return a 400 code and "Email already existst" message.
+ 
+ Username already exists:
+ This will return a 400 code and "Username already existst" message.
+
+ 
  ```
