@@ -8,8 +8,6 @@ export const getUserData =({email,password})=>{
     // console.log(email,"<<<<email")
     // console.log(password,"<<<<password")
     return userApi.get(`/user/${email}/${password}`).then((res)=>{
-        console.log(res.status)
-        console.log(res.data[0].chalenges.Sl_1_NoPhoneBeforeBed)
             return res.data[0]
         }).catch((err)=>{
            return err
@@ -19,7 +17,7 @@ export const getUserData =({email,password})=>{
 export const patchUserChallenges =(username='Sergiu', chalCodeStr, bodyObj)=>{
     return userApi.patch(`/challenges/${username}`, {[chalCodeStr]: bodyObj}).then((res)=>{
         console.log(res.status)
-        console.log(res.data[0],'<< patch complete')
+        console.log('patch complete')
             return res.data[0]
         }).catch((err)=>{
             console.log(err,"<<<<<err")

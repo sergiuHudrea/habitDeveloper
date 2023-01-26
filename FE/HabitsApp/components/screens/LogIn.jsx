@@ -74,6 +74,7 @@ const handleError =(errorMsg,input)=>{
 setIsError((prevState)=>({...prevState,[input]:errorMsg}));
 }
 const handleLogIn=()=>{
+    console.log('FE is working')
    navigation.navigate('MainContainer', {email: inputs.email, password: inputs.password})
 }
 
