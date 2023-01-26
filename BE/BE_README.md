@@ -80,7 +80,7 @@
        }]
     }
 ```
-### GET /journal/:username  -- returns an array containing all journal entries of the username defaulted to date desc order unless query (?order=asc) given
+### GET /journal/:email  -- returns an array containing all journal entries of the email defaulted to date desc order unless query (?order=asc) given
 
 ```
 [
@@ -135,7 +135,7 @@
     ]
 ```
 
-### GET /journal/filter/:username  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the username defaulted to date desc order unless query (?order=asc) given. 
+### GET /journal/filter/:email  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the email defaulted to date desc order unless query (?order=asc) given. 
 
 ```
  [
@@ -172,7 +172,7 @@
     ]
 ```
 
-### PATCH /challenges/:username -- takes an object (challenge), array of strings (dates) or numbers (streak and times) and patches the respective challenge.
+### PATCH /challenges/:email -- takes an object (challenge), array of strings (dates) or numbers (streak and times) and patches the respective challenge.
 ```
 queries: username
 exampleInput: { "challenges.Sl_3_RegularSleep": {
@@ -276,3 +276,60 @@ exampleInput: {
   "challenges.2_DimLights3hBeforeBed.times": 55
     }
 ```
+
+### PATCH /journal/:email -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
+```
+An example of journalEntry object to send can be seen below:
+
+const journalEntry = {
+            challengeName: "Sl_1_NoPhoneBeforeBed",
+            challengeEntryNumber:0,
+            journalEntry:"Day 1, feeling good :)",
+            date: new Date()
+        }
+There are a number of custom errors if this API call is not invoked correctly.
+
+An incomplete journalEntry:
+
+const journalEntry = {
+            challengeName: "Sl_1_NoPhoneBeforeBed",
+            challengeEntryNumber:0,
+            date: new Date()
+        }
+ This will return a 400 code and "Missing part of journal entry" message.
+ 
+ User does not exist:
+ 
+ .patch("/journal/:non-ExistentUser")
+ 
+ This will return a 400 code and "User does not exist" message.
+ ```
+ 
+ ### POST /user -- takes a new users details and creats a user entry in the database
+```
+An example of newUser object to send can be seen below:
+
+const newUser = {
+        username: "Michael",
+        email:"Michael.rivett@yahoo.au",
+        password:"password",
+        }
+There are a number of custom errors if this API call is not invoked correctly.
+
+An incomplete newUser:
+
+const newUser = {
+        email:"Michael.rivett@yahoo.au",
+        password:"password",
+        }
+ This will return a 400 code and "Missing info" message.
+ 
+ Email already exists:
+ 
+ This will return a 400 code and "Email already existst" message.
+ 
+ Username already exists:
+ This will return a 400 code and "Username already existst" message.
+
+ 
+ ```

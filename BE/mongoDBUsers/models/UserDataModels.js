@@ -1,4 +1,3 @@
-const { ObjectID } = require("bson");
 const User = require("./UserSetUpModel");
 
 exports.saveNewUser = (username, email, password) =>{
@@ -11,25 +10,34 @@ exports.saveNewUser = (username, email, password) =>{
         password: password,
         likes: 0,
         challenges: { 
-                      },
+          Sl_1_NoPhoneBeforeBed: { times: null, dates:[], streak: 0, badges: [], title: "Avoid looking at screens when going to your bedroom.", description: "Gadget emits blue light which suppresses melatonin production and disturbs the sleep/wake cycle. An hour without screen time before bed is ideal, but you can first try with 10 or 20 minutes and build up from there.", img_url: ""},
+          Sl_2_DimLights3hBeforeBed: {times: 0, dates:[], streak: 0, badges: [], title: "Dim lights and reduce your exposure to them in the evening", description: "Dim the lights a full hour before bedtime to encourage your body to begin its physiological progression toward sleep. Use a dimmer switch on overhead lights to control their brightness, or install low-watt, dimmable bulbs in lamps.", img_url: ""},
+          Sl_3_RegularSleep: {times: 2, dates:[], streak: 0, badges: [], title: "Stick to a schedule", description: "Establish a sleeping schedule with at least 7 hours of sleep and, then attempt to keep the same bedtime and wake up time every day. It`s alright to have variations within one hour of planned schedule.", img_url: ""},
+          Sl_4_NoCoffe8hBeforeBed: {times: 8, dates:[], streak: 0, badges: [], title: "Avoid caffeine 8-10 hours before bed", description: "Caffeine is a stimulate that stays in your system for hours and can affect your sleep. Avoiding consuming any caffeinated products 8-10 hours before your scheduled bedtime.", img_url: ""},
+          Sl_5_NoLargeMealsBB: {times: 24, dates:[], streak: 0, badges: [], title: "No large meals and beverages in the evening", description: "Heavy meals before bed can cause digestive issues which interferes with sleep. You can have light snacks before bed. Also, drinking too many fluids can cause frequent awakening to urinate.", img_url: ""},
+          Sl_6_NoAlcoholBB: {times: 1, dates:[], streak: 0, badges: [], title: "Avoid alcoholic drinks in the evening", description: "The presence of alcohol in the body can reduce your REM sleep, keeping you in the lighter stages of sleep. If you really enjoy a nightcap, try to limit it to one drink at least an hour before bed.", img_url: ""},
+          Sl_7_NoNapAfter3pm: {times: null, dates:[], streak: 0, badges: [], title: "Don't nap after 3pm", description: "Taking a nap late in the day can disturb your sleep at night. Try doing something that excites you if you are really sleepy.", img_url: ""},
+          Sl_8_NaturalLight30Mins: {times: null, dates:[], streak: 0, badges: [], title: "Get the right daily sunlight exposure", description: "Exposure to daylight in the morning and early afternoon supports more consistent and high-quality sleep. Try to get outside in the natural sunlight for at least 30 minutes per day.", img_url: ""},
+          Sl_9_OptimisedBedroomEnv: {times: null, dates:[], streak: 0, badges: [], title: "Have a dark and cool (in temperature & style) bedroom", description: "Have the room temperature on the cool side to get better sleep. Set your thermostat to a comfortable temperature. Also, a dark and quiet bedroom is most conducive to sleep. You could try sleep masks and ear plugs as well.", img_url: ""},
+          Sl_10_UnwindBB: {times: 44, dates:[], streak: 0, badges: [], title: "Make sure to leave time to relax before bed", description: "Make sure to have some relaxation time before bed. Mind you relaxation time does not include screen time. If you find yourself still in bed for more than 20 minutes, or you`re starting to get anxious in bed, get up and do something else until you feel sleepy.", img_url: ""}
+                  
+          },
         uniqueUserLink: "",
-        medals: {
-                },
         dailyJournal: []
         })
 
-        return User.find({username:nUser.username})
-        .then((result)=>{
-            if(result.length!==0){
-                return Promise.reject({msg: "Username already exists", status:400});
-            }
-        })
-        .then(()=>{
-            return User.find({email:nUser.email})
-        })
+        return User.find({email:nUser.email})
         .then((result)=>{
             if(result.length!==0){
                 return Promise.reject({msg: "Email already exists", status:400});
+            }
+        })
+        .then(()=>{
+            return User.find({username:nUser.username})
+        })
+        .then((result)=>{
+            if(result.length!==0){
+                return Promise.reject({msg: "Username already exists", status:400});
             }
         })
         .then(()=>{
@@ -41,14 +49,25 @@ exports.saveNewUser = (username, email, password) =>{
 }
 
 exports.findUser = (password, email) =>{
-    return User.find({email:email, password:password})
+    return User.find({email:email})
     .then((result)=>{
-         return result;
+        if(result.length===0){
+            return Promise.reject({msg: "Email does not exist", status:404});
+        }
+    })
+    .then(()=>{
+        return User.find({email:email, password:password})
+    })
+    .then((result)=>{
+        if(result.length===0){
+            return Promise.reject({msg: "Password is incorrect", status:404});
+        }
+        return result;
     })
 }
 
 
-exports.inputJournalEntry = (username, journalEntry) =>{
+exports.inputJournalEntry = (email, journalEntry) =>{
     const journalProps = ['challengeName','challengeEntryNumber','journalEntry','date'];
 
     for(let i =0; i < journalProps.length;i++){
@@ -57,14 +76,14 @@ exports.inputJournalEntry = (username, journalEntry) =>{
         }
     }
 
-    return User.find({username:username})
+    return User.find({email:email})
     .then((result)=>{
         if(result.length===0){
-            return Promise.reject({msg: "User does not exist", status:400});
+            return Promise.reject({msg: "Email does not exist", status:400});
         }
     })
     .then(()=>{
-        return User.updateOne({username: username}, { $push: 
+        return User.updateOne({email: email}, { $push: 
             {dailyJournal:journalEntry}
         })
     })
@@ -74,14 +93,14 @@ exports.inputJournalEntry = (username, journalEntry) =>{
 }
 
 
-exports.updateChallenge = (username, updates) => {
+exports.updateChallenge = (email, updates) => {
    return User.find({ [Object.keys(updates)[0]] : {$exists: true}})
     .then((res) => {
         
         if (res.length === 0 ) {return Promise.reject({status: 400, msg: 'Bad request'}) }
     })
     .then(()=> {
-        return User.findOneAndUpdate({username: username}, { $set: updates }, {
+        return User.findOneAndUpdate({email: email}, { $set: updates }, {
                 new: true
             }) })
     .then((result) => {
@@ -94,7 +113,7 @@ exports.updateChallenge = (username, updates) => {
 
 
 //get journal entries, sort by date
-exports.getJournalEntriesInfo = (username,order="desc") => {
+exports.getJournalEntriesInfo = (email,order="desc") => {
      if (order === "asc") {
           order = 1
      } else if (order == "desc"){
@@ -103,14 +122,14 @@ exports.getJournalEntriesInfo = (username,order="desc") => {
           return Promise.reject({status: 400, msg: 'Bad request'})
      }
 
-     return User.find({username:username})
+     return User.find({email:email})
           .then((result)=>{
                if(result.length===0){
-                    return Promise.reject({msg: "User does not exist", status:400});
+                    return Promise.reject({msg: "Email does not exist", status:400});
                }
           })
           .then(() => {
-               return User.aggregate([{$match:{username:username}},{$unwind:"$dailyJournal"},{$sort:{'dailyJournal.date':order}}])
+               return User.aggregate([{$match:{email:email}},{$unwind:"$dailyJournal"},{$sort:{'dailyJournal.date':order}}])
                .then((result) => {
                     return result.map((entry) => {return entry.dailyJournal})
                })
@@ -120,7 +139,7 @@ exports.getJournalEntriesInfo = (username,order="desc") => {
 }
 
 //get journal entries, filter by challenge, sort by date
-exports.getFilterJournalInfo = (username,challenge,order="desc") => {
+exports.getFilterJournalInfo = (email,challenge,order="desc") => {
      if (order === "asc") {
           order = 1
      } else if (order == "desc"){
@@ -129,10 +148,10 @@ exports.getFilterJournalInfo = (username,challenge,order="desc") => {
           return Promise.reject({status: 400, msg: 'Bad request'})
      }
      
-     return User.find({username:username})
+     return User.find({email:email})
           .then((result)=>{
                if(result.length===0){
-                    return Promise.reject({msg: "User does not exist", status:400});
+                    return Promise.reject({msg: "Email does not exist", status:400});
                }
           })
           .then (() => {
@@ -144,7 +163,7 @@ exports.getFilterJournalInfo = (username,challenge,order="desc") => {
                })
           })
           .then(() => {
-               return User.aggregate([{$match:{username:username}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName',challenge]}}}}},{$unwind:"$dailyJournal"},{$sort: {'dailyJournal.date':order}}])
+               return User.aggregate([{$match:{email:email}},{$project : {dailyJournal: {$filter: {input:'$dailyJournal',as:"entry", cond: {$eq: ['$$entry.challengeName',challenge]}}}}},{$unwind:"$dailyJournal"},{$sort: {'dailyJournal.date':order}}])
                .then((result) => {
                     return result.map((entry) => {return entry.dailyJournal})
                })

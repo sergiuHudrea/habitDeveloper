@@ -6,7 +6,6 @@ export const getUserData =({email,password})=>{
     // const email = "shudrea@gmail.com"
     // const password = "iLoveCake"
     return userApi.get(`/user/${email}/${password}`).then((res)=>{
-        console.log(res.status)
             return res.data[0]
         }).catch((err)=>{
            return err
