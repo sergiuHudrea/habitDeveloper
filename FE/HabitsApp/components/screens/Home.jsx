@@ -20,9 +20,11 @@ const Home = ({navigation, route})=>{
         const challengeObj = userData.challenges
         const challArray = Object.entries(challengeObj).map((e) => ({[e[0]]:e[1]})); //converts to arr of objs
         setChallenges(challArray)
-        setOngoingChallengesArr(challenges.filter((chal)=>{
+        const activeChallenges = challenges.filter((chal)=>{
           return Boolean(chal[Object.keys(chal)[0]].times)
-        }))
+        })
+        setOngoingChallengesArr(activeChallenges)
+        console.log(ongoingChallengesArr, 'active challs')
         if (ongoingChallengesArr.length === 0){
           setFirstTimeUser(true)
         } else {
@@ -30,6 +32,7 @@ const Home = ({navigation, route})=>{
         }
       })
     },[selectedDay])
+
 
     return (
       <View>
@@ -39,7 +42,7 @@ const Home = ({navigation, route})=>{
           {(!firstTimeUser && <ScrollView style={styles.cards} horizontal={true}>
           { (challenges.length !== 0) &&
               challenges.map((chal)=>{
-                  return <ChallengeCard key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation}/>
+                  return <ChallengeCard key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation} userInfo={userInfo}/>
               })
           }
           </ScrollView>)}
