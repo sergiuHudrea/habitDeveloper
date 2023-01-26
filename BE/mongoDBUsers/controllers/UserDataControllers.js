@@ -1,6 +1,6 @@
 const { ADDRGETNETWORKPARAMS } = require("dns");
 const User = require("../models/UserSetUpModel");
-const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEntriesInfo, getFilterJournalInfo } = require("../models/UserDataModels")
+const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEntriesInfo, getFilterJournalInfo,removeJournalEntry } = require("../models/UserDataModels")
 
 
 exports.addUser = (req,res, next) =>{
@@ -73,6 +73,19 @@ exports.getFilterJournal  = (req,res,next) => {
     getFilterJournalInfo(email,challenge,order)
     .then((journalEntries) =>{
         res.status(200).send(journalEntries)
+    })
+    .catch((err) => {
+        next(err)
+    })
+}
+
+//delete journal entry by entryId
+exports.deleteJournalEntry = (req,res,next) => {
+    const {entryId} = req.params;
+
+    removeJournalEntry(entryId)
+    .then(() => {
+        res.status(202).send()
     })
     .catch((err) => {
         next(err)

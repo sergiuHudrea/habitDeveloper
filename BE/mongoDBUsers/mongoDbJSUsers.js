@@ -6,7 +6,7 @@ const { req, res } = require('express');
 
 const {handleCustomErrors} = require('./controllers/errorController')
 
-const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal} = require('./controllers/UserDataControllers');
+const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal, deleteJournalEntry} = require('./controllers/UserDataControllers');
 
 var ObjectID = require('mongodb').ObjectID;
 
@@ -34,6 +34,8 @@ app.patch('/user/:userId/:challengeName')
 app.get('/journal/:email', getJournalEntries)
 //get journal entries, filter by challenge, sort by date
 app.get('/journal/filter/:email', getFilterJournal)
+//delete journal entry
+app.delete('/journalEntry/:entryId',deleteJournalEntry)
 
 
 app.patch('/journal/:email', addJournalEntry)
