@@ -12,8 +12,8 @@ export const ChallengeCard =({chal, selectedDay})=>{
     Sl_6: "No Alcohol Before Bed",
     Sl_7: "No Nap After 3pm",
     Sl_8: "Natural Light 30 Mins",
-    Sl_9: "Optimised Bedroom Env",
-    Sl_10: "Unwind Before Bed"} 
+    Sl_9: "Optimised Bedroom Environment",
+    Sl_10: "Unwind Before Bed"}
     const chalCode = Object.keys(chal)[0] // challenges key
 
     //function that gets name from challenge code ex: Sl_10_UnwindBB-> "Unwind Before Bed"
@@ -38,8 +38,8 @@ export const ChallengeCard =({chal, selectedDay})=>{
                         const chalCodeStr = 'challenges.'+ chalCode.toString() + ".times"
                         chal[chalCode].dates.push(selectedDay.toISOString().split('T')[0])
                         console.log(chalCodeStr, chal[chalCode].dates)
-                        // patchUserChallenges('Sergiu',chalCodeStr, chal[chalCode].times+1)
-                        // patchUserChallenges('Sergiu',chalCodeStr, chal[chalCode].dates)
+                        patchUserChallenges('Sergiu',chalCodeStr, chal[chalCode].times+1)
+                        patchUserChallenges('Sergiu',chalCodeStr, chal[chalCode].dates)
                     }
                 }}
                 />
