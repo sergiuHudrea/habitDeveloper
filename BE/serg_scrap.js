@@ -31,30 +31,18 @@ db.Users.aggregate( [
     password: "iLoveCake",
     likes: 100,
     challenges: { 
-                  Sl_1_NoPhoneBeforeBed: {times: null, dates:[], streak: 0},
-                  Sl_2_DimLights3hBeforeBed: {times: 0, dates:[], streak: 0},
-                  Sl_3_RegularSleep: {times: 2, dates:[], streak: 0},
-                  Sl_4_NoCoffe8hBeforeBed: {times: 8, dates:[], streak: 0},
-                  Sl_5_NoLargeMealsBB: {times: 24, dates:[], streak: 0},
-                  Sl_6_NoAlcoholBB: {times: 1, dates:[], streak: 0},
-                  Sl_7_NoNapAfter3pm: {times: null, dates:[], streak: 0},
-                  Sl_8_NaturalLight30Mins: {times: null, dates:[], streak: 0},
-                  Sl_9_OptimisedBedroomEnv: {times: null, dates:[], streak: 0},
-                  Sl_10_UnwindBB: {times: 44, dates:[], streak: 0}
+                  Sl_1_NoPhoneBeforeBed: { times: null, dates:[], streak: 0, badges: [], title: "Avoid looking at screens when going to your bedroom.", description: "", img_url: ""},
+                  Sl_2_DimLights3hBeforeBed: {times: 0, dates:[], streak: 0, badges: [], title: "Dim lights or turn off some and reduce blue lights in the evening.", description: "", img_url: ""},
+                  Sl_3_RegularSleep: {times: 2, dates:[], streak: 0, badges: [], title: "Stick to a schedule", description: "", img_url: ""},
+                  Sl_4_NoCoffe8hBeforeBed: {times: 8, dates:[], streak: 0, badges: [], title: "Avoid caffeine 8-10 hours before bed", description: "", img_url: ""},
+                  Sl_5_NoLargeMealsBB: {times: 24, dates:[], streak: 0, badges: [], title: "No large meals and beverages in the evening", description: "", img_url: ""},
+                  Sl_6_NoAlcoholBB: {times: 1, dates:[], streak: 0, badges: [], title: "Avoid alcoholic drinks in the evening", description: "", img_url: ""},
+                  Sl_7_NoNapAfter3pm: {times: null, dates:[], streak: 0, badges: [], title: "Don't nap after 3pm", description: "", img_url: ""},
+                  Sl_8_NaturalLight30Mins: {times: null, dates:[], streak: 0, badges: [], title: "Get the right daily sunligjt exposure", description: "", img_url: ""},
+                  Sl_9_OptimisedBedroomEnv: {times: null, dates:[], streak: 0, badges: [], title: "Have a dark and cool (in temperature & style) bedroom", description: "", img_url: ""},
+                  Sl_10_UnwindBB: {times: 44, dates:[], streak: 0, badges: [], title: "Make sure to leave time to relax before bed", description: "", img_url: ""}
                   },
     uniqueUserLink: "",
-    medals: {
-    Sl_1: 0,
-    Sl_2: 0,
-    Sl_3: 0,
-    Sl_4: 1,
-    Sl_5: 2,
-    Sl_6: 0,
-    Sl_7: 0,
-    Sl_8: 0,
-    Sl_9: 0,
-    Sl_10: 3
-            },
     dailyJournal: [{
     challengeName: "Sl_3_RegularSleep",
     challengeEntryNumber: 1,
@@ -290,3 +278,20 @@ db.Users.aggregate( [
         Sl_1_NoPhoneBeforeBed: 0
         }
   }})
+
+
+
+  challenges: { 
+    Sl_1_NoPhoneBeforeBed: {title: "", description: "fdsfdfs", img_url: "",  times: null, dates:[], streak: 0},
+    Sl_2_DimLights3hBeforeBed: {times: 0, dates:[], streak: 0},
+    Sl_3_RegularSleep: {times: 2, dates:[], streak: 0},
+    Sl_4_NoCoffe8hBeforeBed: {times: 8, dates:[], streak: 0},
+    Sl_5_NoLargeMealsBB: {times: 24, dates:[], streak: 0},
+    Sl_6_NoAlcoholBB: {times: 1, dates:[], streak: 0},
+    Sl_7_NoNapAfter3pm: {times: null, dates:[], streak: 0},
+    Sl_8_NaturalLight30Mins: {times: null, dates:[], streak: 0},
+    Sl_9_OptimisedBedroomEnv: {times: null, dates:[], streak: 0},
+    Sl_10_UnwindBB: {times: 44, dates:[], streak: 0}
+    },
+
+ 

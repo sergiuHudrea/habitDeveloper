@@ -11,10 +11,18 @@ exports.saveNewUser = (username, email, password) =>{
         password: password,
         likes: 0,
         challenges: { 
-                      },
+          Sl_1_NoPhoneBeforeBed: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_2_DimLights3hBeforeBed: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_3_RegularSleep: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_4_NoCoffe8hBeforeBed: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_5_NoLargeMealsBB: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_6_NoAlcoholBB: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_7_NoNapAfter3pm: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_8_NaturalLight30Mins: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_9_OptimisedBedroomEnv: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""},
+          Sl_10_UnwindBB: {times: -1, dates:[], streak: 0, badges: [], title: "", description: "", img_url: ""}
+          },
         uniqueUserLink: "",
-        medals: {
-                },
         dailyJournal: []
         })
 
