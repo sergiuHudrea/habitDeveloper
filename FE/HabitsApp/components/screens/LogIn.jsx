@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Inputs from '../inputs';
 import { getUserData } from '../../apis';
 import Loader from '../Loader';
+import { Header } from 'react-native';
 
 
 
@@ -84,6 +85,7 @@ const handleLogIn=()=>{
     behavior="padding"
     >
         <Loader visible={isLoading}/>
+        <Text style={styles.header}>Habit Developer</Text>
         <View>
             <Inputs 
             onChangeText={text=>handleOnChange(text,'email')}
@@ -171,6 +173,14 @@ const styles = StyleSheet.create({
         marginTop: 10,
         textDecorationLine: 'underline',
     },
-    
+    header:{
+        fontSize:30,
+        fontWeight:'bold',
+        marginTop:-90,
+        marginBottom: 100,
+        color:'#F7F6F8',
+        fontFamily:'Georgia',
+        
+    }
     
 })
