@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     header:{
         fontSize:30,
         fontWeight:'bold',
-        marginTop:-90,
+        marginTop:-40,
         marginBottom: 100,
         color:'#F7F6F8',
         fontFamily:'Georgia',
