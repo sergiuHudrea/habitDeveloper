@@ -276,3 +276,29 @@ exampleInput: {
   "challenges.2_DimLights3hBeforeBed.times": 55
     }
 ```
+
+### Patch /journal/:username -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
+An example of journalEntry object can be seen below:
+
+const journalEntry = {
+            challengeName: "Sl_1_NoPhoneBeforeBed",
+            challengeEntryNumber:0,
+            journalEntry:"Day 1, feeling good :)",
+            date: new Date()
+        }
+There are a number of custom errors if this API call is not invoked correctly.
+
+# An incomplete journalEntry:
+
+const journalEntry = {
+            challengeName: "Sl_1_NoPhoneBeforeBed",
+            challengeEntryNumber:0,
+            date: new Date()
+        }
+ This will return a 400 code and "Missing part of journal entry" message.
+ 
+ # User does not exist
+ 
+ .patch("/journal/:non-ExistentUser")
+ 
+ This will return a 400 code and "User does not exist" message.
