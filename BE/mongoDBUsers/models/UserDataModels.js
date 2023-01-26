@@ -94,9 +94,9 @@ exports.inputJournalEntry = (email, journalEntry) =>{
 
 
 exports.updateChallenge = (email, updates) => {
-   return User.find({ [Object.keys(updates)[0]] : {$exists: true}})
+     if (/\.+(title|description)/.test(Object.keys(updates)[0])) {return Promise.reject({status: 400, msg: 'Bad request. You cannot change the title or description.'})
+    } else { return User.find({ [Object.keys(updates)[0]] : {$exists: true}})
     .then((res) => {
-        
         if (res.length === 0 ) {return Promise.reject({status: 400, msg: 'Bad request'}) }
     })
     .then(()=> {
@@ -107,7 +107,7 @@ exports.updateChallenge = (email, updates) => {
         if (result === null) { return Promise.reject({status: 404, msg: 'Not Found'}) }
         return result;
                 })
-   
+            }
 }
 
 
