@@ -40,7 +40,7 @@ describe('GET /user/:email/:password', () =>{
         .get('/user/doesnotexist@gmail.com/iLoveCake')
         .expect(404)
         .then((response)=>{
-            expect(response._body.msg).toBe("Email does not exist");
+            expect(response._body.msg).toBe("User does not exist");
         })
     })
 

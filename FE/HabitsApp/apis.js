@@ -8,7 +8,7 @@ export const getUserData =({email,password})=>{
     return userApi.get(`/user/${email}/${password}`).then((res)=>{
             return res.data[0]
         }).catch((err)=>{
-           return err
+            return err.response.data.msg
         })
 }
 
