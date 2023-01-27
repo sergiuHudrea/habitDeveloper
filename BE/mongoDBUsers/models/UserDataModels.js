@@ -96,8 +96,9 @@ exports.inputJournalEntry = (email, journalEntry) =>{
 exports.updateChallenge = (email, updates) => {
     return User.find({ [Object.keys(updates)[0]] : {$exists: true}})
         .then((res) => {
+            console.log(res.length)
             if (/\.+(title|description)/.test(Object.keys(updates)[0])) {return Promise.reject({status: 400, msg: 'Bad request. You cannot change the title or description.'})}
-            else if (res.length === 0 ) {return Promise.reject({status: 400, msg: 'Bad request'}) }
+            if (res.length === 0 ) {return Promise.reject({status: 400, msg: 'Bad request'}) }
         })
         .then(()=> {
             return User.findOneAndUpdate({email: email}, { $set: updates }, {
