@@ -398,7 +398,7 @@ describe('GET /api/journal/:email sort', () =>{
 describe('DELETE /journal/:email/:entryId', () =>{
     test('status code 202 deleted journal entry by entryId', () => {
         return request(app)
-        .delete('/journalEntry/63d39e9c6a6ea0cab390012a')
+        .delete('/journalEntry/63d3af67e2d6d3010b4174cb')
         .expect(202)
     })
     test('status code 400 when entryId is invalid', () => {
