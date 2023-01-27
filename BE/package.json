@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --forceExit",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "start": "node mongoDbJSUsers.js"
   },
   "author": "",
   "license": "ISC",
