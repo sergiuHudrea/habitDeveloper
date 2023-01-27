@@ -11,6 +11,39 @@ beforeAll(done => {
     mongoose.connection.close()
     done()
   })
+
+
+describe('GET /', () => {
+    test("status:200, return the message 'The backend is working, happy days!'", () => {
+        return request(app)
+        .get('/')
+        .expect(200)
+        .then((response) => {
+           expect(response._body.msg).toBe("The backend is working, happy days!")
+        })
+    })
+
+    test("status:404, route does not exist", ()=>{
+        return request(app)
+        .get('/asdfasdfas')
+        .expect(404)
+        .then((response)=>{
+            expect(response._body.msg).toBe("Route not found");
+        })
+    })
+})
+
+describe('GET /api', () => {
+    test("status:200, returns the message 'Welcome to our hosted API!'", () => {
+        return request(app)
+        .get('/api')
+        .expect(200)
+        .then((response) => {
+           expect(response._body.msg).toBe("Welcome to our hosted API!")
+        })
+    })
+})  
+
 describe('GET /api/user/:email/:password', () =>{
 
     test("status:200, returns a user object with their app details", ()=>{
@@ -23,17 +56,6 @@ describe('GET /api/user/:email/:password', () =>{
             expect(user.username).toBe("Sergiu");
         })
     })
-
-
-    // To be refactored for later
-    // test("status:404, route does not exist", ()=>{
-    //     return request(app)
-    //     .get('/asdfasdfas')
-    //     .expect(404)
-    //     .then((response)=>{
-    //         expect(response._body.msg).toBe("Route not found");
-    //     })
-    // })
 
     test("status:404, email does not exist", ()=>{
         return request(app)
@@ -395,20 +417,20 @@ describe('GET /api/journal/:email sort', () =>{
 })
 
 //delete journal entry
-describe('DELETE /journal/:email/:entryId', () =>{
+describe('DELETE /api/journal/:email/:entryId', () =>{
     test('status code 202 deleted journal entry by entryId', () => {
         return request(app)
-        .delete('/journalEntry/63d39e9c6a6ea0cab390012a')
+        .delete('/api/journalEntry/63d39e9c6a6ea0cab390012a')
         .expect(202)
     })
     test('status code 400 when entryId is invalid', () => {
         return request(app)
-        .delete('/journalEntry/varsha')
+        .delete('/api/journalEntry/varsha')
         .expect(404)
     })
     test('status code 400 when entryId is valid but non-existent', () => {
         return request(app)
-        .delete('/journalEntry/63d3999e49d97008f964f8a3')
+        .delete('/api/journalEntry/63d3999e49d97008f964f8a3')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Bad request")
