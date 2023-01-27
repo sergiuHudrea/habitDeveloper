@@ -18,6 +18,7 @@ mongoose.connect(uri)
      console.log(err);
 })
 
+
 app.post('/user', addUser)
 app.get('/user/:email/:password', getUser)
 
