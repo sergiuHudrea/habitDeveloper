@@ -24,9 +24,10 @@ useEffect(()=>{
             setUserInfo(userData)
             setIsLoading(false)
             handleLogIn()
-            }  
+            } else {
+                handleLoginError(userData)
+            } 
             setIsValid(false)
-            handleLoginError(userData)
             setIsLoading(false)
                
     
