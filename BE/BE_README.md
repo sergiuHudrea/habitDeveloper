@@ -1,4 +1,4 @@
-### GET /:email/:password  -- returns an object containing the respective user 
+### GET /api/:email/:password  -- returns an object containing the respective user 
 
 ```{"_id":{"$oid":"63ca5fb92aecc47bd9f1f735"},
     username: "Sergiu",
@@ -80,7 +80,7 @@
        }]
     }
 ```
-### GET /journal/:email  -- returns an array containing all journal entries of the email defaulted to date desc order unless query (?order=asc) given
+### GET /api/journal/:email  -- returns an array containing all journal entries of the email defaulted to date desc order unless query (?order=asc) given
 
 ```
 [
@@ -135,7 +135,7 @@
     ]
 ```
 
-### GET /journal/filter/:email  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the email defaulted to date desc order unless query (?order=asc) given. 
+### GET /api/journal/filter/:email  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the email defaulted to date desc order unless query (?order=asc) given. 
 
 ```
  [
@@ -172,7 +172,7 @@
     ]
 ```
 
-### PATCH /challenges/:email -- takes an object (challenge), array of strings (dates) or numbers (streak and times) and patches the respective challenge.
+### PATCH /api/challenges/:email -- takes an object (challenge), array of strings (dates) or numbers (streak and times) and patches the respective challenge.
 ```
 queries: username
 exampleInput: { "challenges.Sl_3_RegularSleep": {
@@ -277,7 +277,7 @@ exampleInput: {
     }
 ```
 
-### PATCH /journal/:email -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
+### PATCH /api/journal/:email -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
 ```
 An example of journalEntry object to send can be seen below:
 
@@ -333,3 +333,9 @@ const newUser = {
 
  
  ```
+ 
+### DELETE /api/journalEntry/:entryId -- returns 202 after deletion, 404 for invalid entryId and 400 for valid but non-existent entryId. entryId==dailyJournal._id
+
+
+
+ 
