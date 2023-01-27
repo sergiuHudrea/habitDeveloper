@@ -310,7 +310,6 @@ describe('GET /api/journal/filter/:email  filter+sort', () =>{
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
-            console.log(journalEntries)
             expect(journalEntries).toBeInstanceOf(Array);
             const sortJournalEntries =[...journalEntries].sort((a,b) => a.date-b.date)
             expect(journalEntries).toEqual(sortJournalEntries)
