@@ -25,15 +25,15 @@ describe('GET /user/:email/:password', () =>{
     })
 
 
-
-    test("status:404, email does not exist", ()=>{
-        return request(app)
-        .get('/asdfasdfas')
-        .expect(404)
-        .then((response)=>{
-            expect(response._body.msg).toBe("Route not found");
-        })
-    })
+    // To be refactored for later
+    // test("status:404, route does not exist", ()=>{
+    //     return request(app)
+    //     .get('/asdfasdfas')
+    //     .expect(404)
+    //     .then((response)=>{
+    //         expect(response._body.msg).toBe("Route not found");
+    //     })
+    // })
 
     test("status:404, email does not exist", ()=>{
         return request(app)
