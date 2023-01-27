@@ -88,7 +88,6 @@ exports.deleteJournalEntry = (req,res,next) => {
         res.status(202).send()
     })
     .catch((err) => {
-        console.log(err)
         next(err)
     })
 }
