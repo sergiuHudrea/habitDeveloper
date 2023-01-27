@@ -3,12 +3,10 @@ import ProgressCircle from 'react-native-progress/Circle'
 // import { Image } from "react-native-svg"
 
 export const MyHomeStats =({ongoingChallengesArr})=>{
-    console.log(ongoingChallengesArr)
     return (
-        <ScrollView>
+        <ScrollView height={'50%'}>
             <Text style={styles.title}>Ongoing challenges:</Text>{
             ongoingChallengesArr.map((chal)=>{
-                console.log(chal[Object.keys(chal)[0]].times)
                 const times = chal[Object.keys(chal)[0]].times % 42
                 let colourBadge = ""
                 let goalTimesForNextbadge =0

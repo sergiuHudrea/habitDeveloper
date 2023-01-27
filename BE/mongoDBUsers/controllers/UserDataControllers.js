@@ -1,3 +1,4 @@
+
 const { ADDRGETNETWORKPARAMS } = require("dns");
 const User = require("../models/UserSetUpModel");
 const { findUser, saveNewUser, updateChallenge, inputJournalEntry, getJournalEntriesInfo, getFilterJournalInfo,removeJournalEntry } = require("../models/UserDataModels")
@@ -25,7 +26,6 @@ exports.getUser = (req, res, next) =>{
         next(err);
     })
 }
-
 
 exports.addJournalEntry = (req, res, next) =>{
     const {email} = req.params;

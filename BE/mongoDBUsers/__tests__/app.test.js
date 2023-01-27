@@ -1,26 +1,21 @@
-// const { default: test } = require('node:test');
 const request = require('supertest');
-// const User = require("./models/UserSetUpModel");
-// const { describe } = require('test');
 const app = require("../mongoDbJSUsers");
 const mongoose = require("mongoose");
-const User = require("../models/UserSetUpModel");
-jest.setTimeout(50000);
+jest.setTimeout(10000);
 
 beforeAll(done => {
     done()
   })
 
   afterAll(done => {
-    // Closing the DB connection allows Jest to exit successfully.
     mongoose.connection.close()
     done()
   })
-describe('GET /user/:email/:password', () =>{
+describe('GET /api/user/:email/:password', () =>{
 
     test("status:200, returns a user object with their app details", ()=>{
         return request(app)
-        .get('/user/shudrea@gmail.com/iLoveCake')
+        .get('/api/user/shudrea@gmail.com/iLoveCake')
         .expect(200)
         .then((response)=>{
             const user = response._body[0];
@@ -29,18 +24,29 @@ describe('GET /user/:email/:password', () =>{
         })
     })
 
+
+    // To be refactored for later
+    // test("status:404, route does not exist", ()=>{
+    //     return request(app)
+    //     .get('/asdfasdfas')
+    //     .expect(404)
+    //     .then((response)=>{
+    //         expect(response._body.msg).toBe("Route not found");
+    //     })
+    // })
+
     test("status:404, email does not exist", ()=>{
         return request(app)
-        .get('/user/doesnotexist@gmail.com/iLoveCake')
+        .get('/api/user/doesnotexist@gmail.com/iLoveCake')
         .expect(404)
         .then((response)=>{
-            expect(response._body.msg).toBe("Email does not exist");
+            expect(response._body.msg).toBe("User does not exist");
         })
     })
 
     test("status:404, password is incorrect", ()=>{
         return request(app)
-        .get('/user/shudrea@gmail.com/incorrectPassword123')
+        .get('/api/user/shudrea@gmail.com/incorrectPassword123')
         .expect(404)
         .then((response)=>{
             expect(response._body.msg).toBe("Password is incorrect");
@@ -48,7 +54,7 @@ describe('GET /user/:email/:password', () =>{
     })
   })
 
-describe("PATCH /journal/:email", () =>{
+describe("PATCH /api/journal/:email", () =>{
 
     test("status 201, returns 201 confirming patch of new journal entry", ()=>{
         const journalEntry = {
@@ -58,7 +64,7 @@ describe("PATCH /journal/:email", () =>{
             date: new Date()
         }
         return request(app)
-        .patch("/journal/shudrea@gmail.com")
+        .patch("/api/journal/shudrea@gmail.com")
         .send(journalEntry)
         .expect(201)
     })
@@ -70,7 +76,7 @@ describe("PATCH /journal/:email", () =>{
             date: new Date()
         }
         return request(app)
-        .patch("/journal/Karl")
+        .patch("/api/journal/Karl")
         .send(journalEntry)
         .expect(400)
         .then((response)=>{
@@ -86,7 +92,7 @@ describe("PATCH /journal/:email", () =>{
             date: new Date()
         }
         return request(app)
-        .patch("/journal/Kar")
+        .patch("/api/journal/Kar")
         .send(journalEntry)
         .expect(400)
         .then((response)=>{
@@ -97,11 +103,11 @@ describe("PATCH /journal/:email", () =>{
 })
 
 
-describe('PATCH /challenges/:email', () => {
+describe('PATCH /api/challenges/:email', () => {
     test("status:200, responds with a patched challenge containing and array of dates, number of streak and number of times", () => {
         const challenge_updates = {"challenges.Sl_3_RegularSleep": {times: 2, dates: ["32323", "4234", "54"], streak: 100}}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(200)
         .then((response) => {
@@ -118,7 +124,7 @@ describe('PATCH /challenges/:email', () => {
     test("status:200, responds with patched challenge streak", () => {
         const challenge_updates = {"challenges.Sl_3_RegularSleep.streak": 2}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(200)
         .then((response) => {
@@ -129,7 +135,7 @@ describe('PATCH /challenges/:email', () => {
     test("status:200, responds with patched challenge times to null", () => {
         const challenge_updates = {"challenges.Sl_6_NoAlcoholBB.times": null}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(200)
         .then((response) => {
@@ -140,7 +146,7 @@ describe('PATCH /challenges/:email', () => {
     test("status:200, responds with patched challenge dates array", () => {
         const challenge_updates = {"challenges.Sl_6_NoAlcoholBB.dates": ["1234243234", "23424423"]}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(200)
         .then((response) => {
@@ -151,7 +157,7 @@ describe('PATCH /challenges/:email', () => {
     test("status:404, not found if email does not exist", () => {
         const challenge_updates = {"challenges.Sl_6_NoAlcoholBB": null}
         return request(app)
-        .patch('/challenges/doesnotexists@gmail.com')
+        .patch('/api/challenges/doesnotexists@gmail.com')
         .send(challenge_updates)
         .expect(404)
         .then(({body}) => {
@@ -162,7 +168,7 @@ describe('PATCH /challenges/:email', () => {
     test("status:400, bad request when the key passed is invalid", () => {
         const challenge_updates = {"challenges.asbbbasdadsasdaasd": 3}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(400)
         .then(({body}) => {
@@ -170,14 +176,12 @@ describe('PATCH /challenges/:email', () => {
         })
     })
 
-})
-
 
 
     test("status:400, bad request when the dates value is not an array of strings", () => {
         const challenge_updates = {"challenges.2_DimLights3hBeforeBed.dates": [1,2, 3]}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(400)
         .then(({body}) => {
@@ -188,7 +192,7 @@ describe('PATCH /challenges/:email', () => {
     test("status:400, bad request when the streak value is not a number", () => {
         const challenge_updates = {"challenges.2_DimLights3hBeforeBed.streak": "NotaNumber"}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(400)
         .then(({body}) => {
@@ -199,7 +203,7 @@ describe('PATCH /challenges/:email', () => {
     test("status:400, bad request when the times value is not a number", () => {
         const challenge_updates = {"challenges.2_DimLights3hBeforeBed.times": "NotaNumber"}
         return request(app)
-        .patch('/challenges/shudrea@gmail.com')
+        .patch('/api/challenges/shudrea@gmail.com')
         .send(challenge_updates)
         .expect(400)
         .then(({body}) => {
@@ -207,8 +211,32 @@ describe('PATCH /challenges/:email', () => {
         })
     })
 
+    test("status:400, bad request if you try to update the title.", () => {
+        const challenge_updates = {"challenges.2_DimLights3hBeforeBed.title": "NO TITLE"}
+        return request(app)
+        .patch('/api/challenges/shudrea@gmail.com')
+        .send(challenge_updates)
+        .expect(400)
+        .then(({body}) => {
+            expect(body.msg).toBe('Bad request. You cannot change the title or description.')
+        })
+    })
 
-describe("POST /user", () =>{
+    test("status:400, bad request if you try to update the description", () => {
+        const challenge_updates = {"challenges.2_DimLights3hBeforeBed.description": "SLEEP IS BADZ"}
+        return request(app)
+        .patch('/api/challenges/shudrea@gmail.com')
+        .send(challenge_updates)
+        .expect(400)
+        .then(({body}) => {
+            expect(body.msg).toBe('Bad request. You cannot change the title or description.')
+        })
+    })
+
+})
+
+
+describe("POST /api/user", () =>{
 
     test("status 201, returns 201 confirming new user and user object", ()=>{
         //if this fails it's likely because user is already in database, just reseed and re run
@@ -219,7 +247,7 @@ describe("POST /user", () =>{
    }
 
         return request(app)
-        .post("/user")
+        .post("/api/user")
         .send(newUser)
         .expect(201)
     })
@@ -231,7 +259,7 @@ describe("POST /user", () =>{
 }
 
     return request(app)
-    .post("/user")
+    .post("/api/user")
     .send(newUser)
     .expect(400)
     .then((response)=>{
@@ -247,7 +275,7 @@ describe("POST /user", () =>{
        }
         
             return request(app)
-            .post("/user")
+            .post("/api/user")
             .send(newUser)
             .expect(400)
             .then((response)=>{
@@ -263,7 +291,7 @@ describe("POST /user", () =>{
        }
         
             return request(app)
-            .post("/user")
+            .post("/api/user")
             .send(newUser)
             .expect(400)
             .then((response)=>{
@@ -275,10 +303,10 @@ describe("POST /user", () =>{
 })
 
 //get journal entries, filter by challenge, sort by date
-describe('GET /journal/filter/:email  filter+sort', () =>{
+describe('GET /api/journal/filter/:email  filter+sort', () =>{
     test('status code 200 returns an array of journal entries in  asc order', () => {
         return request(app)
-        .get('/journal/filter/shudrea@gmail.com?challenge=Sl_4_NoCoffe8hBeforeBed&order=asc')
+        .get('/api/journal/filter/shudrea@gmail.com?challenge=Sl_4_NoCoffe8hBeforeBed&order=asc')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
@@ -290,7 +318,7 @@ describe('GET /journal/filter/:email  filter+sort', () =>{
     })
     test('status code 200 returns an array of journal entries in  desc order', () => {
         return request(app)
-        .get('/journal/filter/shudrea@gmail.com?challenge=Sl_3_RegularSleep')
+        .get('/api/journal/filter/shudrea@gmail.com?challenge=Sl_3_RegularSleep')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
@@ -301,7 +329,7 @@ describe('GET /journal/filter/:email  filter+sort', () =>{
     })
     test('status code 400 when order is invlaid', () => {
         return request(app)
-        .get('/journal/filter/shudrea@gmail.com?challenge=Sl_3_RegularSleep&order=varshs')
+        .get('/api/journal/filter/shudrea@gmail.com?challenge=Sl_3_RegularSleep&order=varshs')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Bad request")
@@ -309,7 +337,7 @@ describe('GET /journal/filter/:email  filter+sort', () =>{
     })
     test('status code 400 when challenge is invlaid', () => {
         return request(app)
-        .get('/journal/filter/shudrea@gmail.com?challenge=varsha&order=desc')
+        .get('/api/journal/filter/shudrea@gmail.com?challenge=varsha&order=desc')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Bad request")
@@ -317,7 +345,7 @@ describe('GET /journal/filter/:email  filter+sort', () =>{
     })
     test('status code 400 when username is invlaid', () => {
         return request(app)
-        .get('/journal/filter/doesnotexist@gmail.com?challenge=Sl_3_RegularSleep&order=desc')
+        .get('/api/journal/filter/doesnotexist@gmail.com?challenge=Sl_3_RegularSleep&order=desc')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Email does not exist")
@@ -326,10 +354,10 @@ describe('GET /journal/filter/:email  filter+sort', () =>{
 })
 
 //get journal entries, sort by date
-describe('GET /journal/:email sort', () =>{
+describe('GET /api/journal/:email sort', () =>{
     test('status code 200 returns an array of journal entries in  desc order unless specified', () => {
         return request(app)
-        .get('/journal/shudrea@gmail.com')
+        .get('/api/journal/shudrea@gmail.com')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
@@ -340,7 +368,7 @@ describe('GET /journal/:email sort', () =>{
     })
     test('status code 200 returns an array of journal entries in  asc order', () => {
         return request(app)
-        .get('/journal/shudrea@gmail.com?order=asc')
+        .get('/api/journal/shudrea@gmail.com?order=asc')
         .expect(200)
         .then((response) => {
             const journalEntries = response.body;
@@ -351,7 +379,7 @@ describe('GET /journal/:email sort', () =>{
     })
     test('status code 400 when order is invlaid', () => {
         return request(app)
-        .get('/journal/shudrea@gmail.com?order=varshs')
+        .get('/api/journal/shudrea@gmail.com?order=varshs')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Bad request")
@@ -359,7 +387,7 @@ describe('GET /journal/:email sort', () =>{
     })
     test('status code 400 when email is invlaid', () => {
         return request(app)
-        .get('/journal/doesnotexist@gmail.com?order=desc')
+        .get('/api/journal/doesnotexist@gmail.com?order=desc')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Email does not exist")
