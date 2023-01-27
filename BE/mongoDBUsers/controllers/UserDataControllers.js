@@ -26,7 +26,6 @@ exports.getUser = (req, res, next) =>{
     })
 }
 
-
 exports.addJournalEntry = (req, res, next) =>{
     const {email} = req.params;
     const journalEntry = req.body;

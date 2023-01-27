@@ -24,20 +24,20 @@ mongoose.connect(uri)
      console.log(err);
 })
 
-app.post('/user', addUser)
+app.post('/api/user', addUser)
 
-app.get('/user/:email/:password', getUser)
+app.get('/api/user/:email/:password', getUser)
 
-app.patch('/user/:userId/:challengeName')
+app.patch('/api/user/:userId/:challengeName')
 
 //get journal entries, sort by date
-app.get('/journal/:email', getJournalEntries)
+app.get('/api/journal/:email', getJournalEntries)
 //get journal entries, filter by challenge, sort by date
-app.get('/journal/filter/:email', getFilterJournal)
+app.get('/api/journal/filter/:email', getFilterJournal)
 
 
-app.patch('/journal/:email', addJournalEntry)
-app.patch('/challenges/:email', patchChallenge)
+app.patch('/api/journal/:email', addJournalEntry)
+app.patch('/api/challenges/:email', patchChallenge)
 app.use(handleCustomErrors);
 
 module.exports = app;
