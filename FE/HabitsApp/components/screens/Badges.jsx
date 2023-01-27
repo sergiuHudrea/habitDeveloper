@@ -23,9 +23,9 @@ const Badges = ({navigation, route}) => {
   return (
     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
     {/* <Text>{chal[Object.keys(chal)[0]].title}</Text> */}
+    <Image source={require("../../assets/badges/goldBadge2.png")} style={{height:100, width:100}}/>
     <Image source={require("../../assets/badges/silverBadge.png")} style={{height:100, width:100}}/>
     <Image source={require("../../assets/badges/bronzeBadge.png")} style={{height:100, width:100}}/>
-    <Image source={require("../../assets/badges/goldBadge2.png")} style={{height:100, width:100}}/>
     </View>
   )
 }
