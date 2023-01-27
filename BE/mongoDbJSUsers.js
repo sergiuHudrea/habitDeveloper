@@ -32,7 +32,7 @@ app.get('/api/journal/:email', getJournalEntries)
 //get journal entries, filter by challenge, sort by date
 app.get('/api/journal/filter/:email', getFilterJournal)
 
-app.delete('/journalEntry/:entryId([0-9a-fA-F]{24})',deleteJournalEntry)
+app.delete('/api/journalEntry/:entryId([0-9a-fA-F]{24})',deleteJournalEntry)
 
 app.patch('/api/journal/:email', addJournalEntry)
 app.patch('/api/challenges/:email', patchChallenge)

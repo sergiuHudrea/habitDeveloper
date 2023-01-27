@@ -398,17 +398,17 @@ describe('GET /api/journal/:email sort', () =>{
 describe('DELETE /journal/:email/:entryId', () =>{
     test('status code 202 deleted journal entry by entryId', () => {
         return request(app)
-        .delete('/journalEntry/63d3af67e2d6d3010b4174cb')
+        .delete('/api/journalEntry/63d3ad927d2b39361c6e42d9')
         .expect(202)
     })
     test('status code 400 when entryId is invalid', () => {
         return request(app)
-        .delete('/journalEntry/varsha')
+        .delete('/api/journalEntry/varsha')
         .expect(404)
     })
     test('status code 400 when entryId is valid but non-existent', () => {
         return request(app)
-        .delete('/journalEntry/63d3999e49d97008f964f8a3')
+        .delete('/api/journalEntry/63d3999e49d97008f964f8a3')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Bad request")

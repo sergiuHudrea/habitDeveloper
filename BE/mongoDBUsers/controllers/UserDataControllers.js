@@ -84,7 +84,8 @@ exports.deleteJournalEntry = (req,res,next) => {
     const {entryId} = req.params;
 
     removeJournalEntry(entryId)
-    .then(() => {
+    .then((response) => {
+        console.log(response)
         res.status(202).send()
     })
     .catch((err) => {

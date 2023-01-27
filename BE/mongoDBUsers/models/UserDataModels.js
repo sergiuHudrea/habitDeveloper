@@ -180,6 +180,15 @@ exports.removeJournalEntry = (entryId) => {
      .then(() => {
           return User.updateMany({}, {$pull:{'dailyJournal':{_id: ObjectID(entryId)}}})
      })
+    //  .catch((err) => {
+    //     console.log(err, ">>>error")
+    //     return Promise.reject({msg: "Bad request", status:400});
+    //  })
     
+    //  return User.updateMany({}, {$pull:{'dailyJournal':{challengeName: 'Sl_1_NoPhoneBeforeBed'}}})
+    // return User.find()
+    // .then((result) => {
+    //     return result
+    // })
      
 }
