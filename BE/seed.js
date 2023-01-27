@@ -82,7 +82,8 @@ const seedTest = [ {
       journalEntry: "mhg",
       date: 7
        }]
-    }]
+    }
+  ]
 
 const seeDB = async () => {
     await User.deleteMany({});
