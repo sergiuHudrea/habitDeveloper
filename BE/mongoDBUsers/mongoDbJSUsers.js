@@ -35,7 +35,7 @@ app.get('/journal/:email', getJournalEntries)
 //get journal entries, filter by challenge, sort by date
 app.get('/journal/filter/:email', getFilterJournal)
 //delete journal entry
-app.delete('/journalEntry/:entryId',deleteJournalEntry)
+app.delete('/journalEntry/:entryId([0-9a-fA-F]{24})',deleteJournalEntry)
 
 
 app.patch('/journal/:email', addJournalEntry)

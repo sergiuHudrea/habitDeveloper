@@ -173,15 +173,19 @@ exports.getFilterJournalInfo = (email,challenge,order="desc") => {
 //delete journal Entry
 exports.removeJournalEntry = (entryId) => {
 
-     return User.find({[`dailyJournal.ObjectId(${entryId})`]:{$exists:true}})
+    console.log(entryId)
+
+     return User.countDocuments({'dailyJournal._id':ObjectID(entryId)})
      .then((result) => {
           console.log(result)
-          if(result.length===0){
+          if(result===0){
                return Promise.reject({msg: "Bad request", status:400});
           }
      })
      .then(() => {
+        console.log("line186")
           return User.updateMany({}, {$pull:{'dailyJournal':{_id: ObjectID(entryId)}}})
      })
+    
      
 }

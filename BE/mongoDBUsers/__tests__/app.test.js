@@ -371,15 +371,21 @@ describe('GET /journal/:email sort', () =>{
 describe('DELETE /journal/:email/:entryId', () =>{
     test('status code 202 deleted journal entry by entryId', () => {
         return request(app)
-        .delete('/journalEntry/63d2acd27b385e14f5942564')
+        .delete('/journalEntry/63d39e9c6a6ea0cab390012a')
         .expect(202)
     })
     test('status code 400 when entryId is invalid', () => {
         return request(app)
         .delete('/journalEntry/varsha')
+        .expect(404)
+    })
+    test('status code 400 when entryId is valid but non-existent', () => {
+        return request(app)
+        .delete('/journalEntry/63d3999e49d97008f964f8a3')
         .expect(400)
         .then((response) => {
             expect(response.body.msg).toBe("Bad request")
         })
     })
 })
+
