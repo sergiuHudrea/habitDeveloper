@@ -1,18 +1,13 @@
-// const { default: test } = require('node:test');
 const request = require('supertest');
-// const User = require("./models/UserSetUpModel");
-// const { describe } = require('test');
 const app = require("../mongoDbJSUsers");
 const mongoose = require("mongoose");
-const User = require("../models/UserSetUpModel");
-jest.setTimeout(5000);
+jest.setTimeout(10000);
 
 beforeAll(done => {
     done()
   })
 
   afterAll(done => {
-    // Closing the DB connection allows Jest to exit successfully.
     mongoose.connection.close()
     done()
   })
@@ -29,12 +24,23 @@ describe('GET /api/user/:email/:password', () =>{
         })
     })
 
+
+    // To be refactored for later
+    // test("status:404, route does not exist", ()=>{
+    //     return request(app)
+    //     .get('/asdfasdfas')
+    //     .expect(404)
+    //     .then((response)=>{
+    //         expect(response._body.msg).toBe("Route not found");
+    //     })
+    // })
+
     test("status:404, email does not exist", ()=>{
         return request(app)
         .get('/api/user/doesnotexist@gmail.com/iLoveCake')
         .expect(404)
         .then((response)=>{
-            expect(response._body.msg).toBe("Email does not exist");
+            expect(response._body.msg).toBe("User does not exist");
         })
     })
 
@@ -170,8 +176,6 @@ describe('PATCH /challenges/:email', () => {
         })
     })
 
-})
-
 
 
     test("status:400, bad request when the dates value is not an array of strings", () => {
@@ -206,6 +210,30 @@ describe('PATCH /challenges/:email', () => {
             expect(body.msg).toBe("Bad request")
         })
     })
+
+    test("status:400, bad request if you try to update the title.", () => {
+        const challenge_updates = {"challenges.2_DimLights3hBeforeBed.title": "NO TITLE"}
+        return request(app)
+        .patch('/challenges/shudrea@gmail.com')
+        .send(challenge_updates)
+        .expect(400)
+        .then(({body}) => {
+            expect(body.msg).toBe('Bad request. You cannot change the title or description.')
+        })
+    })
+
+    test("status:400, bad request if you try to update the description", () => {
+        const challenge_updates = {"challenges.2_DimLights3hBeforeBed.description": "SLEEP IS BADZ"}
+        return request(app)
+        .patch('/challenges/shudrea@gmail.com')
+        .send(challenge_updates)
+        .expect(400)
+        .then(({body}) => {
+            expect(body.msg).toBe('Bad request. You cannot change the title or description.')
+        })
+    })
+
+})
 
 
 describe("POST /api/user", () =>{

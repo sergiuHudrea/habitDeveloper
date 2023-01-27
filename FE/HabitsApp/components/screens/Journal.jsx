@@ -1,4 +1,4 @@
-import {StyleSheet, Text, FlatList, Image} from 'react-native'
+import {StyleSheet, Text, FlatList, Image, View} from 'react-native'
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
 import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
@@ -32,13 +32,16 @@ const userInfo = route.params
 
   const data = userJournal
   const JournalCard = ({challengeName,journalEntry,date}) => (
-  <SafeAreaView style={styles.item}>
-      <Image style={{ marginTop:-20, width: 100, height: 100, alignSelf:'center' }} source={{uri:'https://cdn-icons-png.flaticon.com/512/4312/4312464.png'}}/>
+    <View style={styles.item}>
+       <SafeAreaView >
+      <Image style={{ marginTop:-35, width: 100, height: 100, alignSelf:'center' }} source={{uri:'https://cdn-icons-png.flaticon.com/512/4312/4312464.png'}}/>
       <Text style={styles.challengeName}>{getChalNameFromCode(challengeName)}</Text>
       <Text style={styles.journalEntry}>"{journalEntry}"</Text>
       <Text style={styles.date}><SimpleDateTime dateSeparator="-"  showTime='0' meridians="1" format="DMY">{date}</SimpleDateTime></Text>
-      <Ionicons style={{alignSelf:'center', fontSize:16, marginBottom:-30,marginTop:10}} name='trash-outline' onPress={()=>{}}/>
-</SafeAreaView>  
+      <Ionicons style={{alignSelf:'center', fontSize:16,}} name='trash-outline' onPress={()=>{}}/>
+</SafeAreaView> 
+    </View>
+  
   );
 
 
@@ -55,7 +58,7 @@ export default Journal
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#F7F6F8"
+    backgroundColor:'#F7F6F8'
   },
   item: {
     backgroundColor: '#F7F6F8',
@@ -63,14 +66,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     marginVertical: 5,
-    borderWidth:1,
+    borderWidth:7,
     width:'48%',
     margin:'1%',
     marginHorizontal:10,
     marginVertical:10,
     borderRadius:30,
     padding:7,
-    borderColor:'#BBD18C'
+    borderColor:'#345772'
   },
 journalEntry:{
   textAlign:'center',

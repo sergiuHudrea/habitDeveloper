@@ -1,6 +1,5 @@
-import { Keyboard, ScrollView, StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import React, { useEffect } from 'react'
-import { useState } from 'react';
+import { Keyboard, ScrollView, StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native'
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Inputs from '../inputs';
 import Loader from '../Loader';
@@ -8,28 +7,28 @@ import { postNewUser } from '../../apis';
 
 
 const Register = ({navigation}) => {
-  const [inputs, setInputs] = React.useState({username: '',email: '',password: '',conpassword: ''});
+  const [inputs, setInputs] = useState({username: '',email: '',password: '',conpassword: ''});
   const [isError,setIsError]=useState({})
   const [isLoading,setIsLoading]=useState(false)
-  const [isValid,setIsValid]=useState(false)
-
-
-console.log(inputs.username,'<<<username')
-console.log(inputs.email,'<<<email')
-console.log(inputs.password,'<<<password')
-
-
-useEffect(()=>{
   
-    postNewUser(inputs.username,inputs.email,inputs.password).then((response)=>{
-      console.log(response,'<<<res')
-    if(inputs.username !== '' && inputs.email !== '' && inputs.password !== ''){
-    setIsLoading(false)
-    handleRegister()
-}
-  })
 
-},[isValid])
+const handleRegister =()=>{
+postNewUser(inputs.username,inputs.email,inputs.password).then((response)=>{
+  if(response){
+    Alert.alert('Oops!', response, [
+      {text: 'Try Again', onPress: () => console.log('OK Pressed')},
+    ]);
+setIsLoading(false)
+  
+  }else{
+    Alert.alert('Welcome'+" "+ inputs.username+'!', 'Account created successfully!!', [
+      {text: 'Log In', onPress: () => navigation.navigate('Log In')},
+    ]);
+    setIsLoading(false)
+  }
+})
+}
+
 
 
 
@@ -40,7 +39,7 @@ useEffect(()=>{
     if(!inputs.username){
       handleError('Please input a username','username');
       valid=false;
-    }
+    } 
     if(!inputs.email){
     handleError('Please input email','email');
     valid=false;
@@ -63,16 +62,14 @@ useEffect(()=>{
     handleError('Your password does not match, try agin','conpassword');
     valid=false;
 }
-
-
-
-
     if(valid){
-      setIsValid(true) 
       setIsLoading(true)
+      handleRegister()
     }
      
     }
+
+
 
 
     const handleOnChange =(text,input)=>{
@@ -81,21 +78,19 @@ useEffect(()=>{
       const handleError =(errorMsg,input)=>{
       setIsError((prevState)=>({...prevState,[input]:errorMsg}));
       }
-      const handleRegister=()=>{
-        navigation.navigate('Log In')
-      }
+     
       
 
 
   return (
     <SafeAreaView style={{backgroundColor:'#F7F6F8', flex:1}}>
-      <KeyboardAvoidingView behavior='padding' style={{paddingTop: 50, paddingHorizontal: 20}}> 
+      <ScrollView behavior='padding' style={{paddingTop: 50, paddingHorizontal: 20}}> 
       <Loader visible={isLoading}/>
         <Text style={{color:'#345772', fontSize: 40, fontWeight: 'bold'}}>Register</Text>
       <Text style={{color: '#78ACB1', fontSize: 18, marginVertical: 10,marginBottom:40}}>
       Enter Your Details to Register
       </Text>
-      <View >
+      <View style={{alignItems:'center',}} >
          <Inputs
             onChangeText={text => handleOnChange(text, 'username')}
             onFocus={() => handleError(null, 'username')}
@@ -151,7 +146,7 @@ useEffect(()=>{
             Already have an account? Login
           </Text>
        
-     </KeyboardAvoidingView>
+     </ScrollView>
      
     </SafeAreaView>
     

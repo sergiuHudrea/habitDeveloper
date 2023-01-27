@@ -80,7 +80,7 @@
        }]
     }
 ```
-### GET /journal/:username  -- returns an array containing all journal entries of the username defaulted to date desc order unless query (?order=asc) given
+### GET /journal/:email  -- returns an array containing all journal entries of the email defaulted to date desc order unless query (?order=asc) given
 
 ```
 [
@@ -135,7 +135,7 @@
     ]
 ```
 
-### GET /journal/filter/:username  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the username defaulted to date desc order unless query (?order=asc) given. 
+### GET /journal/filter/:email  -- returns an array containing filtered journal entries as query (?challenge="challengeName") of the email defaulted to date desc order unless query (?order=asc) given. 
 
 ```
  [
@@ -172,7 +172,7 @@
     ]
 ```
 
-### PATCH /challenges/:username -- takes an object (challenge), array of strings (dates) or numbers (streak and times) and patches the respective challenge.
+### PATCH /challenges/:email -- takes an object (challenge), array of strings (dates) or numbers (streak and times) and patches the respective challenge.
 ```
 queries: username
 exampleInput: { "challenges.Sl_3_RegularSleep": {
@@ -277,7 +277,7 @@ exampleInput: {
     }
 ```
 
-### PATCH /journal/:username -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
+### PATCH /journal/:email -- takes a journalEntry object and inserts a journal entry into the dailyJournal array
 ```
 An example of journalEntry object to send can be seen below:
 

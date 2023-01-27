@@ -1,11 +1,8 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
-const { stringify } = require('querystring');
 const schema = mongoose.Schema;
 
 mongoose.set("strictQuery", false);
 
-//could also add timestamp property 16:49 on video
 const userSchema = schema({
     username:{
         type:String,
@@ -24,14 +21,43 @@ const userSchema = schema({
         required: true
     },
     challenges:{
+            type:Object,
+            default: {},
+            Challenge_Code: {
+                times: {
+                    type: Number,
+                    required: true
+                    }, 
+                dates:{
+                    type: [String],
+                    required: true
+                    }, 
+                streak: {
+                    type: Number,
+                    required: true
+                    },
+                badges: {
+                    type: [Number],
+                    required: true
+                },
+                title: {
+                    type: String,
+                    required: true
+                    },
+                description: {
+                    type: String,
+                    required: true
+                    },
+                img_url: {
+                    type: String,
+                    required: true
+                    },
+                }
+                
     },
     uniqueUserLink:{
         type:String,
         required:false,
-    },
-    medals:{
-    type:Object,
-    default:{}
     },
     dailyJournal:[{
         challengeName:{

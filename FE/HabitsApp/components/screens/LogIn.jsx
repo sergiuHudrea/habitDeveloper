@@ -1,10 +1,10 @@
 import { KeyboardAvoidingView, StyleSheet, Text,TouchableOpacity, View, Keyboard} from 'react-native'
-
+import { Alert } from 'react-native';
 import React, { useEffect, useState } from 'react'
 import Inputs from '../inputs';
 import { getUserData } from '../../apis';
 import Loader from '../Loader';
-import { Header } from 'react-native';
+
 
 
 
@@ -18,16 +18,24 @@ const [isValid,setIsValid]=useState(false)
 const [userInfo,setUserInfo]=useState({})
 
 useEffect(()=>{
-    getUserData({email:inputs.email, password: inputs.password}).then((userData)=>{
-        if(userData && (inputs.email===userData.email && inputs.password===userData.password)){
+    
+        getUserData({email:inputs.email, password: inputs.password}).then((userData)=>{
+        if(inputs.email===userData.email && inputs.password===userData.password){
             setUserInfo(userData)
             setIsLoading(false)
             handleLogIn()
-            } else {
-                setIsValid(false)
-                setIsLoading(false)
-            }
+            }  
+            setIsValid(false)
+            handleLoginError(userData)
+            setIsLoading(false)
+               
+    
         })
+        .catch((err)=>{
+           return err
+        })
+    
+    
     },[isValid])
 
 
@@ -76,7 +84,11 @@ setIsError((prevState)=>({...prevState,[input]:errorMsg}));
 const handleLogIn=()=>{
    navigation.navigate('MainContainer', {email: inputs.email, password: inputs.password})
 }
-
+const handleLoginError=(userData)=>{
+    Alert.alert('Oops!', userData, [
+        {text: 'Try Again', onPress: () => {}},
+          ]);
+}
 
 
   return (
@@ -176,7 +188,7 @@ const styles = StyleSheet.create({
     header:{
         fontSize:30,
         fontWeight:'bold',
-        marginTop:-90,
+        marginTop:-40,
         marginBottom: 100,
         color:'#F7F6F8',
         fontFamily:'Georgia',
