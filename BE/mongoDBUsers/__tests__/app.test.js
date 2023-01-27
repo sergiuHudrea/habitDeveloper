@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require("../mongoDbJSUsers");
+const app = require("../../mongoDbJSUsers");
 const mongoose = require("mongoose");
 jest.setTimeout(10000);
 

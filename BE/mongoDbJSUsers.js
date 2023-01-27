@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const express = require("express");
 
-const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal, deleteJournalEntry} = require('./controllers/UserDataControllers');
+const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal, deleteJournalEntry} = require('./mongoDBUsers/controllers/UserDataControllers');
 
-const {handleCustomErrors, handle404s} = require('./controllers/errorController')
+const {handleCustomErrors, handle404s} = require('./mongoDBUsers/controllers/errorController')
 
 
 const app = express();	
