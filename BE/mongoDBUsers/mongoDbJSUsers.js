@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const express = require("express");
 
+const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal, deleteJournalEntry} = require('./controllers/UserDataControllers');
+
 const {handleCustomErrors, handle404s} = require('./controllers/errorController')
-const { addUser, getUser, patchChallenge, addJournalEntry,getJournalEntries, getFilterJournal} = require('./controllers/UserDataControllers');
+
 
 const app = express();	
 app.use(express.json());
@@ -30,6 +32,7 @@ app.get('/api/journal/:email', getJournalEntries)
 //get journal entries, filter by challenge, sort by date
 app.get('/api/journal/filter/:email', getFilterJournal)
 
+app.delete('/journalEntry/:entryId([0-9a-fA-F]{24})',deleteJournalEntry)
 
 app.patch('/api/journal/:email', addJournalEntry)
 app.patch('/api/challenges/:email', patchChallenge)
