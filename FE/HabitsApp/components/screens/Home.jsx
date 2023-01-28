@@ -24,7 +24,7 @@ const Home = ({navigation, route})=>{
           return Boolean(chal[Object.keys(chal)[0]].times)
         })
         setOngoingChallengesArr(activeChallenges)
-        console.log(ongoingChallengesArr, 'active challs')
+        // console.log(ongoingChallengesArr, 'active challs')
         if (ongoingChallengesArr.length === 0){
           setFirstTimeUser(true)
         } else {

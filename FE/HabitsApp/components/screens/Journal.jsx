@@ -1,10 +1,9 @@
-import {StyleSheet, Text, FlatList, Image, View} from 'react-native'
+import {StyleSheet, Text, FlatList, Image, View,Dimensions} from 'react-native'
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
 import React, { useEffect, useState } from 'react'
-import { getUserData } from '../../apis'
+import { getUserData,getJournalByUser } from '../../apis'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
 
 
 
@@ -16,8 +15,8 @@ const userInfo = route.params
 
 
   useEffect(()=>{
-    getUserData(userInfo).then((data)=>{
-      setUserJournal(data.dailyJournal) 
+    getJournalByUser(userInfo.email).then((data)=>{
+      setUserJournal(data) 
     })
   },[])
   
@@ -34,7 +33,7 @@ const userInfo = route.params
   const JournalCard = ({challengeName,journalEntry,date}) => (
     <View style={styles.item}>
        <SafeAreaView >
-      <Image style={{ marginTop:-35, width: 100, height: 100, alignSelf:'center' }} source={{uri:'https://cdn-icons-png.flaticon.com/512/4312/4312464.png'}}/>
+      <Image style={{ marginTop:-35, width: 100, height: 100, alignSelf:'center' }} source={{uri:'https://i.ibb.co/y8dbS4P/dim-light-icon.png%22'}}/>
       <Text style={styles.challengeName}>{getChalNameFromCode(challengeName)}</Text>
       <Text style={styles.journalEntry}>"{journalEntry}"</Text>
       <Text style={styles.date}><SimpleDateTime dateSeparator="-"  showTime='0' meridians="1" format="DMY">{date}</SimpleDateTime></Text>
@@ -45,11 +44,16 @@ const userInfo = route.params
   );
 
 
+  const dimensions = Dimensions.get('screen');
+  const screenWidth = dimensions.width;
+
+
       
 return (
-  <FlatList numColumns={2} style={styles.container}     data={data}
+    <FlatList showsVerticalScrollIndicator={false}  numColumns={2} style={[styles.container,{width:screenWidth}]}     data={data}
   renderItem={({item}) => <JournalCard challengeName={item.challengeName} journalEntry={item.journalEntry} date={item.date} key={item.id}/>
 }/>
+ 
   )
 };
 

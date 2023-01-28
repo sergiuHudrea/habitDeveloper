@@ -5,7 +5,7 @@ import MoreHabits from './MoreHabits';
 import Journal from './Journal';
 import Badges from './Badges';
 import Home from './Home';
-import { Header } from 'react-native/Libraries/NewAppScreen';
+
 
 
 
@@ -38,7 +38,6 @@ export default function MainContainer({navigation, route}) {
           }else if (rn === badgesName) {
             iconName = focused ? 'medal' : 'medal-outline';
           }
-
     
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -48,7 +47,10 @@ export default function MainContainer({navigation, route}) {
         inactiveTintColor: 'grey',
         labelStyle: { fontSize: 10, fontWeight:'600'},
         style: { padding: 10, height: 70}
-      }}>
+      }}
+      
+      
+      >
         <Tab.Screen options={{ headerShown:false}} name={homeName} component={Home} initialParams={userInfo}/>
         <Tab.Screen options={{ headerShown:false}} name={habitsName} component={MoreHabits} initialParams={userInfo}/>
         <Tab.Screen options={{ headerShown:false}} name={journalName} component={Journal} initialParams={userInfo}/>
