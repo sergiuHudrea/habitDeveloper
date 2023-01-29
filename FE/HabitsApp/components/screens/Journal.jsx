@@ -1,41 +1,25 @@
 import {StyleSheet, Text, FlatList, Image, View,Dimensions, ScrollView,StatusBar, TextInput, TouchableOpacity} from 'react-native'
-import SimpleDateTime  from 'react-simple-timestamp-to-date';
 import React, { useEffect, useState } from 'react'
-import { getUserData,getJournalByUser } from '../../apis'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import Loader from '../Loader';
+import JournalSearchInput from '../SearchInput';
 const {width}=Dimensions.get('screen')
 
-const Journal = ({navigation,route }) => {
-const [userJournal, setUserJournal]=useState()
-const [isLoading, setIsLoading]=useState(true)
+const Journal = ({navigation,route,username }) => {
+const [input,setInput]=useState('')
 const userInfo = route.params
 
-
-
-  useEffect(()=>{
-    getJournalByUser(userInfo.email).then((data)=>{
-      setUserJournal(data) 
-      setIsLoading(false)
-    })
-  },[])
+console.log(userInfo.username)
 
 
   
   
-
-  
-  
-return isLoading ? (
-  <Loader />
-):
-( 
+return ( 
   <SafeAreaView style={{backgroundColor:'white',flex:1}}>
     <StatusBar barStyle='dark-content' translucent={false} backgroundColor='black'/>
     <View style={styles.header}>
       <View>
-        <Text style={{fontSize:36,fontWeight:'bold',marginVertical:20}}>Hello Sergiu!</Text>
+        <Text style={{fontSize:36,fontWeight:'bold',marginVertical:20}}>Hello {userInfo.username}!</Text>
         <Text style={{fontSize:16,fontWeight:'200'}}>How are you feeling today?</Text>
       </View>
       <Ionic/>
@@ -49,21 +33,15 @@ return isLoading ? (
       }}>
         <View style={styles.searchInput}>
           <Ionic name='search' size={23}/>
-          <TextInput placeholder='Enter a keyword'/>
+          <TextInput autoCapitalize={false} value={input} onChangeText={(text)=> setInput(text)} placeholder='Search'/>
         </View>
         <View style={styles.sortBtn}>
           <Ionic style={{margin:12, justifyContent:'center'}}name='options' color={'white'} size={28}/>
         </View>
       </View>
-      <View style={styles.journalCardContainer}>
-      {userJournal.map((journal,index)=>(
-        <View style={styles.journalCard} key={index}>
-          <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
-          <Text style={{marginHorizontal:10,fontSize:15}}>Even if you're not sure what a blog is, you've no doubt come across one at some point in time. Perhaps you've stumbled across a blog when you've searched "healthy dinner recipes". In fact, if you're reading this, guess what? You're on a blog. (Very meta, I know.)</Text>
-        </View>
-      ))}
-    </View>
-    
+      <View>
+        <JournalSearchInput userInfo={userInfo} input={input} setInput={setInput}/>
+      </View>
     </ScrollView>
     <View style={{flex:1}}>
       <TouchableOpacity style={styles.journalAddButton}><Ionic size={29} name='add' color={'white'} /></TouchableOpacity>
@@ -79,14 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor:'#F7F6F8'
   },
-  journalCard: {
-    height:180,
-    borderBottomWidth:0.2,
-    borderTopWidth:0.2,
-    borderColor:'#B2BDB5',
-   backgroundColor:'white'
-   
-  },
+  
 journalEntry:{
   textAlign:'center',
   fontStyle:'italic',
@@ -118,10 +89,7 @@ sortBtn:{
   marginLeft:10,
 
 },
-journalCardContainer:{
-  paddingHorizontal:20,
-  marginTop:20
-},
+
 journalAddButton:{
   backgroundColor:"#55BEDF",
   width:60,
@@ -133,10 +101,7 @@ journalAddButton:{
 justifyContent:'center',
 alignItems:'center',
 },
-date:{
-  marginHorizontal:10,
-  marginVertical:10,
-}
+
 })
 
 

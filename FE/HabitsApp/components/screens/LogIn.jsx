@@ -83,7 +83,7 @@ const handleError =(errorMsg,input)=>{
 setIsError((prevState)=>({...prevState,[input]:errorMsg}));
 }
 const handleLogIn=()=>{
-   navigation.navigate('MainContainer', {email: inputs.email, password: inputs.password})
+   navigation.navigate('MainContainer', {email: inputs.email, password: inputs.password, username:userInfo.username})
 }
 const handleLoginError=(userData)=>{
     Alert.alert('Oops!', userData, [

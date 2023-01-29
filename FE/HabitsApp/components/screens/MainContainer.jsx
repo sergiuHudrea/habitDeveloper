@@ -20,7 +20,9 @@ const badgesName='Badges';
 export default function MainContainer({navigation, route}) {
   const userInfo = route.params
 
-  return (
+  
+
+return (
       <Tab.Navigator  initialRouteName={homeName}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -55,7 +57,7 @@ export default function MainContainer({navigation, route}) {
       >
         <Tab.Screen options={{ headerShown:false}} name={homeName} component={Home} initialParams={userInfo}/>
         <Tab.Screen options={{ headerShown:false}} name={habitsName} component={MoreHabits} initialParams={userInfo}/>
-        <Tab.Screen options={{ headerShown:false}} name={journalName} component={Journal} initialParams={userInfo}/>
+        <Tab.Screen options={{ headerShown:false}} name={journalName} component={Journal} initialParams={userInfo} />
         <Tab.Screen options={{ headerShown:false}} name={badgesName} component={Badges} initialParams={userInfo}/>
       </Tab.Navigator>
 

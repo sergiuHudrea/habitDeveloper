@@ -44,7 +44,7 @@ const HabitDetail = ({navigation,route}) => {
   <Text style={{textAlign:'center',padding:20,margin:1,fontSize:15,color:'#839AAD'}}>{challenges.description}</Text>
 </View>
       <TouchableOpacity activeOpacity={0.7} style={style.button}>
-        <Text style={{color: 'white', fontWeight: 'bold',fontSize:18}}>ADD <Ionicons size={20} name='add' /></Text>
+        <Text style={{color: 'white', fontWeight: 'bold',fontSize:18}}>ADD <Ionic size={20} name='add' /></Text>
       </TouchableOpacity>
      
     </SafeAreaView>
