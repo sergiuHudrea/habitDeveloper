@@ -1,6 +1,6 @@
 import { Image,StyleSheet, Text, View,SafeAreaView,StatusBar,ImageBackground, TouchableOpacity } from 'react-native'
 import React from 'react'
-import Ionicons from '@expo/vector-icons/Ionicons';
+import Ionic from 'react-native-vector-icons/Ionicons';
 
 
 const HabitDetail = ({navigation,route}) => {
@@ -19,7 +19,7 @@ const HabitDetail = ({navigation,route}) => {
           }}>
           
           <View style={style.header}>
-            <Ionicons
+            <Ionic
               name="arrow-back"
               size={28}
               color={'black'}

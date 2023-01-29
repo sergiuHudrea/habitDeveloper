@@ -1,7 +1,7 @@
 import {StyleSheet, Text, FlatList, Image, View, TouchableOpacity} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
-import Ionicons from '@expo/vector-icons/Ionicons';
+import Ionic from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Loader from '../Loader';
 
@@ -25,13 +25,17 @@ getUserData(userInfo).then((data)=>{
 
 const HabitCard = ({title,description,img_url}) => (
   
-    <View style={styles.item}>
+    <SafeAreaView style={styles.item}>
       <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url})}>
-    <Image style={{  borderColor:'black',borderWidth:4,height:180,width:180, alignSelf:'center',borderRadius:90, }} source={{uri:img_url}}/>
+        <View>
+          <Image style={{  borderColor:'black',borderWidth:4,height:180,width:180, alignSelf:'center',borderRadius:90, }} source={{uri:img_url}}/> 
+        </View>
+    
+   
     </TouchableOpacity> 
     <Text style={styles.title}>{title}</Text> 
-   <Ionicons/>
-  </View>
+   
+  </SafeAreaView>
  
   
 
@@ -53,10 +57,10 @@ export default MoreHabits
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#FFFAFA'
+    backgroundColor:'#F7F6F8',
   },
   item: {
-    backgroundColor: '#FFFAFA',
+    backgroundColor: '#F7F6F8',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,

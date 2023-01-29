@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Ionicons from '@expo/vector-icons/Ionicons';
+import Ionic from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MoreHabits from './MoreHabits';
 import Journal from './Journal';
@@ -21,7 +21,7 @@ export default function MainContainer({navigation, route}) {
   const userInfo = route.params
 
   return (
-      <Tab.Navigator initialRouteName={homeName}
+      <Tab.Navigator  initialRouteName={homeName}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -29,24 +29,26 @@ export default function MainContainer({navigation, route}) {
 
           if (rn === homeName) {
             iconName = focused ? 'home' : 'home-outline';
+            size= focused ? size + 9 : size + 2;
 
           } else if (rn === habitsName) {
             iconName = focused ? 'list' : 'list-outline';
-
+            size= focused ? size + 9 : size + 2;
           } else if (rn === journalName) {
             iconName = focused ? 'book' : 'book-outline';
+            size= focused ? size + 9 : size + 2;
           }else if (rn === badgesName) {
-            iconName = focused ? 'medal' : 'medal-outline';
+            iconName = focused ? 'ribbon' : 'ribbon-outline';
+            size= focused ? size + 9 : size + 2;
           }
     
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionic name={iconName} size={size} color={color} />;
         },
       })}
       tabBarOptions={{
         activeTintColor: '#345772',
-        inactiveTintColor: 'grey',
-        labelStyle: { fontSize: 10, fontWeight:'600'},
-        style: { padding: 10, height: 70}
+        inactiveTintColor: 'black',
+        showLabel:false,
       }}
       
       

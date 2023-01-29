@@ -1,15 +1,15 @@
-import {StyleSheet, Text, FlatList, Image, View,Dimensions} from 'react-native'
+import {StyleSheet, Text, FlatList, Image, View,Dimensions, ScrollView,StatusBar, TextInput, TouchableOpacity} from 'react-native'
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
 import React, { useEffect, useState } from 'react'
 import { getUserData,getJournalByUser } from '../../apis'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Ionicons from '@expo/vector-icons/Ionicons';
-
-
-
+import Ionic from 'react-native-vector-icons/Ionicons';
+import Loader from '../Loader';
+const {width}=Dimensions.get('screen')
 
 const Journal = ({navigation,route }) => {
 const [userJournal, setUserJournal]=useState()
+const [isLoading, setIsLoading]=useState(true)
 const userInfo = route.params
 
 
@@ -17,43 +17,58 @@ const userInfo = route.params
   useEffect(()=>{
     getJournalByUser(userInfo.email).then((data)=>{
       setUserJournal(data) 
+      setIsLoading(false)
     })
   },[])
+
+
   
-  const getChalNameFromCode =(challCode)=>{
-    let newCodesArr = challCode.split("_")
-    newCodesArr = newCodesArr.slice(2,3)
-   
-    return newCodesArr
-    
-}
+  
 
-
-  const data = userJournal
-  const JournalCard = ({challengeName,journalEntry,date}) => (
-    <View style={styles.item}>
-       <SafeAreaView >
-      <Image style={{ marginTop:-35, width: 100, height: 100, alignSelf:'center' }} source={{uri:'https://i.ibb.co/y8dbS4P/dim-light-icon.png%22'}}/>
-      <Text style={styles.challengeName}>{getChalNameFromCode(challengeName)}</Text>
-      <Text style={styles.journalEntry}>"{journalEntry}"</Text>
-      <Text style={styles.date}><SimpleDateTime dateSeparator="-"  showTime='0' meridians="1" format="DMY">{date}</SimpleDateTime></Text>
-      <Ionicons style={{alignSelf:'center', fontSize:16,}} name='trash-outline' onPress={()=>{}}/>
-</SafeAreaView> 
+  
+  
+return isLoading ? (
+  <Loader />
+):
+( 
+  <SafeAreaView style={{backgroundColor:'white',flex:1}}>
+    <StatusBar barStyle='dark-content' translucent={false} backgroundColor='black'/>
+    <View style={styles.header}>
+      <View>
+        <Text style={{fontSize:36,fontWeight:'bold',marginVertical:20}}>Hello Sergiu!</Text>
+        <Text style={{fontSize:16,fontWeight:'200'}}>How are you feeling today?</Text>
+      </View>
+      <Ionic/>
     </View>
-  
-  );
-
-
-  const dimensions = Dimensions.get('screen');
-  const screenWidth = dimensions.width;
-
-
-      
-return (
-    <FlatList showsVerticalScrollIndicator={false}  numColumns={2} style={[styles.container,{width:screenWidth}]}     data={data}
-  renderItem={({item}) => <JournalCard challengeName={item.challengeName} journalEntry={item.journalEntry} date={item.date} key={item.id}/>
-}/>
- 
+    <ScrollView>
+      <View 
+      style={{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        paddingHorizontal:20,
+      }}>
+        <View style={styles.searchInput}>
+          <Ionic name='search' size={23}/>
+          <TextInput placeholder='Enter a keyword'/>
+        </View>
+        <View style={styles.sortBtn}>
+          <Ionic style={{margin:12, justifyContent:'center'}}name='options' color={'white'} size={28}/>
+        </View>
+      </View>
+      <View style={styles.journalCardContainer}>
+      {userJournal.map((journal,index)=>(
+        <View style={styles.journalCard} key={index}>
+          <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
+          <Text style={{marginHorizontal:10,fontSize:15}}>Even if you're not sure what a blog is, you've no doubt come across one at some point in time. Perhaps you've stumbled across a blog when you've searched "healthy dinner recipes". In fact, if you're reading this, guess what? You're on a blog. (Very meta, I know.)</Text>
+        </View>
+      ))}
+    </View>
+    
+    </ScrollView>
+    <View style={{flex:1}}>
+      <TouchableOpacity style={styles.journalAddButton}><Ionic size={29} name='add' color={'white'} /></TouchableOpacity>
+    </View>
+  </SafeAreaView>
   )
 };
 
@@ -64,20 +79,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor:'#F7F6F8'
   },
-  item: {
-    backgroundColor: '#F7F6F8',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    marginVertical: 5,
-    borderWidth:7,
-    width:'48%',
-    margin:'1%',
-    marginHorizontal:10,
-    marginVertical:10,
-    borderRadius:30,
-    padding:7,
-    borderColor:'#345772'
+  journalCard: {
+    height:180,
+    borderBottomWidth:0.2,
+    borderTopWidth:0.2,
+    borderColor:'#B2BDB5',
+   backgroundColor:'white'
+   
   },
 journalEntry:{
   textAlign:'center',
@@ -85,16 +93,49 @@ journalEntry:{
   margin:20,
   color:'black',
 },
-challengeName:{
-  textAlign:'center',
-  margin:8,
-  fontWeight:'bold',
-  color:'black',
+header:{
+  paddingVertical:20,
+  flexDirection:'row',
+  justifyContent:'space-between',
+  paddingHorizontal:20,
+},
+searchInput:{
+  height:50,
+  backgroundColor:'#F7F6F8',
+  flex:1,
+  flexDirection:'row',
+  alignItems:'center',
+  paddingHorizontal:20,
+  borderRadius:10,
+},
+sortBtn:{
+  backgroundColor:"#55BEDF",
+  height:50,
+  width:50,
+  borderRadius:10,
+  justifyContent:'center',
+  alignContent:'center',
+  marginLeft:10,
+
+},
+journalCardContainer:{
+  paddingHorizontal:20,
+  marginTop:20
+},
+journalAddButton:{
+  backgroundColor:"#55BEDF",
+  width:60,
+  height:60,
+  position:'absolute',
+  bottom:20,
+  right:40,
+  borderRadius:50,
+justifyContent:'center',
+alignItems:'center',
 },
 date:{
-  textAlign:'center',
-  margin:8,
-  color:'black',
+  marginHorizontal:10,
+  marginVertical:10,
 }
 })
 

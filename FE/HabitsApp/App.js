@@ -24,7 +24,7 @@ export default function App() {
               component={Register}
             />
              <Stack.Screen
-            //  options={{ headerShown:false}}
+             options={{ headerShown:false}}
               name="MainContainer"
               component={MainContainer}
             />
