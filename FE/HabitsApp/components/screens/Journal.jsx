@@ -9,7 +9,7 @@ const Journal = ({navigation,route,username }) => {
 const [input,setInput]=useState('')
 const userInfo = route.params
 
-console.log(userInfo.username)
+
 
 
   
