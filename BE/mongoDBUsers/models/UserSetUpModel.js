@@ -62,20 +62,24 @@ const userSchema = schema({
     dailyJournal:[{
         challengeName:{
             type:String,
-            required:false,
+            required:true,
+        },
+        title:{
+            type:String,
+            required:true,
         },
         challengeEntryNumber:{
             type:Number,
-            required:false,
+            required:true,
         }
         ,
         journalEntry:{
             type:String,
-            required:false,
+            required:true,
         },
         date:{
             type:Date,
-            required:false,
+            required:true,
         }
     }]
 },    

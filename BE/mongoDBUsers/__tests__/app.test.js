@@ -77,11 +77,12 @@ describe('GET /api/user/:email/:password', () =>{
     })
   })
 
-describe("PATCH /api/journal/:email", () =>{
+describe.only("PATCH /api/journal/:email", () =>{
 
     test("status 201, returns 201 confirming patch of new journal entry", ()=>{
         const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
+            title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             journalEntry:"Day 1, feeling good :)",
             date: new Date()
@@ -95,6 +96,7 @@ describe("PATCH /api/journal/:email", () =>{
     test("status 400, journalEntry object is missing data", ()=>{
         const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
+            title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             date: new Date()
         }
@@ -110,6 +112,7 @@ describe("PATCH /api/journal/:email", () =>{
     test("status 400, email does not exist ", ()=>{
         const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
+            title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             journalEntry:"Day 1, feeling good :)",
             date: new Date()

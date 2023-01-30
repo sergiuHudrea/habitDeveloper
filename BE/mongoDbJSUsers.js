@@ -44,7 +44,7 @@ app.delete('/api/journalEntry/:entryId([0-9a-fA-F]{24})',deleteJournalEntry)
 app.patch('/api/journal/:email', addJournalEntry)
 app.patch('/api/challenges/:email', patchChallenge)
 
-app.all('/*', handle404s);
+//app.all('/*', handle404s);
 app.use(handleCustomErrors);
 
 module.exports = app;
