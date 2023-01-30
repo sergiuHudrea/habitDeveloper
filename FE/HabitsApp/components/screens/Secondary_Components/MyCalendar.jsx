@@ -17,7 +17,6 @@ export const MyCalendar =({selectedDay, setSelectedDay})=>{
           dots: [{color: "red"},{color: "blue"},{color: 'yellow'},{color: 'orange'}]
         },
       ];
-    // console.log(selectedDay, "selectedday")
 
     return (
         <View>

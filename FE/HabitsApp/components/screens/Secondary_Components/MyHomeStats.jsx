@@ -9,28 +9,28 @@ export const MyHomeStats =({ongoingChallengesArr})=>{
             ongoingChallengesArr.map((chal)=>{
                 const times = chal[Object.keys(chal)[0]].times % 42
                 let colourBadge = ""
-                let goalTimesForNextbadge =0
+                let timesForNextbadge =0
                 if (times<7) {
                     colourBadge = "#CD7F32"
-                    goalTimesForNextbadge = 7
+                    timesForNextbadge = 7
                 } else if (times<21) {
                     colourBadge = "#C0C0C0"
-                    goalTimesForNextbadge = 21
+                    timesForNextbadge = 21
                 } else if (times<42) {
                     colourBadge = "#dac206"
-                    goalTimesForNextbadge = 42
+                    timesForNextbadge = 42
                 }
 
 
 
-                return (<View style={styles.container}>
+                return (<View key={Math.random()} style={styles.container}>
                         <View style={styles.smallContainer}>
                             <View style={styles.evenSmallerContainer}>
                                 <Text>{chal[Object.keys(chal)[0]].title}</Text>
                                 <View flexDirection={"row"} alignItems={"center"} marginTop={5}><Text>{`Streak: ${chal[Object.keys(chal)[0]].streak}`}</Text><Image source={require("../../../assets/flame-icon.png")} style={{height:30, width:30}}/></View>
                                 <Text>{`Times completed: ${chal[Object.keys(chal)[0]].times}`}</Text>
                             </View>
-                            <ProgressCircle color={colourBadge} progress={times/goalTimesForNextbadge} size={50}  thickness={5} borderWidth={2} showsText={true} borderColor={"#78ACB1"} textStyle={{fontSize:13, fontWeight:"bold", color:"#78ACB1"}} marginLeft={5}/>
+                            <ProgressCircle color={colourBadge} progress={times/timesForNextbadge} size={50}  thickness={5} borderWidth={2} showsText={true} borderColor={"#78ACB1"} textStyle={{fontSize:13, fontWeight:"bold", color:"#78ACB1"}} marginLeft={5}/>
                         </View>
                             {/* color={"#dac206"} color={"#b9f2ff"}color={"#C0C0C0"}color={"#CD7F32"}color:"#78ACB1"}} */}
                     </View>)
