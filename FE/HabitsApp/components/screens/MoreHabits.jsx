@@ -22,7 +22,6 @@ getUserData(userInfo).then((data)=>{
   })
 },[])
 
-
 const HabitCard = ({title,description,img_url}) => (
     <SafeAreaView style={styles.item}>
       <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url})}>

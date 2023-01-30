@@ -12,11 +12,8 @@ const Badges = ({navigation, route}) => {
     getUserData(userInfo).then((userData)=>{
       const challArray = Object.keys(userData.challenges).map(key=>userData.challenges[key])
       setChallenges(challArray)
-      console.log(challArray[9])
     })
   },[])
-    
-    console.log(challenges)
 
 
   const BadgeCard =({title, badges})=>{
