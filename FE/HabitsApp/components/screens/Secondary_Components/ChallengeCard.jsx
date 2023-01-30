@@ -8,6 +8,7 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo})=>{
     // console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
     const [fillColor, setFillColour] = useState("white")
 
+
     useEffect(()=>{
         if(chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {setFillColour("#cbd3d3af")}
 
@@ -28,14 +29,17 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo})=>{
                         chal[chalCode].dates.push(selectedDay.toISOString().split('T')[0])
                         // console.log(chalCodeStrTimes, chal[chalCode].times)
                         patchUserChallenges(userInfo.email,chalCodeStrDates, chal[chalCode].dates)
+                       
                     }
                 }}
+                
                 />
+                {console.log(selectedDay, "--->challengecard")}
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => (navigation.navigate('Journal'))}
+                onPress={() => {navigation.navigate("Add Journal",{addChallengeInfo:chal[chalCode], date:selectedDay})}}
                 style={styles.button}
-                ><Text style={styles.buttonText}>Write to journal</Text>
+                ><Text  style={styles.buttonText}>Write to journal</Text>
             </TouchableOpacity>
         </View>
         )
@@ -76,3 +80,4 @@ const styles = StyleSheet.create({
         color: 'white'
     }
 })
+

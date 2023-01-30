@@ -11,6 +11,7 @@ export const getUserData =({email,password})=>{
 }
 
 export const patchUserChallenges =(email, chalCodeStr, bodyObj)=>{
+    console.log(chalCodeStr, "--->line14 apis")
     return userApi.patch(`/api/challenges/${email}`, {[chalCodeStr]: bodyObj}).then((res)=>{
             return res.data[0]
         }).catch((err)=>{
