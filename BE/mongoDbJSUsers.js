@@ -21,6 +21,13 @@ mongoose.connect(uri)
 })
 
 
+app.get('/', (req ,res) => {
+     res.status(200).send({msg: 'The backend is working, happy days!'})
+})
+app.get('/api', (req, res) => {
+     res.status(200).send({msg: "Welcome to our hosted API!"})
+})
+
 app.post('/api/user', addUser)
 
 app.get('/api/user/:email/:password', getUser)
@@ -37,7 +44,7 @@ app.delete('/api/journalEntry/:entryId([0-9a-fA-F]{24})',deleteJournalEntry)
 app.patch('/api/journal/:email', addJournalEntry)
 app.patch('/api/challenges/:email', patchChallenge)
 
-// app.all('/*', handle404s);
+app.all('/*', handle404s);
 app.use(handleCustomErrors);
 
 module.exports = app;
