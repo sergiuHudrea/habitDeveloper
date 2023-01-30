@@ -12,7 +12,7 @@ beforeAll(done => {
     done()
   })
 
-describe('GET /', () => {
+describe.only('GET /', () => {
     test("status:200, return the message 'The backend is working, happy days!'", () => {
         return request(app)
         .get('/')
@@ -77,7 +77,7 @@ describe('GET /api/user/:email/:password', () =>{
     })
   })
 
-describe.only("PATCH /api/journal/:email", () =>{
+describe("PATCH /api/journal/:email", () =>{
 
     test("status 201, returns 201 confirming patch of new journal entry", ()=>{
         const journalEntry = {
