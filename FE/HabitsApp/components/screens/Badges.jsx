@@ -1,6 +1,7 @@
-import { Image, StyleSheet, Text, View, FlatList } from 'react-native'
+import { Image, StyleSheet, Text, View, FlatList, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 const Badges = ({navigation, route}) => {
   const [challenges, setChallenges] = useState([])
@@ -18,13 +19,44 @@ const Badges = ({navigation, route}) => {
     console.log(challenges)
 
 
-  const BadgeCard =({title, badges})=>(
-    <View style={styles.item}>
-      <Text>{title}</Text>
-      <Text>{badges}</Text>
-      <Image source={require("../../assets/badges/silverBadge.png")} style={{height:100, width:100}}/>
-    </View>
-  )
+  const BadgeCard =({title, badges})=>{
+    let badgeDisplay = []
+
+    if(badges[2]>0){
+      for (let i=0; i<badges[2]; i++){
+        badgeDisplay.push(<Image source={require("../../assets/badges/goldBadge2.png")} style={{height:100, width:100}}/>)
+      }
+    }
+    if(badges[1]>0){
+      for (let i=0; i<badges[1]; i++){
+        badgeDisplay.push(<Image source={require("../../assets/badges/silverBadge.png")} style={{height:100, width:100}}/>)
+      }
+    }
+    if(badges[0]>0){
+      for (let i=0; i<badges[0]; i++){
+        badgeDisplay.push(<Image source={require("../../assets/badges/bronzeBadge.png")} style={{height:100, width:100}}/>)
+      }
+    }
+    if(badgeDisplay.length === 0) {
+      badgeDisplay.push(<Image source={require("../../assets/badges/badgeimage1.png")} style={{height:100, width:100}}/>)
+    }
+
+    console.log(badgeDisplay)
+    
+    return (
+      <View style={styles.item}>
+      <View style={styles.text}>
+        <Text style={styles.title}>{title}</Text>
+        <Text>{`Gold: ${badges[2]}    Silver: ${badges[1]}    Bronze: ${badges[0]}`}</Text>
+      </View>
+      <ScrollView horizontal={true}>
+      {badgeDisplay.map((badge)=>{
+        return badge
+      })}
+      </ScrollView>
+      </View>
+    )}
+
 
   return (
     <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
@@ -33,19 +65,25 @@ const Badges = ({navigation, route}) => {
     }/>
     </View>
   )
-  // {/* <View }}>
-  //     {/* <Text>{chal[Object.keys(chal)[0]].title}</Text> */}
-  //     <Text>{challenges[0]}</Text>
-  //     <Image source={require("../../assets/badges/goldBadge2.png")} style={{height:100, width:100}}/>
-  //     <Image source={require("../../assets/badges/silverBadge.png")} style={{height:100, width:100}}/>
-  //     <Image source={require("../../assets/badges/bronzeBadge.png")} style={{height:100, width:100}}/>
-  //     </View> */}
 }
 export default Badges
 
 
 const styles = StyleSheet.create({
   item: {
-    height: 130,
+    height: 210,
+    borderWidth: 5,
+    borderColor: "#78ACB1",
+    margin: 7,
+    padding: 20,
+    borderRadius: 20
+  },
+  title: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+  text:{
+    marginBottom: 7
   }
 })
