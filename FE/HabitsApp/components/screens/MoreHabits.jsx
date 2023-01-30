@@ -18,9 +18,9 @@ getUserData(userInfo).then((data)=>{
     const challengesInfo =Object.keys(data.challenges).map(key=>data.challenges[key])
     setChallenges(challengesInfo)
     setIsLoading(false)
+    console.log(challengesInfo[0])
   })
 },[])
- 
 
 
 const HabitCard = ({title,description,img_url}) => (
