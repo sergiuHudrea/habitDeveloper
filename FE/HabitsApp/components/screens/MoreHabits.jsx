@@ -21,14 +21,13 @@ getUserData(userInfo).then((data)=>{
     console.log(challengesInfo[0])
   })
 },[])
- 
+
 
 const HabitCard = ({title,description,img_url}) => (
-  
     <SafeAreaView style={styles.item}>
       <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url})}>
-        <View>
-          <Image style={{borderColor:'black',borderWidth:4,height:180,width:180, alignSelf:'center',borderRadius:90}} source={{uri:img_url}}/> 
+        <View style={{borderColor:'black',borderWidth:4,borderRadius:90,height:180,width:180,justifyContent:'center',alignItems:'center' }}>
+          <Image style={styles.image} source={{uri:img_url}}/> 
         </View>
     
    
@@ -68,7 +67,7 @@ const styles = StyleSheet.create({
     margin:'1%',
     color:'red',
     marginHorizontal:10,
-    marginVertical:10,
+    marginVertical:7,
     padding:7,
   },
 title:{
@@ -77,6 +76,12 @@ title:{
   fontSize:14,
   fontWeight:'400',
   color:'black',
+},
+image:{
+height:140,
+width: 140,
+
+
 }
 })
 

@@ -11,6 +11,39 @@ beforeAll(done => {
     mongoose.connection.close()
     done()
   })
+
+describe.only('GET /', () => {
+    test("status:200, return the message 'The backend is working, happy days!'", () => {
+        return request(app)
+        .get('/')
+        .expect(200)
+        .then((response) => {
+           expect(response._body.msg).toBe("The backend is working, happy days!")
+        })
+    })
+
+    test("status:404, route does not exist", ()=>{
+        return request(app)
+        .get('/asdfasdfas')
+        .expect(404)
+        .then((response)=>{
+            expect(response._body.msg).toBe("Route not found");
+        })
+    })
+})
+
+describe('GET /api', () => {
+    test("status:200, returns the message 'Welcome to our hosted API!'", () => {
+        return request(app)
+        .get('/api')
+        .expect(200)
+        .then((response) => {
+           expect(response._body.msg).toBe("Welcome to our hosted API!")
+        })
+    })
+})  
+
+
 describe('GET /api/user/:email/:password', () =>{
 
     test("status:200, returns a user object with their app details", ()=>{
@@ -24,16 +57,6 @@ describe('GET /api/user/:email/:password', () =>{
         })
     })
 
-
-    // To be refactored for later
-    // test("status:404, route does not exist", ()=>{
-    //     return request(app)
-    //     .get('/asdfasdfas')
-    //     .expect(404)
-    //     .then((response)=>{
-    //         expect(response._body.msg).toBe("Route not found");
-    //     })
-    // })
 
     test("status:404, email does not exist", ()=>{
         return request(app)
@@ -59,6 +82,7 @@ describe("PATCH /api/journal/:email", () =>{
     test("status 201, returns 201 confirming patch of new journal entry", ()=>{
         const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
+            title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             journalEntry:"Day 1, feeling good :)",
             date: new Date()
@@ -72,6 +96,7 @@ describe("PATCH /api/journal/:email", () =>{
     test("status 400, journalEntry object is missing data", ()=>{
         const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
+            title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             date: new Date()
         }
@@ -87,6 +112,7 @@ describe("PATCH /api/journal/:email", () =>{
     test("status 400, email does not exist ", ()=>{
         const journalEntry = {
             challengeName: "Sl_1_NoPhoneBeforeBed",
+            title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             journalEntry:"Day 1, feeling good :)",
             date: new Date()
