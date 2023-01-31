@@ -5,6 +5,7 @@ import LogIn from './components/screens/LogIn';
 import Register from './components/screens/Register';
 import MainContainer from './components/screens/MainContainer'
 import HabitDetail from './components/screens/HabitDetail';
+import AddJournal from './components/AddJournal';
 const Stack = createNativeStackNavigator();
 
 
@@ -32,6 +33,11 @@ export default function App() {
              options={{ headerShown:false}}
               name="Habit Detail"
               component={HabitDetail}
+            />
+            <Stack.Screen
+             options={{ headerShown:true}}
+              name="Add Journal"
+              component={AddJournal}
             />
           </Stack.Navigator>
         </NavigationContainer> 

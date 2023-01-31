@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import JournalSearchInput from '../SearchInput';
+import AddJournal from '../AddJournal';
 const {width}=Dimensions.get('screen')
 
 const Journal = ({navigation,route,username }) => {
 const [input,setInput]=useState('')
 const userInfo = route.params
-
   
   
 return ( 
@@ -40,9 +40,6 @@ return (
         <JournalSearchInput userInfo={userInfo} input={input} setInput={setInput}/>
       </View>
     </ScrollView>
-    <View style={{flex:1}}>
-      <TouchableOpacity style={styles.journalAddButton}><Ionic size={29} name='add' color={'white'} /></TouchableOpacity>
-    </View>
   </SafeAreaView>
   )
 };
