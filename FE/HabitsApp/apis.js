@@ -61,3 +61,11 @@ export const patchJournalEntry =(challengeName,title,challengeEntryNumber,journa
             return err.response.data.msg
         })
 }
+
+
+export const deleteJournalEntry = (entryId) => {
+    return userApi.delete(`/api/journalEntry/${entryId}`)
+    .then ((res) => {
+        return res
+    })
+}
