@@ -38,7 +38,7 @@ const Badges = ({navigation, route}) => {
       badgeDisplay.push(<Image source={require("../../assets/badges/badgeimage1.png")} style={{height:100, width:100}}/>)
     }
 
-    console.log(badgeDisplay)
+    
     
     return (
       <View style={styles.item}>

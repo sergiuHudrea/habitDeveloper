@@ -1,7 +1,8 @@
-import { StyleSheet, Text, SafeAreaView, TextInput, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, SafeAreaView, TextInput, View, TouchableOpacity, KeyboardAvoidingView,Image, Alert,StatusBar } from 'react-native'
 import { useState } from 'react'
 import React from 'react'
 import { patchJournalEntry } from '../apis'
+import Ionic from 'react-native-vector-icons/Ionicons';
 
 const AddJournal = ({navigation, route}) => {
   const addChallengeInfo=route.params.addChallengeInfo
@@ -14,31 +15,63 @@ const AddJournal = ({navigation, route}) => {
   const [isPosted,setIsPosted] = useState(false)
 
   
+const handleErr=()=>{
+  Alert.alert('Oops!', 'This field cannot be empty', [
+    {text: 'Try Again', onPress: () => {}},
+      ]);
+}
+
+
+
+
   const patchJournal = () => {
-    setIsPosting(true)
+    if(journalInput !== ''){
+      setIsPosting(true)
     patchJournalEntry(challengeName,addChallengeInfo.title,addChallengeInfo.times, journalInput, date, email)
       .then(() => {
         setIsPosting(false)
         setIsPosted(true)
         handleSave()
       })
-      setJournalInput("")
+    }else{
+      handleErr()
+    }
+    
   }
 
   const handleSave = () => {
     navigation.navigate("Journal",{isPosted:isPosted})
   }
 
+
+
+
   return (
-    <SafeAreaView>
-      <Text>{addChallengeInfo.title}</Text>
-      <Text>{addChallengeInfo.times}</Text>
-      <Text>{date.toISOString().split('T')[0]}</Text>
+    
+    <SafeAreaView style={{backgroundColor:'white', flex:1}}>
+      <View>
+          <View style={styles.header}>
+            <Ionic
+              name="arrow-back"
+              size={28}
+              color={'black'}
+              onPress={navigation.goBack}
+            />
+            </View>
+          </View>
+      <KeyboardAvoidingView>
+      <Image style={{height:220, width:220,alignSelf:'center'}} source={{uri:'https://www.launch-marketing.com/wp-content/uploads/2019/10/GettyImages-946716862.jpg'}}/>
       <View style={styles.journalInput}>
-      <TextInput multiline={true} value={journalInput} onChangeText={(text)=> setJournalInput(text)} placeholder="How do you feel?"/>
+      <TextInput keyboardAppearance='true'  maxLength={300} scrollEnabled={true} multiline={true} value={journalInput} onChangeText={(text)=> setJournalInput(text)} placeholder="How do you feel?"/>
       </View>
       <TouchableOpacity style={styles.button} onPress={patchJournal}><Text style={styles.buttonText} >Save</Text></TouchableOpacity>
+      </KeyboardAvoidingView>
+      
     </SafeAreaView>
+   
+      
+    
+    
   )
 }
 
@@ -47,17 +80,22 @@ export default AddJournal
 const styles = StyleSheet.create({
   journalInput:{
     backgroundColor:'#F7F6F8',
-    borderWidth: 2,
-    height: 100,
-    width: "70%",
+    height: 200,
+    width: "80%",
     alignSelf:'center',
-    borderRadius:10,
+    borderTopWidth: 9,
+    borderColor:'#55BEDF',
     marginVertical: 10,
     padding:10,
+    borderRadius:10,
+    shadowOffset:{width:0,height:4},
+    shadowOpacity:0.4,
+    shadowRadius:2,
+    
   },
   button: {
     marginTop: 10,
-    backgroundColor:'#78ACB1',
+    backgroundColor:'#55BEDF',
     width:'20%',
     padding:5,
     alignSelf:'center',
@@ -67,5 +105,10 @@ const styles = StyleSheet.create({
 buttonText: {
   color: 'white',
   textAlign: 'center'
-}
+},
+header: {
+  flexDirection: 'row',
+  padding: 20,
+  justifyContent: 'space-between',
+},
 })

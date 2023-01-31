@@ -35,7 +35,7 @@ export default function App() {
               component={HabitDetail}
             />
             <Stack.Screen
-             options={{ headerShown:true}}
+             options={{ headerShown:false}}
               name="Add Journal"
               component={AddJournal}
             />
