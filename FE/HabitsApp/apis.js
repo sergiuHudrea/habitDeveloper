@@ -11,7 +11,7 @@ export const getUserData =({email,password})=>{
 }
 
 export const patchUserChallenges =(email, chalCodeStr, bodyObj)=>{
-    console.log(chalCodeStr, "--->line14 apis")
+    
     return userApi.patch(`/api/challenges/${email}`, {[chalCodeStr]: bodyObj}).then((res)=>{
             return res.data[0]
         }).catch((err)=>{
@@ -42,4 +42,23 @@ export const getJournalByUser=(email)=>{
     }).catch((err)=>{
         return err.response.data.msg
     })
+}
+
+export const patchJournalEntry =(challengeName,title,challengeEntryNumber,journalEntry,date, email)=>{
+console.log(challengeName,title,challengeEntryNumber,journalEntry,date, email, ">>>>>apis")
+
+    const patchjournalBody = {
+        challengeName:  challengeName,
+        title: title,
+        challengeEntryNumber:challengeEntryNumber,
+        journalEntry:journalEntry,
+        date:  date
+    }
+
+    return userApi.patch(`/api/journal/${email}`,patchjournalBody).then((res)=>{
+            return res.data[0]
+        }).catch((err)=>{
+            console.log(err.response.data.msg)
+            return err.response.data.msg
+        })
 }

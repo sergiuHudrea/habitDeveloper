@@ -34,10 +34,11 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo})=>{
                 }}
                 
                 />
-                {console.log(selectedDay, "--->challengecard")}
+                
+                
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => {navigation.navigate("Add Journal",{addChallengeInfo:chal[chalCode], date:selectedDay})}}
+                onPress={() => {navigation.navigate("Add Journal",{addChallengeInfo:chal[chalCode], date:selectedDay, email:userInfo.email, challengeName:chalCode})}}
                 style={styles.button}
                 ><Text  style={styles.buttonText}>Write to journal</Text>
             </TouchableOpacity>
