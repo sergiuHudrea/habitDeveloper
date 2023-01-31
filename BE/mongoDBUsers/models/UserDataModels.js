@@ -180,5 +180,4 @@ exports.removeJournalEntry = (entryId) => {
      .then(() => {
           return User.updateMany({}, {$pull:{'dailyJournal':{_id: ObjectID(entryId)}}})
      })
-     
 }

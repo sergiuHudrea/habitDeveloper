@@ -5,6 +5,7 @@ import { MyCalendar } from './Secondary_Components/MyCalendar'
 import { getUserData } from '../../apis'
 import { ChallengeCard } from './Secondary_Components/ChallengeCard'
 import { MyHomeStats } from './Secondary_Components/MyHomeStats'
+import Loader from '../Loader'
 
 
 const Home = ({navigation, route})=>{
@@ -12,37 +13,52 @@ const Home = ({navigation, route})=>{
     const [challenges, setChallenges] = useState([])
     const [firstTimeUser, setFirstTimeUser] = useState(false)
     const [ongoingChallengesArr, setOngoingChallengesArr] = useState([])
+    const [populatePage, setPopulatePage] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
+    const [optimisticTimes, setOptimisticTimes] = useState()
     const userInfo = route.params
 
     useEffect(()=>{
+      if(populatePage) {
+        setPopulatePage(false)
+      }
+      setIsLoading(true)
       getUserData(userInfo).then((userData)=>{
-        // const challCodes = Object.keys(userData.challenges)
         const challengeObj = userData.challenges
+
         const challArray = Object.entries(challengeObj).map((e) => ({[e[0]]:e[1]})); //converts to arr of objs
         setChallenges(challArray)
-        const activeChallenges = challenges.filter((chal)=>{
-          return Boolean(chal[Object.keys(chal)[0]].times)
-        })
-        setOngoingChallengesArr(activeChallenges)
-        // console.log(ongoingChallengesArr, 'active challs')
-        if (ongoingChallengesArr.length === 0){
-          setFirstTimeUser(true)
+        let activeChallenges = []
+
+        if (challenges.length===0) {
+          activeChallenges = challArray.filter((chal)=>{
+            return Boolean(chal[Object.keys(chal)[0]].times)
+          })
         } else {
-          setFirstTimeUser(false)
+          activeChallenges = challenges.filter((chal)=>{
+            return Boolean(chal[Object.keys(chal)[0]].times)
+          })
         }
+
+        setOngoingChallengesArr(activeChallenges)
+        if (ongoingChallengesArr.length === 0 && activeChallenges.length===0){setFirstTimeUser(true)} else {setFirstTimeUser(false)}
       })
-    },[selectedDay])
+      setIsLoading(false)
+    },[selectedDay, populatePage])
+    
 
 
-    return (
+    return isLoading ? (
+      <Loader />
+    ):(
       <View>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
-          <Text style={styles.todaysChal}>Challenges:</Text>
+          <Text style={styles.todaysChal}>Today's Challenges:</Text>
           {(!firstTimeUser && <ScrollView style={styles.cards} horizontal={true}>
           { (challenges.length !== 0) &&
               challenges.map((chal)=>{
-                  return <ChallengeCard key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation} userInfo={userInfo}/>
+                  return <ChallengeCard setOptimisticTimes={setOptimisticTimes} setPopulatePage={setPopulatePage} key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation} userInfo={userInfo}/>
               })
           }
           </ScrollView>)}
@@ -54,7 +70,7 @@ const Home = ({navigation, route})=>{
             </TouchableOpacity></View>
             )}
           </View>
-          <MyHomeStats ongoingChallengesArr={ongoingChallengesArr}/>
+          <MyHomeStats ongoingChallengesArr={ongoingChallengesArr} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
       </View>
        
     )

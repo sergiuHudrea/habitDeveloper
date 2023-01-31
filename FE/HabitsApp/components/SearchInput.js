@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
+import Ionic from 'react-native-vector-icons/Ionicons';
 import React from 'react'
 import { useState,useEffect } from 'react';
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
-import { getJournalByUser } from '../apis'
+import { deleteJournalEntry, getJournalByUser } from '../apis'
 import Loader from './Loader'
 
 const JournalSearchInput = ({userInfo,input,setInput}) => {
@@ -15,10 +16,7 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
           setUserJournal(data) 
           setIsLoading(false)
         })
-      },[])
-    
-
-
+      },[userJournal])
 
     return isLoading ? (
         <Loader />
@@ -26,21 +24,16 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
       ( 
     <View style={styles.journalCardContainer}>
       {userJournal.map((journal,index)=>{
-        if(journal.journalEntry === undefined){
-            {journal.journalEntry}
-return(
-    <View>
-        <Text>Hi</Text>
-    </View>
-)
-        }
         if(input === ''){
-return (
-    <View style={styles.journalCard} >
-         <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
-          <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
-    </View>
-)
+          return (
+              <View style={styles.journalCard} >
+                  <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
+                    <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
+                    <View>
+                      <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournalEntry(journal._id)}}/>
+                    </View>
+              </View>
+          )
         }
         if(journal.journalEntry.toLowerCase().includes(input.toLowerCase())){
             return (
@@ -73,5 +66,8 @@ const styles = StyleSheet.create({
       date:{
         marginHorizontal:10,
         marginVertical:10,
+      },
+      trashIcon:{
+        alignSelf: 'flex-end',
       }
 })

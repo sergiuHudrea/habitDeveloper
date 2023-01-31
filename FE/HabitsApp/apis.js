@@ -11,6 +11,7 @@ export const getUserData =({email,password})=>{
 }
 
 export const patchUserChallenges =(email, chalCodeStr, bodyObj)=>{
+    
     return userApi.patch(`/api/challenges/${email}`, {[chalCodeStr]: bodyObj}).then((res)=>{
             return res.data[0]
         }).catch((err)=>{
@@ -40,5 +41,31 @@ export const getJournalByUser=(email)=>{
         return res.data
     }).catch((err)=>{
         return err.response.data.msg
+    })
+}
+
+export const patchJournalEntry =(challengeName,title,challengeEntryNumber,journalEntry,date, email)=>{
+
+    const patchjournalBody = {
+        challengeName:  challengeName,
+        title: title,
+        challengeEntryNumber:challengeEntryNumber,
+        journalEntry:journalEntry,
+        date:  date
+    }
+
+    return userApi.patch(`/api/journal/${email}`,patchjournalBody).then((res)=>{
+            return res.data[0]
+        }).catch((err)=>{
+            console.log(err.response.data.msg)
+            return err.response.data.msg
+        })
+}
+
+
+export const deleteJournalEntry = (entryId) => {
+    return userApi.delete(`/api/journalEntry/${entryId}`)
+    .then ((res) => {
+        return res
     })
 }

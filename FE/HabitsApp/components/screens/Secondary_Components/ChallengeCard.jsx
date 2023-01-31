@@ -2,40 +2,52 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { patchUserChallenges } from "../../../apis";
+import { RecursiveBadgeCalculator } from "../../RecursiveBadgeCalculator";
+import { streakCalculator } from "../../streakCalculator";
 
-export const ChallengeCard =({chal, selectedDay, navigation, userInfo})=>{
+export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
     // console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
     const [fillColor, setFillColour] = useState("white")
 
+
     useEffect(()=>{
         if(chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {setFillColour("#cbd3d3af")}
-
     },[])
 
     return (
-        ( Boolean(chal[Object.keys(chal)[0]].times) && //if times not null
+        (Boolean(chal[Object.keys(chal)[0]].times) && //if times not null
         <View style={styles.container} backgroundColor={fillColor}>
             <Text style={styles.text}>{chal[Object.keys(chal)[0]].title}</Text>
             <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} fillColor={"#55BEDF"}
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
-                    if(isChecked){setFillColour("#cbd3d3af")}
+                    if(isChecked){setFillColour("#cbd3d3af") 
+                        // setPopulatePage(true)
+                        // setOptimisticTimes(chalCode)
+                    }
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"
                         const chalCodeStrDates = 'challenges.'+ chalCode.toString() + ".dates"
+                        const chalCodeStrBadges = 'challenges.'+ chalCode.toString() + ".badges"
+                        const chalCodeStrStreaks = 'challenges.'+ chalCode.toString() + ".streak"
                         patchUserChallenges(userInfo.email,chalCodeStrTimes, chal[chalCode].times+1)
                         chal[chalCode].dates.push(selectedDay.toISOString().split('T')[0])
-                        // console.log(chalCodeStrTimes, chal[chalCode].times)
                         patchUserChallenges(userInfo.email,chalCodeStrDates, chal[chalCode].dates)
+
+                        streakCalculator(selectedDay, chal[chalCode].dates, userInfo.email, chalCodeStrStreaks, chal[chalCode].streak)
+                        RecursiveBadgeCalculator(chal[chalCode].times, userInfo.email, chalCodeStrBadges, chal[chalCode].badges)
                     }
                 }}
+                
                 />
+                
+                
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => (navigation.navigate('Journal'))}
+                onPress={() => {navigation.navigate("Add Journal",{addChallengeInfo:chal[chalCode], date:selectedDay, email:userInfo.email, challengeName:chalCode})}}
                 style={styles.button}
-                ><Text style={styles.buttonText}>Write to journal</Text>
+                ><Text  style={styles.buttonText}>Write to journal</Text>
             </TouchableOpacity>
         </View>
         )
@@ -76,3 +88,4 @@ const styles = StyleSheet.create({
         color: 'white'
     }
 })
+
