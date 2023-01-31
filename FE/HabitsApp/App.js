@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,6 +7,8 @@ import Register from './components/screens/Register';
 import MainContainer from './components/screens/MainContainer'
 import HabitDetail from './components/screens/HabitDetail';
 import AddJournal from './components/AddJournal';
+import SortJournal from './components/SortJournal';
+import SortDrawerNavigator from './components/SortDrawerNavigator';
 const Stack = createNativeStackNavigator();
 
 
@@ -38,6 +41,16 @@ export default function App() {
              options={{ headerShown:false}}
               name="Add Journal"
               component={AddJournal}
+            />
+             {/* <Stack.Screen
+             options={{ headerShown:true}}
+              name="Journal"
+              component={SortJournal}
+            /> */}
+            <Stack.Screen
+             options={{ headerShown:true}}
+              name="Sort"
+              component={SortDrawerNavigator}
             />
           </Stack.Navigator>
         </NavigationContainer> 

@@ -1,4 +1,4 @@
-import { Image,StyleSheet, Text, View,SafeAreaView,StatusBar,ImageBackground, TouchableOpacity } from 'react-native'
+import { Image,StyleSheet, Text, View,SafeAreaView,StatusBar,ImageBackground, TouchableOpacity, } from 'react-native'
 import React from 'react'
 import Ionic from 'react-native-vector-icons/Ionicons';
 

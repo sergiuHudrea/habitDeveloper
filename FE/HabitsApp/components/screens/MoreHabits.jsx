@@ -1,7 +1,6 @@
-import {StyleSheet, Text, FlatList, Image, View, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, FlatList, Image, View, TouchableOpacity, StatusBar,} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
-import Ionic from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Loader from '../Loader';
 
@@ -18,12 +17,12 @@ getUserData(userInfo).then((data)=>{
     const challengesInfo =Object.keys(data.challenges).map(key=>data.challenges[key])
     setChallenges(challengesInfo)
     setIsLoading(false)
-    console.log(challengesInfo[0])
+   
   })
 },[])
 
 const HabitCard = ({title,description,img_url}) => (
-    <SafeAreaView style={styles.item}>
+    <View style={styles.item}>
       <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url})}>
         <View style={{borderColor:'black',borderWidth:4,borderRadius:90,height:180,width:180,justifyContent:'center',alignItems:'center' }}>
           <Image style={styles.image} source={{uri:img_url}}/> 
@@ -33,7 +32,7 @@ const HabitCard = ({title,description,img_url}) => (
     </TouchableOpacity> 
     <Text style={styles.title}>{title}</Text> 
    
-  </SafeAreaView>
+  </View>
  
   
 
@@ -44,9 +43,15 @@ return isLoading ? (
    <Loader />
 ):
 ( 
-    <FlatList showsVerticalScrollIndicator={false} numColumns={2} style={styles.container}     data={challenges}
-  renderItem={({item}) => <HabitCard title={item.title} img_url={item.img_url} description={item.description} key={item.date}/>
+  <SafeAreaView>
+  <FlatList showsVerticalScrollIndicator={false} numColumns={2}     data={challenges}
+  renderItem={({item}) =>  
+  <View style={styles.container} >
+  <HabitCard title={item.title} img_url={item.img_url} description={item.description} key={item.date}/></View>
 }/>
+ </SafeAreaView>
+   
+   
   )
 };
 
@@ -62,10 +67,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-    marginVertical: 5,
     margin:'1%',
     color:'red',
-    marginHorizontal:10,
+    marginHorizontal:1,
     marginVertical:7,
     padding:7,
   },
@@ -79,9 +83,12 @@ title:{
 image:{
 height:140,
 width: 140,
-
-
-}
+},
+header: {
+  flexDirection: 'row',
+  padding: 20,
+  justifyContent: 'space-between',
+},
 })
 
 

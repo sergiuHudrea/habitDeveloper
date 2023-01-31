@@ -4,6 +4,9 @@ import React from 'react'
 import { patchJournalEntry } from '../apis'
 import Ionic from 'react-native-vector-icons/Ionicons';
 
+
+
+
 const AddJournal = ({navigation, route}) => {
   const addChallengeInfo=route.params.addChallengeInfo
   const challengeName = route.params.challengeName
