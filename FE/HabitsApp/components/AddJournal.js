@@ -6,10 +6,9 @@ import { patchJournalEntry } from '../apis'
 const AddJournal = ({navigation, route}) => {
   const addChallengeInfo=route.params.addChallengeInfo
   const challengeName = route.params.challengeName
-  const date=route.params.date.toISOString()
+  const date=route.params.date
   const email = route.params.email
   
-
   const [journalInput, setJournalInput] = useState("");
   const [isPosting,setIsPosting] = useState(false)
   const [isPosted,setIsPosted] = useState(false)
@@ -27,16 +26,16 @@ const AddJournal = ({navigation, route}) => {
   }
 
   const handleSave = () => {
-    navigation.navigate("Journal")
+    navigation.navigate("Journal",{isPosted:isPosted})
   }
 
   return (
     <SafeAreaView>
       <Text>{addChallengeInfo.title}</Text>
       <Text>{addChallengeInfo.times}</Text>
-      <Text>{date.split('T')[0]}</Text>
+      <Text>{date.toISOString().split('T')[0]}</Text>
       <View style={styles.journalInput}>
-      <TextInput value={journalInput} onChangeText={(text)=> setJournalInput(text)} placeholder="How do you feel?"/>
+      <TextInput multiline={true} value={journalInput} onChangeText={(text)=> setJournalInput(text)} placeholder="How do you feel?"/>
       </View>
       <TouchableOpacity style={styles.button} onPress={patchJournal}><Text style={styles.buttonText} >Save</Text></TouchableOpacity>
     </SafeAreaView>
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     borderRadius:10,
     marginVertical: 10,
-    padding:10
+    padding:10,
   },
   button: {
     marginTop: 10,

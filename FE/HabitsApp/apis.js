@@ -45,7 +45,6 @@ export const getJournalByUser=(email)=>{
 }
 
 export const patchJournalEntry =(challengeName,title,challengeEntryNumber,journalEntry,date, email)=>{
-console.log(challengeName,title,challengeEntryNumber,journalEntry,date, email, ">>>>>apis")
 
     const patchjournalBody = {
         challengeName:  challengeName,

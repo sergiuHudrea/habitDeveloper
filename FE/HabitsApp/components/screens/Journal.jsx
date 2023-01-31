@@ -12,7 +12,6 @@ const userInfo = route.params
 
 
 
-
   
   
 return ( 

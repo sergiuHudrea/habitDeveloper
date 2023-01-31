@@ -15,7 +15,7 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
           setUserJournal(data) 
           setIsLoading(false)
         })
-      },[])
+      },[userJournal])
     
 
 
