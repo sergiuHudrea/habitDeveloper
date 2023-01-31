@@ -3,7 +3,7 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import React from 'react'
 import { useState,useEffect } from 'react';
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
-import { getJournalByUser } from '../apis'
+import { deleteJournalEntry, getJournalByUser } from '../apis'
 import Loader from './Loader'
 
 const JournalSearchInput = ({userInfo,input,setInput}) => {
@@ -17,9 +17,6 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
           setIsLoading(false)
         })
       },[userJournal])
-    
-
-
 
     return isLoading ? (
         <Loader />
@@ -33,7 +30,7 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
                   <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
                     <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
                     <View>
-                      <Ionic name='trash' style={styles.trashIcon} size={20}/>
+                      <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournalEntry(journal._id)}}/>
                     </View>
               </View>
           )
