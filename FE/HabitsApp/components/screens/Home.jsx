@@ -15,7 +15,7 @@ const Home = ({navigation, route})=>{
     const [ongoingChallengesArr, setOngoingChallengesArr] = useState([])
     const [populatePage, setPopulatePage] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
-    const [optimisticTimes, setOptimisticTimes] = useState()
+    const [optimisticTimes, setOptimisticTimes] = useState(0)
     const userInfo = route.params
 
     useEffect(()=>{

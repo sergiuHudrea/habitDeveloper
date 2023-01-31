@@ -15,16 +15,19 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
         if(chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {setFillColour("#cbd3d3af")}
     },[])
 
+    const [disabledCheckBox, setDisabledCheckBox] = useState(false);
+
     return (
         (Boolean(chal[Object.keys(chal)[0]].times) && //if times not null
         <View style={styles.container} backgroundColor={fillColor}>
             <Text style={styles.text}>{chal[Object.keys(chal)[0]].title}</Text>
-            <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} fillColor={"#55BEDF"}
+            <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} bouncinessIn={30} fillColor={"#55BEDF"} disabled={disabledCheckBox}
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
                     if(isChecked){setFillColour("#cbd3d3af") 
+                        setDisabledCheckBox(true)
                         // setPopulatePage(true)
-                        // setOptimisticTimes(chalCode)
+                        setOptimisticTimes(1)
                     }
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"
