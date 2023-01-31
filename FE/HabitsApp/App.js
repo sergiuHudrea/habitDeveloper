@@ -9,6 +9,10 @@ import HabitDetail from './components/screens/HabitDetail';
 import AddJournal from './components/AddJournal';
 import SortJournal from './components/SortJournal';
 import SortDrawerNavigator from './components/SortDrawerNavigator';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
 const Stack = createNativeStackNavigator();
 
 

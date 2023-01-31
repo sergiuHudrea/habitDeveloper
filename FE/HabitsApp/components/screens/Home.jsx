@@ -15,8 +15,9 @@ const Home = ({navigation, route})=>{
     const [ongoingChallengesArr, setOngoingChallengesArr] = useState([])
     const [populatePage, setPopulatePage] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
+    const [optimisticTimes, setOptimisticTimes] = useState()
     const userInfo = route.params
-    
+
     useEffect(()=>{
       if(populatePage) {
         setPopulatePage(false)
@@ -53,11 +54,11 @@ const Home = ({navigation, route})=>{
       <SafeAreaView style={{flex:1}}>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
-          <Text style={styles.todaysChal}>Challenges:</Text>
+          <Text style={styles.todaysChal}>Today's Challenges:</Text>
           {(!firstTimeUser && <ScrollView style={styles.cards} horizontal={true}>
           { (challenges.length !== 0) &&
               challenges.map((chal)=>{
-                  return <ChallengeCard key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation} userInfo={userInfo}/>
+                  return <ChallengeCard setOptimisticTimes={setOptimisticTimes} setPopulatePage={setPopulatePage} key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation} userInfo={userInfo}/>
               })
           }
           </ScrollView>)}
@@ -71,6 +72,7 @@ const Home = ({navigation, route})=>{
           </View>
           <MyHomeStats ongoingChallengesArr={ongoingChallengesArr}/>
       </SafeAreaView>
+
        
     )
 } 

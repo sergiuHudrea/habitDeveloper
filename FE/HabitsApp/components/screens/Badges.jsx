@@ -21,24 +21,22 @@ const Badges = ({navigation, route}) => {
 
     if(badges[2]>0){
       for (let i=0; i<badges[2]; i++){
-        badgeDisplay.push(<Image source={require("../../assets/badges/goldBadge2.png")} style={{height:100, width:100}}/>)
+        badgeDisplay.push(<Image key={Math.random()} source={require("../../assets/badges/goldBadge2.png")} style={{height:100, width:100}}/>)
       }
     }
     if(badges[1]>0){
       for (let i=0; i<badges[1]; i++){
-        badgeDisplay.push(<Image source={require("../../assets/badges/silverBadge.png")} style={{height:100, width:100}}/>)
+        badgeDisplay.push(<Image key={Math.random()} source={require("../../assets/badges/silverBadge.png")} style={{height:100, width:100}}/>)
       }
     }
     if(badges[0]>0){
       for (let i=0; i<badges[0]; i++){
-        badgeDisplay.push(<Image source={require("../../assets/badges/bronzeBadge.png")} style={{height:100, width:100}}/>)
+        badgeDisplay.push(<Image key={Math.random()} source={require("../../assets/badges/bronzeBadge.png")} style={{height:100, width:100}}/>)
       }
     }
     if(badgeDisplay.length === 0) {
-      badgeDisplay.push(<Image source={require("../../assets/badges/badgeimage1.png")} style={{height:100, width:100}}/>)
+      badgeDisplay.push(<Image key={Math.random()} source={require("../../assets/badges/badgeimage1.png")} style={{height:100, width:100}}/>)
     }
-
-    
     
     return (
       <View style={styles.item}>
