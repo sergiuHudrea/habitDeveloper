@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { patchUserChallenges } from "../../../apis";
+import { RecursiveBadgeCalculator } from "../../RecursiveBadgeCalculator";
 
 export const ChallengeCard =({chal, selectedDay, navigation, userInfo})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
@@ -25,11 +26,11 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo})=>{
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"
                         const chalCodeStrDates = 'challenges.'+ chalCode.toString() + ".dates"
+                        const chalCodeStrBadges = 'challenges.'+ chalCode.toString() + ".badges"
                         patchUserChallenges(userInfo.email,chalCodeStrTimes, chal[chalCode].times+1)
                         chal[chalCode].dates.push(selectedDay.toISOString().split('T')[0])
-                        // console.log(chalCodeStrTimes, chal[chalCode].times)
                         patchUserChallenges(userInfo.email,chalCodeStrDates, chal[chalCode].dates)
-                       
+                        RecursiveBadgeCalculator(chal[chalCode].times, userInfo.email, chalCodeStrBadges, chal[chalCode].badges)
                     }
                 }}
                 

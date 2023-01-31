@@ -9,9 +9,6 @@ const {width}=Dimensions.get('screen')
 const Journal = ({navigation,route,username }) => {
 const [input,setInput]=useState('')
 const userInfo = route.params
-
-
-
   
   
 return ( 
