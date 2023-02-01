@@ -7,7 +7,7 @@ import { streakCalculator } from "../../streakCalculator";
 
 export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes, setChallenges})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
-    if(chalCode==="Sl_10_UnwindBB"){console.log(chal, 'this is chal')}
+    // if(chalCode==="Sl_10_UnwindBB"){console.log(chal, 'this is chal')}
     const [fillColor, setFillColour] = useState("white")
 
 
@@ -25,9 +25,8 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
                     if(isChecked){setFillColour("#cbd3d3af") 
-                        setDisabledCheckBox(() => true)
-                        // setPopulatePage(true)
-
+                        setDisabledCheckBox(true)
+                        setOptimisticTimes(1)
                         // setChallenges((currOngChall) => {
                         //     let newArrr= currOngChall.map((ongChal) => {
                         //         const newChallenge = {...ongChal}

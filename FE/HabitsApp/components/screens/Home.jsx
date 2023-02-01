@@ -20,9 +20,9 @@ const Home = ({navigation, route})=>{
     let ongoingChallengesArr =[]
 
     useEffect(()=>{
-      if(populatePage) {
-        setPopulatePage(false)
-      }
+      // if(populatePage) {
+      //   setPopulatePage(false)
+      // }
       setIsLoading(true)
       getUserData(userInfo).then((userData)=>{
         const challengeObj = userData.challenges
@@ -31,7 +31,7 @@ const Home = ({navigation, route})=>{
         setChallenges(challArray)
         // console.log(challenges[0], 'challenges response')
         let activeChallenges = []
-
+        setOptimisticTimes(0)
         // if (challenges.length===0) {
         //   activeChallenges = challArray.filter((chal)=>{
         //     return Boolean(chal[Object.keys(chal)[0]].times)
@@ -41,7 +41,6 @@ const Home = ({navigation, route})=>{
         ongoingChallengesArr = challenges.filter((chal)=>{
           return Boolean(chal[Object.keys(chal)[0]].times)
         })
-
         // console.log(ongoingChallengesArr[0], 'ongoing challenges')
         if (ongoingChallengesArr.length === 0){setFirstTimeUser(true)} else {setFirstTimeUser(false)}
         // if (ongoingChallengesArr.length === 0 && activeChallenges.length===0){setFirstTimeUser(true)} else {setFirstTimeUser(false)}
