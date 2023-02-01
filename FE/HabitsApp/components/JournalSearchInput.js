@@ -9,14 +9,34 @@ import Loader from './Loader'
 const JournalSearchInput = ({userInfo,input,setInput}) => {
     const [userJournal, setUserJournal]=useState()
     const [isLoading, setIsLoading]=useState(true)
+    const [isDeleting, setIsDeleting] = useState(false)
     
 
     useEffect(()=>{
+      if (!isDeleting) {
         getJournalByUser(userInfo.email).then((data)=>{
           setUserJournal(data) 
           setIsLoading(false)
         })
+      } 
+     
+        
       },[userJournal])
+
+      const deleteJournal = (entryId) => {
+        const currList = userJournal.filter((journal) => {
+          return journal._id !== entryId
+        })
+        setIsDeleting(true)
+        setUserJournal(currList)
+        
+        console.log(userJournal, ">>>>userJou line 27")
+        deleteJournalEntry(entryId)
+        .then(() => {
+          setIsDeleting(false)
+        })
+        
+      }
 
 
       const LoaderJournal = ({visible = false}) => {
@@ -46,7 +66,7 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
         if(input === ''){
           return (
               <View style={styles.journalCard} >
-                <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournalEntry(journal._id)}}/>
+                <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournal(journal._id)}}/>
                   <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
                     <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
                     <View>
@@ -58,7 +78,7 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
         if(journal.journalEntry.toLowerCase().includes(input.toLowerCase())){
             return (
                 <View style={styles.journalCard} >
-                  <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournalEntry(journal._id)}}/>
+                  <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{() => {deleteJournal(journal._id)}}}/>
                      <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
                       <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
                 </View>

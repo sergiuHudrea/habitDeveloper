@@ -27,11 +27,12 @@ const handleErr=()=>{
   const patchJournal = () => {
     if(journalInput !== ''){
       setIsPosting(true)
+      handleSave()
     patchJournalEntry(challengeName,addChallengeInfo.title,addChallengeInfo.times, journalInput, date, email)
       .then(() => {
         setIsPosting(false)
         setIsPosted(true)
-        handleSave()
+       
       })
     }else{
       handleErr()
