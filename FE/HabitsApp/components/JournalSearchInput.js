@@ -10,7 +10,7 @@ const JournalSearchInput = ({userInfo,input,setInput,selected}) => {
   console.log(userInfo.isPosted)
     const [userJournal, setUserJournal]=useState()
     const [isLoading, setIsLoading]=useState(true)
-    const [selectedChallenge, setSelectedChallenge] = useState(undefined)
+    const [selectedChallenge, setSelectedChallenge] = useState()
 
     
     
@@ -19,33 +19,34 @@ const JournalSearchInput = ({userInfo,input,setInput,selected}) => {
     useEffect(()=>{
       setSelectedChallenge(`${selected}`)
       console.log(selected,"<<<selected")
-      if(selectedChallenge === undefined){
-        console.log(selectedChallenge,"<<selectedChall")
+      if(selectedChallenge !== undefined){
+        console.log(selected,"<<selected in if")
         console.log(typeof(selectedChallenge),"<<selectedChall")
         console.log("<<<i got here")
-         getJournalByUser(userInfo.email).then((data)=>{
+        filterJournal(userInfo.email,selected).then((data) =>{
         setUserJournal(data) 
         setIsLoading(false)
     })
       }else{
-        console.log("<<<i got here2")
-        filterJournal(userInfo.email,selected)
-        .then((data) =>{
+        getJournalByUser(userInfo.email).then((data)=>{
           console.log(data, ">>> data in else")
           setUserJournal(data) 
           setIsLoading(false)
+         
         })
+    
       }
+        
      
-      },[selected])
+      },[selected,userJournal])
 
       
-     
-
-    return isLoading ? (
+     if(userJournal === undefined){
+      return(
         <Loader />
-      ):
-      ( 
+      )
+     }else{
+    return (
     <View style={styles.journalCardContainer}>
       {userJournal.map((journal,index)=>{
         if(input === ''){
@@ -73,6 +74,7 @@ const JournalSearchInput = ({userInfo,input,setInput,selected}) => {
 })}
     </View>
   )
+}
 }
 
 export default JournalSearchInput
