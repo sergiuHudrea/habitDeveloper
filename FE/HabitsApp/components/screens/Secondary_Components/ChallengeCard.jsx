@@ -5,7 +5,7 @@ import { patchUserChallenges } from "../../../apis";
 import { RecursiveBadgeCalculator } from "../../RecursiveBadgeCalculator";
 import { streakCalculator } from "../../streakCalculator";
 
-export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes})=>{
+export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes, setOngoingChallengesArr})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
     // console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
     const [fillColor, setFillColour] = useState("white")
@@ -24,10 +24,20 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
             <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} bouncinessIn={30} fillColor={"#55BEDF"} disabled={disabledCheckBox}
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
+                    setDisabledCheckBox(() => true)
                     if(isChecked){setFillColour("#cbd3d3af") 
-                        setDisabledCheckBox(true)
-                        // setPopulatePage(true)
-                        setOptimisticTimes(1)
+   
+                        // setOngoingChallengesArr((currOngChall) => {
+                        //     let newArrr= currOngChall.map((ongChal) => {
+                        //         const newChallenge = {...ongChal}
+                        //         if (Object.keys(ongChal)[0] === chalCode) {
+                        //             newChallenge[chalCode].times += 1;
+                        //             newChallenge[chalCode].streak += 1;
+                        //         }
+                        //         return newChallenge
+                        //     })
+                        //     return newArrr;
+                        // })
                     }
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"

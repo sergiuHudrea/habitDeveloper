@@ -7,7 +7,6 @@ export const streakCalculator = (selectedDay, datesArr, email, chalCodeStrStreak
         if((Date.parse(today) - Date.parse(datesArr[i])) === 86400000){
             isOnStreak = true
             streak = streak +1
-            console.log(email,chalCodeStrStreaks,streak, "success")
             patchUserChallenges(email, chalCodeStrStreaks, streak)
         } 
     }
