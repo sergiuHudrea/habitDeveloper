@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity,View,SafeAreaView } from 'react-native'
 import { useEffect } from 'react'
 import { useState } from "react"
 import { MyCalendar } from './Secondary_Components/MyCalendar'
@@ -6,6 +6,7 @@ import { getUserData } from '../../apis'
 import { ChallengeCard } from './Secondary_Components/ChallengeCard'
 import { MyHomeStats } from './Secondary_Components/MyHomeStats'
 import Loader from '../Loader'
+
 
 
 const Home = ({navigation, route})=>{
@@ -51,7 +52,7 @@ const Home = ({navigation, route})=>{
     return isLoading ? (
       <Loader />
     ):(
-      <View>
+      <SafeAreaView style={{flex:1}}>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
           <Text style={styles.todaysChal}>Today's Challenges:</Text>
@@ -70,8 +71,8 @@ const Home = ({navigation, route})=>{
             </TouchableOpacity></View>
             )}
           </View>
-          <MyHomeStats ongoingChallengesArr={ongoingChallengesArr} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
-      </View>
+            <MyHomeStats ongoingChallengesArr={ongoingChallengesArr} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
+      </SafeAreaView>
        
     )
 } 
