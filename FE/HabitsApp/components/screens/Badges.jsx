@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, FlatList, ScrollView } from 'react-native'
+import { Image, StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
@@ -39,6 +39,7 @@ const Badges = ({navigation, route}) => {
     }
     
     return (
+      <SafeAreaView>
       <View style={styles.item}>
       <View style={styles.text}>
         <Text style={styles.title}>{title}</Text>
@@ -50,6 +51,7 @@ const Badges = ({navigation, route}) => {
       })}
       </ScrollView>
       </View>
+      </SafeAreaView>
     )}
 
 

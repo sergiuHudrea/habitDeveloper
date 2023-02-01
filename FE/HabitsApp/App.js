@@ -6,6 +6,9 @@ import Register from './components/screens/Register';
 import MainContainer from './components/screens/MainContainer'
 import HabitDetail from './components/screens/HabitDetail';
 import AddJournal from './components/AddJournal';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 const Stack = createNativeStackNavigator();
 
 

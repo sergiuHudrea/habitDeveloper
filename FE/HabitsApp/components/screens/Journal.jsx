@@ -2,7 +2,7 @@ import {StyleSheet, Text, FlatList, Image, View,Dimensions, ScrollView,StatusBar
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import JournalSearchInput from '../SearchInput';
+import JournalSearchInput from '../JournalSearchInput';
 import AddJournal from '../AddJournal';
 const {width}=Dimensions.get('screen')
 
@@ -20,9 +20,8 @@ return (
         <Text style={{fontSize:16,fontWeight:'200'}}>How are you feeling today?</Text>
       </View>
       <Ionic/>
-    </View>
-    <ScrollView>
-      <View 
+    </View> 
+    <View 
       style={{
         flexDirection:'row',
         justifyContent:'space-between',
@@ -30,12 +29,14 @@ return (
       }}>
         <View style={styles.searchInput}>
           <Ionic name='search' size={23}/>
-          <TextInput autoCapitalize={false} value={input} onChangeText={(text)=> setInput(text)} placeholder='Search'/>
+          <TextInput style={{margin:6}} autoCapitalize={false} value={input} onChangeText={(text)=> setInput(text)} placeholder='Search'/>
         </View>
         <View style={styles.sortBtn}>
           <Ionic style={{margin:12, justifyContent:'center'}}name='options' color={'white'} size={28}/>
         </View>
       </View>
+    <ScrollView>
+     
       <View>
         <JournalSearchInput userInfo={userInfo} input={input} setInput={setInput}/>
       </View>
