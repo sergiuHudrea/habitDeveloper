@@ -10,9 +10,9 @@ const {width}=Dimensions.get('screen')
 const Journal = ({navigation,route,username }) => {
 const [input,setInput]=useState('')
 const userInfo = route.params
+console.log(route.params,'<<<route')
 
-console.log(route.params, ">>>params")
-console.log(route.params.selectedChallenge, ">>>journal")
+console.log(userInfo.selectedChallenge, ">>>journal")
   
 return ( 
   <SafeAreaView style={{backgroundColor:'white',flex:1}}>
@@ -41,7 +41,7 @@ return (
     <ScrollView>
      
       <View>
-        <JournalSearchInput userInfo={userInfo} input={input} setInput={setInput}/>
+        <JournalSearchInput selected={`${userInfo.selectedChallenge}`} userInfo={userInfo} input={input} setInput={setInput}/>
       </View>
     </ScrollView>
   </SafeAreaView>

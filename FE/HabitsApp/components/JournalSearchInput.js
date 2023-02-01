@@ -6,56 +6,39 @@ import SimpleDateTime  from 'react-simple-timestamp-to-date';
 import { deleteJournalEntry, filterJournal, getJournalByUser } from '../apis'
 import Loader from './Loader'
 
-const JournalSearchInput = ({userInfo,input,setInput}) => {
+const JournalSearchInput = ({userInfo,input,setInput,selected}) => {
+  console.log(userInfo.isPosted)
     const [userJournal, setUserJournal]=useState()
     const [isLoading, setIsLoading]=useState(true)
-    const [selectedChallenge, setSelectedChallenge] = useState("")
+    const [selectedChallenge, setSelectedChallenge] = useState(undefined)
 
     
-    const handleSort = (selectedChallenge) => {
-      if (selectedChallenge!==undefined) {
-        filterJournal(userInfo.email,selectedChallenge)
+    
+   
+
+    useEffect(()=>{
+      setSelectedChallenge(`${selected}`)
+      console.log(selected,"<<<selected")
+      if(selectedChallenge === undefined){
+        console.log(selectedChallenge,"<<selectedChall")
+        console.log(typeof(selectedChallenge),"<<selectedChall")
+        console.log("<<<i got here")
+         getJournalByUser(userInfo.email).then((data)=>{
+        setUserJournal(data) 
+        setIsLoading(false)
+    })
+      }else{
+        console.log("<<<i got here2")
+        filterJournal(userInfo.email,selected)
         .then((data) =>{
           console.log(data, ">>> data in else")
           setUserJournal(data) 
-          console.log(userJournal, ">>>in else")
           setIsLoading(false)
         })
-      } else {
-          getJournalByUser(userInfo.email).then((data)=>{
-            console.log(data, ">>> data in if")
-            setUserJournal(data) 
-            console.log(userJournal, ">>>in if")
-            setIsLoading(false)
-        })
       }
-    }
-    
-   console.log(selectedChallenge, ">>>1")
+     
+      },[selected])
 
-    useEffect(()=>{
-      setSelectedChallenge(userInfo.selectedChallenge)
-      console.log(selectedChallenge,">>>before if")
-      handleSort(selectedChallenge)
-      // if (selectedChallenge===undefined) {
-      //   getJournalByUser(userInfo.email).then((data)=>{
-      //     console.log(data, ">>> data in if")
-      //     setUserJournal(data) 
-      //     console.log(userJournal, ">>>in if")
-      //     setIsLoading(false)
-      //   })
-      // } else {
-      //   filterJournal(userInfo.email,selectedChallenge)
-      //   .then((data) =>{
-      //     console.log(data, ">>> data in else")
-      //     setUserJournal(data) 
-      //     console.log(userJournal, ">>>in else")
-      //     setIsLoading(false)
-      //   })
-      // }
-      },[userInfo.selectedChallenge])
-
-      console.log(selectedChallenge, ">>>2")
       
      
 

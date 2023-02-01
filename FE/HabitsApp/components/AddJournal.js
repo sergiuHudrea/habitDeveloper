@@ -26,10 +26,8 @@ const handleErr=()=>{
 
   const patchJournal = () => {
     if(journalInput !== ''){
-      setIsPosting(true)
     patchJournalEntry(challengeName,addChallengeInfo.title,addChallengeInfo.times, journalInput, date, email)
       .then(() => {
-        setIsPosting(false)
         setIsPosted(true)
         handleSave()
       })
@@ -40,7 +38,7 @@ const handleErr=()=>{
   }
 
   const handleSave = () => {
-    navigation.navigate("Journal",{isPosted:isPosted})
+    navigation.navigate("Journal",{isPosted:true})
   }
 
 

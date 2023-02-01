@@ -20,12 +20,18 @@ const SortJournal = ({navigation,route}) => {
                 setChallengeList(challenges) 
         })
     },[])
+
+   
     
     return (
         <SafeAreaView style={{flex:1}}>
             <ScrollView >
                 {challengeList.map((challenge) => (
-                   <BouncyCheckbox text={challenge.title} onPress={() => {navigation.navigate('Journal', {selectedChallenge:challenge.code})}} style={style.challenges}></BouncyCheckbox>
+                    <View>
+                         <BouncyCheckbox text={challenge.title} onPress={() => {navigation.navigate('Journal', {selectedChallenge:challenge.code})}} style={style.challenges}></BouncyCheckbox>
+                    </View>
+                  
+                  
                 ))}
 
 
