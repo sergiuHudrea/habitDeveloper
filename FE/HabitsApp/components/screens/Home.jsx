@@ -40,7 +40,7 @@ const Home = ({navigation, route})=>{
         // } else {
         // }
         ongoingChallengesArr = challenges.filter((chal)=>{
-          return Boolean(chal[Object.keys(chal)[0]].times)
+          return chal[Object.keys(chal)[0]].times !== null
         })
         // console.log(ongoingChallengesArr[0], 'ongoing challenges')
         if (ongoingChallengesArr.length === 0){setFirstTimeUser(true)} else {setFirstTimeUser(false)}
@@ -74,7 +74,7 @@ const Home = ({navigation, route})=>{
             )}
           </View>
            <MyHomeStats challenges={challenges} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
-      </View>
+      </SafeAreaView>
     )
 } 
 

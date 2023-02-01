@@ -18,7 +18,7 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
     const [disabledCheckBox, setDisabledCheckBox] = useState(false);
 
     return (
-        (Boolean(chal[Object.keys(chal)[0]].times) && //if times not null
+        ((chal[Object.keys(chal)[0]].times) !== null && //if times not null
         <View style={styles.container} backgroundColor={fillColor}>
             <Text style={styles.text}>{chal[Object.keys(chal)[0]].title}</Text>
             <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} bouncinessIn={30} fillColor={"#55BEDF"} disabled={disabledCheckBox}

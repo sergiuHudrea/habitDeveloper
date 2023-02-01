@@ -5,7 +5,7 @@ import ProgressCircle from 'react-native-progress/Circle'
 export const MyHomeStats =({challenges, optimisticTimes, setOptimisticTimes})=>{
     console.log(optimisticTimes)
     const ongoingChallengesArr = challenges.filter((chal)=>{
-        return Boolean(chal[Object.keys(chal)[0]].times)
+        return chal[Object.keys(chal)[0]].times !== null
       })
     // console.log(ongoingChallengesArr, "ongoing in stats")
 
