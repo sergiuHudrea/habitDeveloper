@@ -5,9 +5,9 @@ import { patchUserChallenges } from "../../../apis";
 import { RecursiveBadgeCalculator } from "../../RecursiveBadgeCalculator";
 import { streakCalculator } from "../../streakCalculator";
 
-export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes, setOngoingChallengesArr})=>{
+export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes, setChallenges})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
-    // console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
+    if(chalCode==="Sl_10_UnwindBB"){console.log(chal, 'this is chal')}
     const [fillColor, setFillColour] = useState("white")
 
 
@@ -24,10 +24,11 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
             <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} bouncinessIn={30} fillColor={"#55BEDF"} disabled={disabledCheckBox}
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
-                    setDisabledCheckBox(() => true)
                     if(isChecked){setFillColour("#cbd3d3af") 
-   
-                        // setOngoingChallengesArr((currOngChall) => {
+                        setDisabledCheckBox(() => true)
+                        // setPopulatePage(true)
+
+                        // setChallenges((currOngChall) => {
                         //     let newArrr= currOngChall.map((ongChal) => {
                         //         const newChallenge = {...ongChal}
                         //         if (Object.keys(ongChal)[0] === chalCode) {
@@ -38,6 +39,7 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
                         //     })
                         //     return newArrr;
                         // })
+
                     }
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"

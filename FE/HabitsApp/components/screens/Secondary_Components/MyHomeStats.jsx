@@ -2,7 +2,13 @@ import { useState } from "react"
 import { View, Text, StyleSheet, Image, ScrollView} from "react-native"
 import ProgressCircle from 'react-native-progress/Circle'
 
-export const MyHomeStats =({ongoingChallengesArr, optimisticTimes, setOptimisticTimes})=>{
+export const MyHomeStats =({challenges, optimisticTimes, setOptimisticTimes})=>{
+    
+    const ongoingChallengesArr = challenges.filter((chal)=>{
+        return Boolean(chal[Object.keys(chal)[0]].times)
+      })
+    // console.log(ongoingChallengesArr, "ongoing in stats")
+
     return (
         <ScrollView height={'50%'}>
             <Text style={styles.title}>Ongoing challenges:</Text>{
