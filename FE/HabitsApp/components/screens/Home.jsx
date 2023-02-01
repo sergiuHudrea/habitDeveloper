@@ -74,7 +74,7 @@ const Home = ({navigation, route})=>{
             )}
           </View>
            <MyHomeStats challenges={challenges} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
-      </View>
+      </SafeAreaView>
     )
 } 
 
@@ -102,72 +102,3 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
 })
-
-
-// const Home = ({navigation, route})=>{
-//   const [selectedDay, setSelectedDay] = useState(new Date())
-//   const [challenges, setChallenges] = useState([])
-//   const [firstTimeUser, setFirstTimeUser] = useState(false)
-//   const [ongoingChallengesArr, setOngoingChallengesArr] = useState([])
-//   const [populatePage, setPopulatePage] = useState(true)
-//   const [isLoading, setIsLoading] = useState(true)
-//   const [optimisticTimes, setOptimisticTimes] = useState(0)
-//   const userInfo = route.params
-
-//   useEffect(()=>{
-//     if(populatePage) {
-//       setPopulatePage(false)
-//     }
-//     setIsLoading(true)
-//     getUserData(userInfo).then((userData)=>{
-//       const challengeObj = userData.challenges
-
-//       const challArray = Object.entries(challengeObj).map((e) => ({[e[0]]:e[1]})); //converts to arr of objs
-//       setChallenges(() => challArray)
-//       let activeChallenges = []
-
-//       if (challenges.length===0) {
-//         activeChallenges = challArray.filter((chal)=>{
-//           return Boolean(chal[Object.keys(chal)[0]].times)
-//         })
-//       } else {
-//         activeChallenges = challenges.filter((chal)=>{
-//           return Boolean(chal[Object.keys(chal)[0]].times)
-//         })
-//       }
-
-//       setOngoingChallengesArr(activeChallenges)
-//       if (ongoingChallengesArr.length === 0 && activeChallenges.length===0){setFirstTimeUser(true)} else {setFirstTimeUser(false)}
-//     })
-//     setIsLoading(false)
-//   },[selectedDay, populatePage])
-  
-
-
-//   return isLoading ? (
-//     <Loader />
-//   ):(
-//     <View>
-//         <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
-//         <View>
-//         <Text style={styles.todaysChal}>Today's Challenges:</Text>
-//         {(!firstTimeUser && <ScrollView style={styles.cards} horizontal={true}>
-//         { (challenges.length !== 0) &&
-//             challenges.map((chal)=>{
-//                 return <ChallengeCard setOptimisticTimes={setOptimisticTimes} setPopulatePage={setPopulatePage} key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation} userInfo={userInfo} setOngoingChallengesArr={setOngoingChallengesArr}/>
-//             })
-//         }
-//         </ScrollView>)}
-//         {(firstTimeUser && <View style={styles.buttonView}><TouchableOpacity
-//               activeOpacity={0.7}
-//               onPress={() => navigation.navigate('Habits')}
-//               style={styles.button}
-//               ><Text style={styles.buttonText}>Start new challenges!</Text>
-//           </TouchableOpacity></View>
-//           )}
-//         </View>
-//         <MyHomeStats ongoingChallengesArr={ongoingChallengesArr} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
-//     </View>
-     
-//   )
-// } 

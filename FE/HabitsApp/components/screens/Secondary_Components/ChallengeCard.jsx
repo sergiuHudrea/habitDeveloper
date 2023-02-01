@@ -26,7 +26,7 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
                 onPress={(isChecked )=>{
                     if(isChecked){setFillColour("#cbd3d3af") 
                         setDisabledCheckBox(true)
-                        setOptimisticTimes(1)
+                        // setOptimisticTimes(1)
                         // setChallenges((currOngChall) => {
                         //     let newArrr= currOngChall.map((ongChal) => {
                         //         const newChallenge = {...ongChal}

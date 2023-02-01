@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image, ScrollView} from "react-native"
 import ProgressCircle from 'react-native-progress/Circle'
 
 export const MyHomeStats =({challenges, optimisticTimes, setOptimisticTimes})=>{
-    console.log(optimisticTimes)
     const ongoingChallengesArr = challenges.filter((chal)=>{
         return Boolean(chal[Object.keys(chal)[0]].times)
       })

@@ -7,29 +7,18 @@ import CalendarStrip from 'react-native-calendar-strip'
 // push on markedDatesArr each one of the datesArr items with different colors
 
 export const MyCalendar =({selectedDay, setSelectedDay})=>{
-    const markedDatesArray = [
-        {
-          date: moment('2023-01-22', 'YYYY-MM-DD'),
-          dots: [{color: "green"}]
-        },
-        {
-          date: moment('2023-01-20', 'YYYY-MM-DD'),
-          dots: [{color: "red"},{color: "blue"},{color: 'yellow'},{color: 'orange'}]
-        },
-      ];
-
     return (
         <View>
             <CalendarStrip
+            maxDate={new Date()}
             selectedDate={selectedDay}
             onDateSelected={(date) => setSelectedDay(date)}
-            markedDates={markedDatesArray}
             style={{height:110, paddingTop: 20, paddingBottom: 10
             }}
             iconContainer={{flex: 0.02}}
             calendarColor={"#8eb4d28d"}
             scrollable={true}
-            scrollerPaging={true}
+            scrollerPaging={false}
             calendarAnimation={{type: 'sequence', duration: 10}}
             daySelectionAnimation={{type: 'background', duration: 300, borderWidth: 2, borderHighlightColor:"#78ACB1", highlightColor:"#78ACB1"}}
             />
