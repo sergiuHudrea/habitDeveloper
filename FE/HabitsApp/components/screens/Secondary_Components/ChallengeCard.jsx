@@ -5,9 +5,9 @@ import { patchUserChallenges } from "../../../apis";
 import { RecursiveBadgeCalculator } from "../../RecursiveBadgeCalculator";
 import { streakCalculator } from "../../streakCalculator";
 
-export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes})=>{
+export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes, setChallenges})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
-    // console.log(selectedDay.toISOString().split('T')[0], 'selected day card')
+    // if(chalCode==="Sl_10_UnwindBB"){console.log(chal, 'this is chal')}
     const [fillColor, setFillColour] = useState("white")
 
 
@@ -15,16 +15,30 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
         if(chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {setFillColour("#cbd3d3af")}
     },[])
 
+    const [disabledCheckBox, setDisabledCheckBox] = useState(false);
+
     return (
         (Boolean(chal[Object.keys(chal)[0]].times) && //if times not null
         <View style={styles.container} backgroundColor={fillColor}>
             <Text style={styles.text}>{chal[Object.keys(chal)[0]].title}</Text>
-            <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} fillColor={"#55BEDF"}
+            <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} bouncinessIn={30} fillColor={"#55BEDF"} disabled={disabledCheckBox}
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
                     if(isChecked){setFillColour("#cbd3d3af") 
-                        // setPopulatePage(true)
-                        // setOptimisticTimes(chalCode)
+                        setDisabledCheckBox(true)
+                        setOptimisticTimes(1)
+                        // setChallenges((currOngChall) => {
+                        //     let newArrr= currOngChall.map((ongChal) => {
+                        //         const newChallenge = {...ongChal}
+                        //         if (Object.keys(ongChal)[0] === chalCode) {
+                        //             newChallenge[chalCode].times += 1;
+                        //             newChallenge[chalCode].streak += 1;
+                        //         }
+                        //         return newChallenge
+                        //     })
+                        //     return newArrr;
+                        // })
+
                     }
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"
