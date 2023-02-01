@@ -4,12 +4,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import JournalSearchInput from '../JournalSearchInput';
 import AddJournal from '../AddJournal';
+
 const {width}=Dimensions.get('screen')
 
 const Journal = ({navigation,route,username }) => {
 const [input,setInput]=useState('')
 const userInfo = route.params
-  
+
+console.log(route.params, ">>>params")
+console.log(route.params.selectedChallenge, ">>>journal")
   
 return ( 
   <SafeAreaView style={{backgroundColor:'white',flex:1}}>
@@ -32,7 +35,7 @@ return (
           <TextInput style={{margin:6}} autoCapitalize={false} value={input} onChangeText={(text)=> setInput(text)} placeholder='Search'/>
         </View>
         <View style={styles.sortBtn}>
-          <Ionic style={{margin:12, justifyContent:'center'}}name='options' color={'white'} size={28}/>
+          <Ionic onPress={() => navigation.navigate('Sort Journal',{userInfo:userInfo})} style={{margin:12, justifyContent:'center'}}name='options' color={'white'} size={28}/>
         </View>
       </View>
     <ScrollView>

@@ -69,3 +69,14 @@ export const deleteJournalEntry = (entryId) => {
         return res
     })
 }
+
+export const filterJournal = (email,challenge,order='desc') => {
+    
+    return userApi.get(`/api/journal.filter/${email}?challenge=${challenge}&order=${order}`)
+    .then((res) => {
+        return res.data
+    })
+    .catch((err)=>{
+        return err.response.data.msg
+    })
+}

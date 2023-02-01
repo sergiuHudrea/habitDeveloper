@@ -6,6 +6,7 @@ import Register from './components/screens/Register';
 import MainContainer from './components/screens/MainContainer'
 import HabitDetail from './components/screens/HabitDetail';
 import AddJournal from './components/AddJournal';
+import SortJournal from './components/SortJournal';
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
@@ -41,6 +42,11 @@ export default function App() {
              options={{ headerShown:false}}
               name="Add Journal"
               component={AddJournal}
+            />
+            <Stack.Screen
+             options={{ headerShown:true}}
+              name="Sort Journal"
+              component={SortJournal}
             />
           </Stack.Navigator>
         </NavigationContainer> 

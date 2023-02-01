@@ -3,20 +3,61 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import React from 'react'
 import { useState,useEffect } from 'react';
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
-import { deleteJournalEntry, getJournalByUser } from '../apis'
+import { deleteJournalEntry, filterJournal, getJournalByUser } from '../apis'
 import Loader from './Loader'
 
 const JournalSearchInput = ({userInfo,input,setInput}) => {
     const [userJournal, setUserJournal]=useState()
     const [isLoading, setIsLoading]=useState(true)
-    
+    const [selectedChallenge, setSelectedChallenge] = useState("")
 
-    useEffect(()=>{
-        getJournalByUser(userInfo.email).then((data)=>{
+    
+    const handleSort = (selectedChallenge) => {
+      if (selectedChallenge!==undefined) {
+        filterJournal(userInfo.email,selectedChallenge)
+        .then((data) =>{
+          console.log(data, ">>> data in else")
           setUserJournal(data) 
+          console.log(userJournal, ">>>in else")
           setIsLoading(false)
         })
-      },[userJournal])
+      } else {
+          getJournalByUser(userInfo.email).then((data)=>{
+            console.log(data, ">>> data in if")
+            setUserJournal(data) 
+            console.log(userJournal, ">>>in if")
+            setIsLoading(false)
+        })
+      }
+    }
+    
+   console.log(selectedChallenge, ">>>1")
+
+    useEffect(()=>{
+      setSelectedChallenge(userInfo.selectedChallenge)
+      console.log(selectedChallenge,">>>before if")
+      handleSort(selectedChallenge)
+      // if (selectedChallenge===undefined) {
+      //   getJournalByUser(userInfo.email).then((data)=>{
+      //     console.log(data, ">>> data in if")
+      //     setUserJournal(data) 
+      //     console.log(userJournal, ">>>in if")
+      //     setIsLoading(false)
+      //   })
+      // } else {
+      //   filterJournal(userInfo.email,selectedChallenge)
+      //   .then((data) =>{
+      //     console.log(data, ">>> data in else")
+      //     setUserJournal(data) 
+      //     console.log(userJournal, ">>>in else")
+      //     setIsLoading(false)
+      //   })
+      // }
+      },[userInfo.selectedChallenge])
+
+      console.log(selectedChallenge, ">>>2")
+      
+     
 
     return isLoading ? (
         <Loader />
@@ -30,6 +71,7 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
                 <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournalEntry(journal._id)}}/>
                   <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
                     <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
+                    <Text>{journal.challengeName}</Text>
                     <View>
                       
                     </View>
