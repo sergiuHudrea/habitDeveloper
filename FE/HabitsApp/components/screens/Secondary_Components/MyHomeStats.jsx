@@ -1,16 +1,22 @@
-import { useState } from "react"
-import { View, Text, StyleSheet, Image, ScrollView} from "react-native"
+import React from 'react'
+import { View, Text, StyleSheet, Image, ScrollView, RefreshControl} from "react-native"
 import ProgressCircle from 'react-native-progress/Circle'
 
-export const MyHomeStats =({challenges, optimisticTimes, setOptimisticTimes})=>{
-    console.log(optimisticTimes)
+export const MyHomeStats =({setRefreshing, refreshing, challenges})=>{
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 1000);
+      }, []);
+
     const ongoingChallengesArr = challenges.filter((chal)=>{
         return chal[Object.keys(chal)[0]].times !== null
       })
-    // console.log(ongoingChallengesArr, "ongoing in stats")
 
     return (
-        <ScrollView height={'50%'}>
+        <ScrollView height={'50%'} refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             <Text style={styles.title}>Ongoing challenges:</Text>{
             ongoingChallengesArr.map((chal)=>{
                 let times = (chal[Object.keys(chal)[0]].times % 42)

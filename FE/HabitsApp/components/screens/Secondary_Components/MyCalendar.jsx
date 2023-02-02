@@ -1,30 +1,15 @@
-import moment from "moment";
-import { View, Text,StyleSheet } from "react-native"
-// import { Calendar } from "react-native-calendars"
+import { View, Text, StyleSheet } from "react-native"
 import CalendarStrip from 'react-native-calendar-strip'
-//get dates of completed challenges as datesArr
-// const datesArr = [{'2023-01-22', challengeName}, ... ]
-// push on markedDatesArr each one of the datesArr items with different colors
 
 export const MyCalendar =({selectedDay, setSelectedDay})=>{
-    const markedDatesArray = [
-        {
-          date: moment('2023-01-22', 'YYYY-MM-DD'),
-          dots: [{color: "green"}]
-        },
-        {
-          date: moment('2023-01-20', 'YYYY-MM-DD'),
-          dots: [{color: "red"},{color: "blue"},{color: 'yellow'},{color: 'orange'}]
-        },
-      ];
 
     return (
         <View>
             <CalendarStrip
+            maxDate={new Date()}
             selectedDate={selectedDay}
             onDateSelected={(date) => setSelectedDay(date)}
-            markedDates={markedDatesArray}
-            style={{height:110, paddingTop: 20, paddingBottom: 10
+            style={{height:110, paddingTop: 20, paddingBottom: 10, paddingLeft: 15, paddingRight: 15
             }}
             iconContainer={{flex: 0.02}}
             calendarColor={"#8eb4d28d"}
@@ -37,4 +22,6 @@ export const MyCalendar =({selectedDay, setSelectedDay})=>{
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+})

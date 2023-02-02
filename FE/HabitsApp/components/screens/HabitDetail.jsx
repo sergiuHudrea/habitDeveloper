@@ -1,15 +1,15 @@
 import { Image,StyleSheet, Text, View,SafeAreaView,StatusBar,ImageBackground, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React from 'react';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import { patchUserChallenges } from '../../apis';
 
 
 const HabitDetail = ({navigation,route}) => {
-  const challenges=route.params
-  let chalName = "ChallengeName"
+  const challenges= route.params;
+  let chalName = "ChallengeName";
   for (const elem in challenges.wholeObj) {
     if (challenges.title === challenges.wholeObj[elem].title) {
-      chalName = elem
+      chalName = elem;
     }
   }
   console.log('challenges.'+chalName+ ".times", "EKEN")
