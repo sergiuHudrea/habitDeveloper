@@ -71,9 +71,8 @@ const Home = ({navigation, route})=>{
             </TouchableOpacity></View>
             )}
           </View>
-            <MyHomeStats ongoingChallengesArr={ongoingChallengesArr} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
+           <MyHomeStats challenges={challenges} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
       </SafeAreaView>
-       
     )
 } 
 
