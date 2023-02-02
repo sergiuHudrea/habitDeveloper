@@ -16,7 +16,7 @@ export const MyHomeStats =({setRefreshing, refreshing, challenges})=>{
       })
 
     return (
-        <ScrollView height={'50%'} refreshControl={
+        <ScrollView style={{marginHorizontal:30, borderColor:"#345772"}} showsVerticalScrollIndicator={false} height={'50%'} refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             <Text style={styles.title}>Ongoing challenges:</Text>{
             ongoingChallengesArr.map((chal)=>{
@@ -42,7 +42,8 @@ export const MyHomeStats =({setRefreshing, refreshing, challenges})=>{
                                 <View flexDirection={"row"} alignItems={"center"} marginTop={5}><Text>{`Streak: ${chal[Object.keys(chal)[0]].streak}`}</Text><Image source={require("../../../assets/flame-icon.png")} style={{height:30, width:30}}/></View>
                                 <Text>{`Times completed: ${chal[Object.keys(chal)[0]].times}`}</Text>
                             </View>
-                            <ProgressCircle color={colourBadge} size={50}  thickness={10} borderWidth={2} showsText={false} progress={times/timesForNextbadge} borderColor={"#78ACB1"} textStyle={{fontSize:13, fontWeight:"bold", color:"#78ACB1"}} marginLeft={5}/>
+                            <ProgressCircle style={{shadowOffset: {width:0, height:5},shadowOpacity: 0.2,}} color={colourBadge} borderColor={"#55BEDF"} size={50}  thickness={10} borderWidth={2} 
+                                            showsText={false} progress={times/timesForNextbadge}  textStyle={{fontSize:13, fontWeight:"bold", color:"#78ACB1"}} marginLeft={5}/>
                         </View>
                     </View>)
             })
@@ -52,7 +53,11 @@ export const MyHomeStats =({setRefreshing, refreshing, challenges})=>{
 
 const styles = StyleSheet.create({
     container: {justifyContent: "center", alignItems:'center',},
-    smallContainer: {flexDirection: "row", alignItems: "center", margin: 15, borderWidth:5, borderRadius:20,borderColor:"#71979A", padding:10}, 
+    smallContainer: {
+        shadowOffset: {width:0, height:5},
+    shadowOpacity: 0.2,
+        flexDirection: "row", 
+        alignItems: "center", margin: 15, borderWidth:2, borderRadius:20,borderColor:"#345772", padding:10}, 
     title: {alignSelf: "center",marginBottom: 5, fontSize: 18, marginTop:20},
     evenSmallerContainer: {flexDirection: "column", alignItems: "center", width:250,}
   })

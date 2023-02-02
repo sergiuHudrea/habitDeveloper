@@ -25,7 +25,8 @@ getUserData(userInfo).then((data)=>{
 const HabitCard = ({title,description,img_url, wholeObj, email}) => (
   <View style={styles.item}>
       <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url, wholeObj: wholeObj, email: email})}>
-        <View style={{backgroundColor:'white', borderColor:'black',borderRadius:90,height:180,width:180,justifyContent:'center',alignItems:'center' }}>
+        <View style={{backgroundColor:'white', borderWidth:20, borderColor:'#55BEDF',borderRadius:90,height:180,width:180,justifyContent:'center',alignItems:'center',shadowOffset: {width:0, height:5},
+              shadowOpacity: 0.2, }}>
           <Image style={styles.image} source={{uri:img_url}}/> 
         </View>
     </TouchableOpacity> 
@@ -42,7 +43,7 @@ return isLoading ? (
 ):
 ( 
   <SafeAreaView style={{flex:1}}>
-    <FlatList showsVerticalScrollIndicator={false} numColumns={2}     data={challenges}
+    <FlatList showsVerticalScrollIndicator={false} numColumns={2} data={challenges}
   renderItem={({item}) =><View style={styles.container} >
    <HabitCard title={item.title} img_url={item.img_url} description={item.description} key={item.date} wholeObj={wholeObj} email = {userInfo.email}/></View>
 }/></SafeAreaView>
@@ -54,16 +55,17 @@ export default MoreHabits
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#F4F2ED',
+    backgroundColor:'white',
   },
   item: {
-    backgroundColor: '#F4F2ED',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
     marginVertical: 5,
     margin:'1%',
     color:'red',
+    borderRadius: 50,
     marginHorizontal:10,
     marginVertical:7,
     padding:7,
@@ -78,8 +80,6 @@ title:{
 image:{
 height:140,
 width: 140,
-
-
 }
 })
 

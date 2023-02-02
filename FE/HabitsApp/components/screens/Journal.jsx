@@ -1,7 +1,7 @@
 import {StyleSheet, Text, FlatList, Image, View,Dimensions, ScrollView,StatusBar, TextInput, TouchableOpacity, SafeAreaView} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Ionic from 'react-native-vector-icons/Ionicons';
-import JournalSearchInput from '../JournalSearchInput';
+import JournalSearchInput from '../screens/Secondary_Components/JournalSearchInput';
 import AddJournal from '../AddJournal';
 const {width}=Dimensions.get('screen')
 

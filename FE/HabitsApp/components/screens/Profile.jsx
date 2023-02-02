@@ -121,7 +121,7 @@ email:{
     bottom:'2%',
 },
 reminderBtn:{
-    backgroundColor: '#345772',
+    backgroundColor: '#55BEDF',
     height:50,
     borderRadius: 12,
     justifyContent: 'center',
@@ -130,7 +130,7 @@ reminderBtn:{
     marginTop:50,
 },
 button:{
-        backgroundColor: '#345772',
+        backgroundColor: '#55BEDF',
         height:50,
         borderRadius: 12,
         justifyContent: 'center',
