@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native'
+import { Image, StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
 
@@ -54,11 +54,11 @@ const Badges = ({navigation, route}) => {
 
 
   return (
-    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+    <SafeAreaView style={{flex:1, alignItems:'center', justifyContent:'center'}}>
     <FlatList showsVerticalScrollIndicator={false} numColumns={1} style={styles.container} data={challenges}
     renderItem={({item}) => <BadgeCard title={item.title} badges={item.badges}/>
     }/>
-    </View>
+    </SafeAreaView>
   )
 }
 export default Badges
@@ -67,10 +67,8 @@ export default Badges
 const styles = StyleSheet.create({
   item: {
     height: 210,
-    // borderWidth: 4,
     borderTopWidth: 4,
     borderColor: "#55BEDF",
-    // margin: 7,
     marginHorizontal: 20,
     marginVertical: 4,
     padding: 20,
