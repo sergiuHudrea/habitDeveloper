@@ -1,11 +1,18 @@
 import { Image,StyleSheet, Text, View,SafeAreaView,StatusBar,ImageBackground, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React from 'react';
 import Ionic from 'react-native-vector-icons/Ionicons';
+import { patchUserChallenges } from '../../apis';
 
 
 const HabitDetail = ({navigation,route}) => {
-  const challenges=route.params
-  
+  const challenges= route.params;
+  let chalName = "ChallengeName";
+  for (const elem in challenges.wholeObj) {
+    if (challenges.title === challenges.wholeObj[elem].title) {
+      chalName = elem;
+    }
+  }
+  console.log('challenges.'+chalName+ ".times", "EKEN")
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: "white"}}>
       <StatusBar backgroundColor={'white'} />
@@ -43,7 +50,7 @@ const HabitDetail = ({navigation,route}) => {
 <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
   <Text style={{textAlign:'center',padding:20,margin:1,fontSize:15,color:'#839AAD'}}>{challenges.description}</Text>
 </View>
-      <TouchableOpacity activeOpacity={0.7} style={style.button}>
+      <TouchableOpacity activeOpacity={0.7} style={style.button} onPress={()=>patchUserChallenges(challenges.email ,'challenges.'+chalName+ ".times", 0).then(() => navigation.navigate('Home'))}>
         <Text style={{color: 'white', fontWeight: 'bold',fontSize:18}}>ADD <Ionic size={20} name='add' /></Text>
       </TouchableOpacity>
      

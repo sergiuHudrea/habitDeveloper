@@ -46,6 +46,6 @@ app.patch('/api/challenges/:email', patchChallenge)
 
 
 app.use(handleCustomErrors);
-app.use(handle404s);
+// app.use(handle404s);
 
 module.exports = app;

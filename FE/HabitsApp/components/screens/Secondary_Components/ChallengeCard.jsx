@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -5,9 +6,8 @@ import { patchUserChallenges } from "../../../apis";
 import { RecursiveBadgeCalculator } from "../../RecursiveBadgeCalculator";
 import { streakCalculator } from "../../streakCalculator";
 
-export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopulatePage, setOptimisticTimes, setChallenges})=>{
+export const ChallengeCard =({setRefreshing, chal, selectedDay, navigation, userInfo})=>{
     const chalCode = Object.keys(chal)[0] // challenges key
-    // if(chalCode==="Sl_10_UnwindBB"){console.log(chal, 'this is chal')}
     const [fillColor, setFillColour] = useState("white")
 
 
@@ -18,29 +18,19 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
     const [disabledCheckBox, setDisabledCheckBox] = useState(false);
 
     return (
-        (Boolean(chal[Object.keys(chal)[0]].times) && //if times not null
+        ((chal[Object.keys(chal)[0]].times) !== null && //if times not null
         <View style={styles.container} backgroundColor={fillColor}>
             <Text style={styles.text}>{chal[Object.keys(chal)[0]].title}</Text>
             <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} bouncinessIn={30} fillColor={"#55BEDF"} disabled={disabledCheckBox}
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
-                    if(isChecked){setFillColour("#cbd3d3af") 
-                        setDisabledCheckBox(true)
-                        // setOptimisticTimes(1)
-                        // setChallenges((currOngChall) => {
-                        //     let newArrr= currOngChall.map((ongChal) => {
-                        //         const newChallenge = {...ongChal}
-                        //         if (Object.keys(ongChal)[0] === chalCode) {
-                        //             newChallenge[chalCode].times += 1;
-                        //             newChallenge[chalCode].streak += 1;
-                        //         }
-                        //         return newChallenge
-                        //     })
-                        //     return newArrr;
-                        // })
+                    setFillColour("#cbd3d3af")
+                    setDisabledCheckBox(true)
 
-                    }
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
+                        // setRefreshing(true);
+                        // setTimeout(() => {
+                        // setRefreshing(false);}, 1000);
                         const chalCodeStrTimes = 'challenges.'+ chalCode.toString() + ".times"
                         const chalCodeStrDates = 'challenges.'+ chalCode.toString() + ".dates"
                         const chalCodeStrBadges = 'challenges.'+ chalCode.toString() + ".badges"
@@ -52,6 +42,7 @@ export const ChallengeCard =({chal, selectedDay, navigation, userInfo, setPopula
                         streakCalculator(selectedDay, chal[chalCode].dates, userInfo.email, chalCodeStrStreaks, chal[chalCode].streak)
                         RecursiveBadgeCalculator(chal[chalCode].times, userInfo.email, chalCodeStrBadges, chal[chalCode].badges)
                     }
+                    
                 }}
                 
                 />

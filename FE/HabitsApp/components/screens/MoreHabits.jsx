@@ -9,19 +9,22 @@ const MoreHabits = ({navigation,route}) => {
 const [challenges, setChallenges]=useState()
 const [isLoading, setIsLoading]=useState(true)
 const userInfo = route.params
-
+const[wholeObj, setWholeObj] = useState({})
 
 useEffect(()=>{ 
 getUserData(userInfo).then((data)=>{ 
+    setWholeObj(data.challenges)
     const challengesInfo =Object.keys(data.challenges).map(key=>data.challenges[key])
     setChallenges(challengesInfo)
     setIsLoading(false)
   })
 },[])
 
-const HabitCard = ({title,description,img_url}) => (
-    <View style={styles.item}>
-      <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url})}>
+
+
+const HabitCard = ({title,description,img_url, wholeObj, email}) => (
+  <View style={styles.item}>
+      <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url, wholeObj: wholeObj, email: email})}>
         <View style={{backgroundColor:'white', borderColor:'black',borderRadius:90,height:180,width:180,justifyContent:'center',alignItems:'center' }}>
           <Image style={styles.image} source={{uri:img_url}}/> 
         </View>
@@ -41,7 +44,7 @@ return isLoading ? (
   <SafeAreaView style={{flex:1}}>
     <FlatList showsVerticalScrollIndicator={false} numColumns={2}     data={challenges}
   renderItem={({item}) =><View style={styles.container} >
-   <HabitCard title={item.title} img_url={item.img_url} description={item.description} key={item.date}/></View>
+   <HabitCard title={item.title} img_url={item.img_url} description={item.description} key={item.date} wholeObj={wholeObj} email = {userInfo.email}/></View>
 }/></SafeAreaView>
   )
 };

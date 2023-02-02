@@ -1,11 +1,9 @@
 import { Image, StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserData } from '../../apis'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 const Badges = ({navigation, route}) => {
   const [challenges, setChallenges] = useState([])
-  const [badgesArr, setBadgesArr] = [[]]
   const userInfo = route.params
 
   useEffect(()=>{
