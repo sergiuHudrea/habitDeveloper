@@ -74,6 +74,9 @@ const Home = ({navigation, route})=>{
            <MyHomeStats challenges={challenges} optimisticTimes={optimisticTimes} setOptimisticTimes={setOptimisticTimes}/>
       </SafeAreaView>
     )
+     
+
+
 } 
 
 export default Home
