@@ -3,8 +3,7 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import React from 'react'
 import { useState,useEffect } from 'react';
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
-import { deleteJournalEntry, getJournalByUser } from '../../../apis'
-import Loader from '../../Loader'
+import { deleteJournalEntry, getJournalByUser } from '../apis'
 
 const JournalSearchInput = ({userInfo,input,setInput}) => {
     const [userJournal, setUserJournal]=useState()
