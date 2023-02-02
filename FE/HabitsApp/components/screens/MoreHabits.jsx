@@ -25,7 +25,7 @@ getUserData(userInfo).then((data)=>{
 const HabitCard = ({title,description,img_url, wholeObj, email}) => (
   <View style={styles.item}>
       <TouchableOpacity onPress={()=>navigation.navigate('Habit Detail', {title:title, description:description, img_url:img_url, wholeObj: wholeObj, email: email})}>
-        <View style={{backgroundColor:'white', borderWidth:20, borderColor:'#55BEDF',borderRadius:90,height:180,width:180,justifyContent:'center',alignItems:'center',shadowOffset: {width:0, height:5},
+        <View style={{backgroundColor:'white', borderWidth:10, borderColor:'#55BEDF',borderRadius:90,height:180,width:180,justifyContent:'center',alignItems:'center',shadowOffset: {width:0, height:5},
               shadowOpacity: 0.2, }}>
           <Image style={styles.image} source={{uri:img_url}}/> 
         </View>

@@ -71,7 +71,7 @@ useEffect(()=>{
 <Text style={styles.email}>{profile.email}</Text>
  <TouchableOpacity onPress={()=>handleClick()}  style={[isClicked ? styles.activeReminderBtn:styles.reminderBtn]}>
     
-<Text style={{fontSize:18,marginTop:10,color: 'white',textAlign:'center',justifyContent:'center'}}>Set Reminder  <Ionic name={isClicked ? 'notifications' :'notifications-off'} size={20}  /></Text>
+<Text style={{fontSize:18,color: 'white',textAlign:'center',justifyContent:'center'}}>Set Reminder  <Ionic name={isClicked ? 'notifications' :'notifications-off'} size={20}  /></Text>
 </TouchableOpacity>
 <TouchableOpacity onPress={()=>navigation.navigate('Log In')} activeOpacity={0.7} style={styles.button}>
         <Text style={{color: 'white',fontSize:18,fontWeight: 'bold',}}>Log Out <Ionic size={20} name='close'/></Text>
@@ -121,7 +121,7 @@ email:{
     bottom:'2%',
 },
 reminderBtn:{
-    backgroundColor: '#55BEDF',
+    backgroundColor: '#367e93',
     height:50,
     borderRadius: 12,
     justifyContent: 'center',
