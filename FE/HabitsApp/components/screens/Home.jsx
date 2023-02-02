@@ -38,11 +38,11 @@ const Home = ({navigation, route})=>{
     return isLoading ? (
       <Loader />
     ):(
-      <SafeAreaView style={{flex:1}}>
+      <SafeAreaView style={styles.everything}>
           <MyCalendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
           <View>
           <Text style={styles.todaysChal}>Today's Challenges:</Text>
-          {(!firstTimeUser && <ScrollView style={styles.cards} horizontal={true}>
+          {(!firstTimeUser && <ScrollView showsHorizontalScrollIndicator={false} style={styles.cards} horizontal={true}>
           { (challenges.length !== 0) &&
               challenges.map((chal)=>{
                   return <ChallengeCard  setRefreshing={setRefreshing} setChallenges={setChallenges} key={Math.random()} chal={chal} selectedDay={selectedDay} navigation={navigation} userInfo={userInfo}/>
@@ -65,24 +65,29 @@ const Home = ({navigation, route})=>{
 export default Home
 
 const styles = StyleSheet.create({
-  cards: {padding: 10},
-  todaysChal: {margin: 10, fontSize: 18},
+  cards: {padding: 10,},
+  todaysChal: {margin: 10, fontSize: 18, textAlign: "center",},
   button: {
     borderWidth:10,
-    borderColor:'#AFC9CA',
+    borderColor:'#8eb4d28d',
     alignItems:'center',
     justifyContent:'center',
     width:200,
     height:200,
-    backgroundColor:'#78ACB1',
+    backgroundColor:'#55BEDF',
     borderRadius:100,},
   buttonText: {
     fontSize: 25,
     color: 'white',
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: "center",
   },
   buttonView:{
     alignItems:'center',
+    textAlign: "center",
     justifyContent:'center',
   },
+  everything:{
+    backgroundColor: 'white'
+  }
 })

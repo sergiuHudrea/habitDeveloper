@@ -37,7 +37,7 @@ const Badges = ({navigation, route}) => {
     }
     
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.everything}>
       <View style={styles.item}>
       <View style={styles.text}>
         <Text style={styles.title}>{title}</Text>
@@ -67,11 +67,16 @@ export default Badges
 const styles = StyleSheet.create({
   item: {
     height: 210,
-    borderWidth: 5,
-    borderColor: "#78ACB1",
-    margin: 7,
+    // borderWidth: 4,
+    borderTopWidth: 4,
+    borderColor: "#55BEDF",
+    // margin: 7,
+    marginHorizontal: 20,
+    marginVertical: 4,
     padding: 20,
-    borderRadius: 20
+    borderRadius: 0,
+    shadowOffset: {width:0, height:5},
+    shadowOpacity: 0.2,
   },
   title: {
     fontSize: 14,
@@ -80,5 +85,8 @@ const styles = StyleSheet.create({
   },
   text:{
     marginBottom: 7
+  },
+  everything:{
+    backgroundColor: "white"
   }
 })

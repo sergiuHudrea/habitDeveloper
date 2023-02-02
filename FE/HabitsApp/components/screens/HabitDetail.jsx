@@ -12,7 +12,6 @@ const HabitDetail = ({navigation,route}) => {
       chalName = elem;
     }
   }
-  console.log('challenges.'+chalName+ ".times", "EKEN")
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: "white"}}>
       <StatusBar backgroundColor={'white'} />

@@ -24,10 +24,10 @@ export const ChallengeCard =({setRefreshing, chal, selectedDay, navigation, user
             <BouncyCheckbox text={"completed!"} bounceEffectIn={0.3} bouncinessIn={30} fillColor={"#55BEDF"} disabled={disabledCheckBox}
                 isChecked={chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])}
                 onPress={(isChecked )=>{
-                    setFillColour("#cbd3d3af")
-                    setDisabledCheckBox(true)
-
+                    
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
+                        setFillColour("#cbd3d3af")
+                        setDisabledCheckBox(true)
                         // setRefreshing(true);
                         // setTimeout(() => {
                         // setRefreshing(false);}, 1000);
@@ -64,15 +64,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: "center",
+        textAlign: "center",
         marginRight: 15,
         borderRadius: 20,
         borderWidth: 2,
-        borderColor: "#18BB9C",
+        borderColor: "#55BEDF",
         margin: 0,
         backgroundColor: "#F7F6F8",
         width: 150,
         height: 200,
         padding: 10,
+        shadowOffset: {width:0, height:5},
+        shadowOpacity: 0.2,
     },
     text: {
         height: 90,
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 10,
-        backgroundColor:'#78ACB1',
+        backgroundColor:'#345772',
         width:'100%',
         padding:5,
         alignItems:'center',

@@ -12,16 +12,14 @@ export const MyCalendar =({selectedDay, setSelectedDay})=>{
             style={{height:110, paddingTop: 20, paddingBottom: 10, paddingLeft: 15, paddingRight: 15
             }}
             iconContainer={{flex: 0.02}}
-            calendarColor={"#8eb4d28d"}
+            calendarColor={"white"}
             scrollable={true}
             scrollerPaging={false}
             calendarAnimation={{type: 'sequence', duration: 10}}
-            daySelectionAnimation={{type: 'background', duration: 300, borderWidth: 2, borderHighlightColor:"#78ACB1", highlightColor:"#78ACB1"}}
+            daySelectionAnimation={{type: 'background', duration: 300, borderWidth: 2, borderHighlightColor:"#78ACB1", highlightColor:"#55BEDF"}}
             />
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-
-})
+const styles = StyleSheet.create({})
