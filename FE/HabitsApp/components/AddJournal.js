@@ -11,39 +11,22 @@ const AddJournal = ({navigation, route}) => {
   const email = route.params.email
   
   const [journalInput, setJournalInput] = useState("");
-  const [isPosting,setIsPosting] = useState(false)
-  const [isPosted,setIsPosted] = useState(false)
-
   
-const handleErr=()=>{
-  Alert.alert('Oops!', 'This field cannot be empty', [
-    {text: 'Try Again', onPress: () => {}},
-      ]);
-}
-
-
-
+  
 
   const patchJournal = () => {
     if(journalInput !== ''){
-      setIsPosting(true)
     patchJournalEntry(challengeName,addChallengeInfo.title,addChallengeInfo.times, journalInput, date, email)
       .then(() => {
-        setIsPosting(false)
-        setIsPosted(true)
-        handleSave()
+        navigation.navigate("Journal")
       })
     }else{
-      handleErr()
+      Alert.alert('Oops!', 'This field cannot be empty', [
+        {text: 'Try Again', onPress: () => {}},
+          ]);
     }
     
   }
-
-  const handleSave = () => {
-    navigation.navigate("Journal",{isPosted:isPosted})
-  }
-
-
 
 
   return (
@@ -112,3 +95,6 @@ header: {
   justifyContent: 'space-between',
 },
 })
+
+
+// refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
