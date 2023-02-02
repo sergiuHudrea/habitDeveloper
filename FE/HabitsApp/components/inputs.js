@@ -14,7 +14,7 @@ const Inputs = ({iconName,error,password,onFocus=()=>{},...props}) => {
   return (
     <View style={{marginBottom:10}}>
       <View style={[style.inputContainer,{borderColor: error 
-      ? 'red'
+      ? '#fd5a5a'
       : isFocused 
       ? '#55BEDF'
       : '#345772'
@@ -39,7 +39,7 @@ const Inputs = ({iconName,error,password,onFocus=()=>{},...props}) => {
        )}
       </View>
       {error && (
-      <Text style={{color:'red', fontSize:12, fontWeight:'600' ,marginTop:7}}>{error}
+      <Text style={{color:'#fd5a5a', fontSize:16, fontWeight:'600' ,marginTop:7}}>{error}
       </Text>
       )}
       
