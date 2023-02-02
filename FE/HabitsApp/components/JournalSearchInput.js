@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, useWindowDimensions, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, useWindowDimensions, ActivityIndicator, ScrollView} from 'react-native'
 import Ionic from 'react-native-vector-icons/Ionicons';
 import React from 'react'
 import { useState,useEffect } from 'react';
@@ -8,8 +8,7 @@ import { deleteJournalEntry, getJournalByUser } from '../apis'
 const JournalSearchInput = ({userInfo,input,setInput}) => {
     const [userJournal, setUserJournal]=useState()
     const [isLoading, setIsLoading]=useState(true)
-    
-
+   
     useEffect(()=>{
         getJournalByUser(userInfo.email).then((data)=>{
           setUserJournal(data) 
@@ -40,12 +39,13 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
         
       ):
       ( 
-    <View style={styles.journalCardContainer}>
+        <ScrollView >
+          <View style={styles.journalCardContainer}>
       {userJournal.map((journal,index)=>{
         if(input === ''){
           return (
               <View style={styles.journalCard} >
-                <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournalEntry(journal._id)}}/>
+                <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() => deleteJournalEntry(journal._id)}/>
                   <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
                     <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
                     <View>
@@ -57,7 +57,7 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
         if(journal.journalEntry.toLowerCase().includes(input.toLowerCase())){
             return (
                 <View style={styles.journalCard} >
-                  <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() =>{deleteJournalEntry(journal._id)}}/>
+                  <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() => deleteJournalEntry(journal._id)}/>
                      <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
                       <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
                 </View>
@@ -65,6 +65,8 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
         }
 })}
     </View>
+        </ScrollView>
+    
   )
 }
 
