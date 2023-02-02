@@ -20,7 +20,7 @@ return (
       </View>
       <Ionic/>
     </View>
-    <ScrollView>
+    
       <View 
       style={{
         flexDirection:'row',
@@ -35,10 +35,11 @@ return (
           <Ionic style={{margin:12, justifyContent:'center'}}name='options' color={'white'} size={28}/>
         </View>
       </View>
+      
       <View>
         <JournalSearchInput userInfo={userInfo} input={input} setInput={setInput}/>
       </View>
-    </ScrollView>
+    
   </SafeAreaView>
   )
 };
