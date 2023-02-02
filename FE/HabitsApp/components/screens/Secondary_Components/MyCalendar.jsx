@@ -14,7 +14,7 @@ export const MyCalendar =({selectedDay, setSelectedDay})=>{
             iconContainer={{flex: 0.02}}
             calendarColor={"#8eb4d28d"}
             scrollable={true}
-            scrollerPaging={true}
+            scrollerPaging={false}
             calendarAnimation={{type: 'sequence', duration: 10}}
             daySelectionAnimation={{type: 'background', duration: 300, borderWidth: 2, borderHighlightColor:"#78ACB1", highlightColor:"#78ACB1"}}
             />

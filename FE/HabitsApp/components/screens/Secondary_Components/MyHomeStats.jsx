@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, Image, ScrollView, RefreshControl} from "react-native"
 import ProgressCircle from 'react-native-progress/Circle'
 
+
 export const MyHomeStats =({setRefreshing, refreshing, challenges})=>{
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);

@@ -1,6 +1,5 @@
-import {StyleSheet, Text, FlatList, Image, View,Dimensions, ScrollView,StatusBar, TextInput, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, FlatList, Image, View,Dimensions, ScrollView,StatusBar, TextInput, TouchableOpacity, SafeAreaView} from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import JournalSearchInput from '../JournalSearchInput';
 import AddJournal from '../AddJournal';
@@ -20,8 +19,9 @@ return (
         <Text style={{fontSize:16,fontWeight:'200'}}>How are you feeling today?</Text>
       </View>
       <Ionic/>
-    </View> 
-    <View 
+    </View>
+    <ScrollView>
+      <View 
       style={{
         flexDirection:'row',
         justifyContent:'space-between',
@@ -29,14 +29,12 @@ return (
       }}>
         <View style={styles.searchInput}>
           <Ionic name='search' size={23}/>
-          <TextInput style={{margin:6}} autoCapitalize={false} value={input} onChangeText={(text)=> setInput(text)} placeholder='Search'/>
+          <TextInput autoCapitalize={false} value={input} onChangeText={(text)=> setInput(text)} placeholder='Search'/>
         </View>
         <View style={styles.sortBtn}>
           <Ionic style={{margin:12, justifyContent:'center'}}name='options' color={'white'} size={28}/>
         </View>
       </View>
-    <ScrollView>
-     
       <View>
         <JournalSearchInput userInfo={userInfo} input={input} setInput={setInput}/>
       </View>

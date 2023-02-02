@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, useWindowDimensions, ActivityIndicator } from 'react-native'
 import Ionic from 'react-native-vector-icons/Ionicons';
 import React from 'react'
 import { useState,useEffect } from 'react';
@@ -18,8 +18,27 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
         })
       },[userJournal])
 
+
+      const LoaderJournal = ({visible = false}) => {
+        const {width, height} = useWindowDimensions();
+        return (
+          visible && (
+            <View style={[styles.container, {height, width}]}>
+              <View style={styles.loader}>
+                <ActivityIndicator size="large" color="#55BEDF" />
+                <Text style={{marginLeft: 10, fontSize: 16}}>Loading...</Text>
+              </View>
+            </View>
+          )
+        );
+      };
+
     return isLoading ? (
-        <Loader />
+      <View style={{justifyContent: 'center', marginTop: '50%'}}>
+         <LoaderJournal visible={true}/>
+      </View>
+       
+        
       ):
       ( 
     <View style={styles.journalCardContainer}>
@@ -81,5 +100,21 @@ const styles = StyleSheet.create({
       trashIcon:{
         alignSelf: 'flex-end',
         margin:5
-      }
+      },
+      loader: {
+        height: 70,
+        backgroundColor: '#F7F6F8',
+        marginHorizontal: 50,
+        borderRadius: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 20
+      },
+      container: {
+        position: 'absolute',
+        zIndex: 10,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+      },
+      
 })

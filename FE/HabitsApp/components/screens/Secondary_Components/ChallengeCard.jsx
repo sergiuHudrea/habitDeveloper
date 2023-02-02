@@ -26,7 +26,7 @@ export const ChallengeCard =({setRefreshing, chal, selectedDay, navigation, user
                 onPress={(isChecked )=>{
                     setFillColour("#cbd3d3af")
                     setDisabledCheckBox(true)
-    
+
                     if (isChecked && !chal[chalCode].dates.includes(selectedDay.toISOString().split('T')[0])) {
                         // setRefreshing(true);
                         // setTimeout(() => {
