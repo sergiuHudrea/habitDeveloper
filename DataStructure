@@ -1,79 +1,46 @@
-{"_id":{"$oid":"63ca5fb92aecc47bd9f1f735"},
-username: "Sergiu",
-email: "shudrea@gmail.com",
-password: "iLoveCake",
-likes: 100,
-challenges: { 
-                Sl_1_NoPhoneBeforeBed: null,
-                Sl_2_DimLights3hBeforeBed: {times: null, dates:[], streak: 0}
-                Sl_3_RegularSleep: 2,
-                Sl_4_NoCoffe8hBeforeBed: 8,
-                Sl_5_NoLargeMealsBB: 24,
-                Sl_6_NoAlcoholBB: 1,
-                Sl_7_NoNapAfter3pm: null,
-                Sl_8_NaturalLight30Mins: null,
-                Sl_9_OptimisedBedroomEnv: null,
-                Sl_10_UnwindBB: 44
-                },
-uniqueUserLink: "",
-medals: {
-  Sl_1: 0,
-  Sl_2: 0,
-  Sl_3: 0,
-  Sl_4: 1,
-  Sl_5: 2,
-  Sl_6: 0,
-  Sl_7: 0,
-  Sl_8: 0,
-  Sl_9: 0,
-  Sl_10: 3
-          },
-dailyJournal: [{
-  challengeName: "Sl_3_RegularSleep",
-  challengeEntryNumber: 1,
-  journalEntry: "aaaaa",
-  date: 3
-  },
-  {
-    challengeName: "Sl_3_RegularSleep",
-    challengeEntryNumber: 2,
-    journalEntry: "bba",
-    date: 7
-    },
 {
-    challengeName: "Sl_4_NoCoffe8hBeforeBed",
-    challengeEntryNumber: 1,
-    journalEntry: "bb",
-    date: 22
-  },
-  {
-    challengeName: "Sl_4_NoCoffe8hBeforeBed",
-    challengeEntryNumber: 4,
-    journalEntry: "h",
-    date: 67
-    },
-{
-    challengeName: "Sl_4_NoCoffe8hBeforeBed",
-    challengeEntryNumber: 6,
-    journalEntry: "x",
-    date: 56345
-  },
-  {
-    challengeName: "Sl_6_NoAlcoholBB",
-    challengeEntryNumber: 1,
-    journalEntry: "u",
-    date: 5654
-    },
-    {
-    challengeName: "Sl_4_NoCoffe8hBeforeBed",
-    challengeEntryNumber: 7,
-    journalEntry: "sfdads",
-    date: 3
-    },
-    {
-    challengeName: "Sl_4_NoCoffe8hBeforeBed",
-    challengeEntryNumber: 8,
-    journalEntry: "mhg",
-    date: 7
-     }]
-}
+      _id: ObjectID("3dr452g4gtlf4ty6"),
+      username: "Sergius",
+      email: "shudrea@gmail.co.uk",
+      password: "12345678",
+      likes: 15,
+      challenges: { 
+                    Sl_4_NoCoffe8hBeforeBed: { 
+                      times: 3, 
+                      dates:["2023-01-22", "2023-01-23", "2023-02-03"], 
+                      streak: 2, 
+                      badges: [0, 0, 0], 
+                      title: "Avoid looking at screens when going to your bedroom.", 
+                      description: "Gadget emits blue light which suppresses melatonin production and disturbs the sleep/wake cycle. An hour without screen time before bed is ideal, but you can first try with 10 or 20 minutes and build up from there.", 
+                      img_url: "https://i.ibb.co/M6rfbq6/nophoneicon.png%22"},
+                    },
+      uniqueUserLink: "",
+      dailyJournal: [{
+      challengeName: "Sl_4_NoCoffe8hBeforeBed",
+      title: "Avoid caffeine 8-10 hours before bed",
+      challengeEntryNumber: 1,
+      journalEntry: "Super good",
+      date: "2023-01-22T12:00:00.000+00:00",
+      happinesIndex: 20,
+      _id: ObjectID("63dba8002c5eb4c53da04b23")
+      },
+      {
+        challengeName: "Sl_4_NoCoffe8hBeforeBed",
+        title: "Avoid caffeine 8-10 hours before bed",
+        challengeEntryNumber: 2,
+        journalEntry: "All good so far.",
+        date: "2023-01-23T12:00:00.000+00:00",
+        happinesIndex: 14,
+        _id: ObjectID("69ba8002c5eb4c53da04b25")
+      },
+      {
+        challengeName: "Sl_4_NoCoffe8hBeforeBed",
+        title: "Avoid caffeine 8-10 hours before bed",
+        challengeEntryNumber: 3,
+        journalEntry: "I am getting pretty twitchy.",
+        date: "2023-02-03T12:00:00.000+00:00",
+        happinesIndex: 6,
+        _id: ObjectID("73dba8002c5eb4c53da04b65")
+        },
+      ]
+      }
