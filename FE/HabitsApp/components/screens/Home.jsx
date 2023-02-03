@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
   everything:{
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    flex:1
   }
 })
