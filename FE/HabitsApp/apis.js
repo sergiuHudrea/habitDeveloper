@@ -1,5 +1,5 @@
 import axios from "axios"
-
+const Sentiment = require("sentiment")
 const userApi = axios.create({baseURL: "http://localhost:3007"})
 
 export const getUserData =({email,password})=>{
@@ -45,13 +45,17 @@ export const getJournalByUser=(email)=>{
 }
 
 export const patchJournalEntry =(challengeName,title,challengeEntryNumber,journalEntry,date, email)=>{
+    let sentiment = new Sentiment();
+    let result = (sentiment.analyze(journalEntry).score +5)*10;
 
+    console.log(result);
     const patchjournalBody = {
         challengeName:  challengeName,
         title: title,
         challengeEntryNumber:challengeEntryNumber,
         journalEntry:journalEntry,
-        date:  date
+        date:  date,
+        happinessIndex:result
     }
 
     return userApi.patch(`/api/journal/${email}`,patchjournalBody).then((res)=>{

@@ -39,56 +39,64 @@ const seedTest = [ {
       title: "Stick to a schedule",
       challengeEntryNumber: 1,
       journalEntry: "aaaaa",
-      date: 3
+      date: 3,
+      happinessIndex: 45
       },
       {
         challengeName: "Sl_3_RegularSleep",
         title: "Stick to a schedule",
         challengeEntryNumber: 2,
         journalEntry: "bba",
-        date: 7
+        date: 7,
+        happinessIndex: 45
         },
       {
         challengeName: "Sl_4_NoCoffe8hBeforeBed",
         title: "Avoid caffeine 8-10 hours before bed",
         challengeEntryNumber: 1,
         journalEntry: "bb",
-        date: 22
+        date: 22,
+        happinessIndex: 45
       },
       {
         challengeName: "Sl_4_NoCoffe8hBeforeBed",
         title: "Avoid caffeine 8-10 hours before bed",
         challengeEntryNumber: 4,
         journalEntry: "h",
-        date: 67
+        date: 67,
+        happinessIndex: 45
         },
       {
         challengeName: "Sl_4_NoCoffe8hBeforeBed",
         title: "Avoid caffeine 8-10 hours before bed",
         challengeEntryNumber: 6,
         journalEntry: "x",
-        date: 56345
+        date: 56345,
+        happinessIndex: 45
       },
       {
         challengeName: "Sl_6_NoAlcoholBB",
         title: "Avoid alcoholic drinks in the evening",
         challengeEntryNumber: 1,
         journalEntry: "u",
-        date: 5654
+        date: 5654,
+        happinessIndex: 45
         },
         {
         challengeName: "Sl_4_NoCoffe8hBeforeBed",
         title: "Avoid caffeine 8-10 hours before bed",
         challengeEntryNumber: 7,
         journalEntry: "sfdads",
-        date: 3
+        date: 3,
+        happinessIndex: 45
         },
         {
         challengeName: "Sl_4_NoCoffe8hBeforeBed",
         title: "Avoid caffeine 8-10 hours before bed",
         challengeEntryNumber: 8,
         journalEntry: "mhg",
-        date: 7
+        date: 7,
+        happinessIndex: 45
          }]
     }
   ]

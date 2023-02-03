@@ -68,7 +68,7 @@ exports.findUser = (password, email) =>{
 
 
 exports.inputJournalEntry = (email, journalEntry) =>{
-    const journalProps = ['challengeName','title', 'challengeEntryNumber','journalEntry','date'];
+    const journalProps = ['challengeName','title', 'challengeEntryNumber','journalEntry','date', 'happinessIndex'];
 
     for(let i =0; i < journalProps.length;i++){
         if(journalEntry[journalProps[i]] === undefined){

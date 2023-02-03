@@ -80,6 +80,10 @@ const userSchema = schema({
         date:{
             type:Date,
             required:true,
+        },
+        happinessIndex:{
+            type:Number,
+            required:true
         }
     }]
 },    
