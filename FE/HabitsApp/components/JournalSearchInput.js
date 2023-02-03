@@ -47,7 +47,8 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
               <View style={styles.journalCard} >
                 <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() => deleteJournalEntry(journal._id)}/>
                   <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
-                    <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
+                    <Text style={{marginHorizontal:10,fontSize:15,textAlign:'justify'}}>{journal.journalEntry}</Text>
+                    <Text style={{marginHorizontal:10,fontSize:25,  alignSelf: 'flex-end'}}>{journal.happinessIndex <33 ?"😔": journal.happinessIndex<66 ? "😐": "😁"}</Text>
                     <View>
                       
                     </View>
@@ -59,7 +60,8 @@ const JournalSearchInput = ({userInfo,input,setInput}) => {
                 <View style={styles.journalCard} >
                   <Ionic name='trash' style={styles.trashIcon} size={20} onPress={() => deleteJournalEntry(journal._id)}/>
                      <Text style={styles.date}><SimpleDateTime dateSeparator="/"  showTime='0' meridians="1" format="DMY">{journal.date}</SimpleDateTime></Text>
-                      <Text style={{marginHorizontal:10,fontSize:15}}>{journal.journalEntry}</Text>
+                      <Text style={{marginHorizontal:10,fontSize:15, textAlign:'justify'}}>{journal.journalEntry}</Text>
+                      <Text style={{marginHorizontal:10,fontSize:25,  alignSelf: 'flex-end'}}>{journal.happinessIndex <33 ?"😔": journal.happinessIndex<66 ? "😐": "😁"}</Text>
                 </View>
             )
         }
@@ -78,6 +80,7 @@ const styles = StyleSheet.create({
         marginTop:20
       },
       journalCard: {
+        padding:10,
         height:180,
         borderBottomWidth:0.2,
         borderTopWidth:0.2,

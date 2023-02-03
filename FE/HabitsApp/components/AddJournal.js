@@ -45,7 +45,7 @@ const AddJournal = ({navigation, route}) => {
       <KeyboardAvoidingView>
       <Image style={{height:220, width:220,alignSelf:'center'}} source={{uri:'https://www.launch-marketing.com/wp-content/uploads/2019/10/GettyImages-946716862.jpg'}}/>
       <View style={styles.journalInput}>
-      <TextInput keyboardAppearance='true'  maxLength={300} scrollEnabled={true} multiline={true} value={journalInput} onChangeText={(text)=> setJournalInput(text)} placeholder="How do you feel?"/>
+      <TextInput keyboardAppearance='true'  maxLength={200} scrollEnabled={true} multiline={true} value={journalInput} onChangeText={(text)=> setJournalInput(text)} placeholder="How do you feel?"/>
       </View>
       <TouchableOpacity style={styles.button} onPress={patchJournal}><Text style={styles.buttonText} >Save</Text></TouchableOpacity>
       </KeyboardAvoidingView>

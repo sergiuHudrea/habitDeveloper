@@ -29,7 +29,8 @@
     
     "react-native-svg": "13.4.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-simple-timestamp-to-date": "^1.0.3"
+    "react-simple-timestamp-to-date": "^1.0.3",
+    "sentiment": "^5.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

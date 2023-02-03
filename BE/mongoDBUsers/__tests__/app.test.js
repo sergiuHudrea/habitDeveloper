@@ -12,7 +12,7 @@ beforeAll(done => {
     done()
   })
 
-describe.only('GET /', () => {
+describe('GET /', () => {
     test("status:200, return the message 'The backend is working, happy days!'", () => {
         return request(app)
         .get('/')
@@ -77,7 +77,7 @@ describe('GET /api/user/:email/:password', () =>{
     })
   })
 
-describe("PATCH /api/journal/:email", () =>{
+describe.only("PATCH /api/journal/:email", () =>{
 
     test("status 201, returns 201 confirming patch of new journal entry", ()=>{
         const journalEntry = {
@@ -85,7 +85,8 @@ describe("PATCH /api/journal/:email", () =>{
             title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             journalEntry:"Day 1, feeling good :)",
-            date: new Date()
+            date: new Date(),
+            happinessIndex: 75
         }
         return request(app)
         .patch("/api/journal/shudrea@gmail.com")
@@ -98,7 +99,8 @@ describe("PATCH /api/journal/:email", () =>{
             challengeName: "Sl_1_NoPhoneBeforeBed",
             title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
-            date: new Date()
+            date: new Date(),
+            happinessIndex: 75
         }
         return request(app)
         .patch("/api/journal/Karl")
@@ -115,7 +117,8 @@ describe("PATCH /api/journal/:email", () =>{
             title: "Avoid looking at screens when going to your bedroom.",
             challengeEntryNumber:0,
             journalEntry:"Day 1, feeling good :)",
-            date: new Date()
+            date: new Date(),
+            happinessIndex: 75
         }
         return request(app)
         .patch("/api/journal/Kar")
